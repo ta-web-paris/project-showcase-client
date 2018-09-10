@@ -14,6 +14,17 @@
   color: white;
 }
 
+.App-header a {
+  color: gray;
+  margin-right: 20px;
+  text-decoration: none;
+}
+
+.App-header a.active {
+  color:#b10dc9;
+}
+
+
 .App-title {
   font-size: 1.5em;
 }
