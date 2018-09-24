@@ -22,14 +22,12 @@ class Login extends React.Component {
     handleSubmit = (event)=>{
         console.log(this.state);
         event.preventDefault();
-        axios.post("http://localhost:3000/api/login", this.state)
-        .then((response)=>{
-            //console.log(response.data)
-                const {userDoc} = response.data;
-                this.props.handleLogIn(userDoc);
-            }
-        )
-        .catch(err => console.log(err))
+        axios.post("http://localhost:4000/api/login", this.state, { withCredentials: true})
+          .then((response)=>{
+            const {userDoc} = response.data;
+            this.props.handleLogIn(userDoc);
+          })
+          .catch(err => console.log(err))
     }
 
     render() {
