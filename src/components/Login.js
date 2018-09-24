@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios';
+
+import api from '../api.js';
+
 
 class Login extends React.Component {
 
@@ -22,7 +24,7 @@ class Login extends React.Component {
     handleSubmit = (event)=>{
         console.log(this.state);
         event.preventDefault();
-        axios.post("http://localhost:4000/api/login", this.state, { withCredentials: true})
+        api.post('/login', this.state)
           .then((response)=>{
             const {userDoc} = response.data;
             this.props.handleLogIn(userDoc);
@@ -44,5 +46,6 @@ class Login extends React.Component {
         )
     }
 }
+
 
 export default Login;

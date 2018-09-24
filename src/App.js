@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import axios from 'axios';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 
+import api from './api.js';
 import Home from './components/Home';
 import ErrorPage from './components/ErrorPage';
 import Login from './components/Login';
 
 import './App.css';
+
 
 class App extends Component {
   constructor(props){
@@ -17,14 +18,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    axios.get("http://localhost:4000/api/check-login", { withCredentials: true})
+    api.get('/check-login')
       .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
       .catch(err => {
         console.log(err);
-        alert("Sorry, there was an error");
+        alert('Sorry, there was an error.');
       });
   }
 
@@ -35,8 +36,8 @@ class App extends Component {
   }
 
   logUserOut = () => {
-    axios.delete("http://localhost:4000/api/logout", { withCredentials: true})
-      .this(response => {
+    api.delete('/logout')
+      .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
@@ -54,7 +55,10 @@ class App extends Component {
           <h1>This is our Project Showcase app!</h1>
           <NavLink exact to="/">Home</NavLink>
           {currentUser ? (
-            <button onClick={this.logUserOut}>Log out</button>
+            <React.Fragment>
+              <b>{currentUser.email}</b>
+              <button onClick={this.logUserOut}>Log out</button>
+            </React.Fragment>
           ) : (
             <NavLink to="/login">Log in</NavLink>
           )}
@@ -69,5 +73,6 @@ class App extends Component {
     );
   }
 }
+
 
 export default App;
