@@ -6,6 +6,6 @@ import registerServiceWorker from './registerServiceWorker';
 import { BrowserRouter } from 'react-router-dom'; // Importing the component
 
 ReactDOM.render(
-<BrowserRouter><App /></BrowserRouter>, // Wrapping the <App /> inside the router
+<BrowserRouter basename={process.env.PUBLIC_URL}><App /></BrowserRouter>, // Wrapping the <App /> inside the router
 document.getElementById('root'));
 registerServiceWorker();
