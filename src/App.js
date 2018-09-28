@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 
+import './App.css';
+
 import api from './api.js';
 import Home from './components/Home';
 import ErrorPage from './components/ErrorPage';
 import Login from './components/Login';
-
-import './App.css';
 
 
 class App extends Component {
@@ -63,11 +63,15 @@ class App extends Component {
             <NavLink to="/login">Log in</NavLink>
           )}
         </header>
+
         <Switch>
           <Route exact path="/" component={ Home }/>
-          <Route path="/login" render={() => currentUser? <Redirect to="/" /> : <Login handleLogIn={this.userLoggedIn}/> }/>
+          <Route path="/login" render={() =>
+            currentUser ? <Redirect to="/" /> : <Login handleLogIn={this.userLoggedIn}/>
+          }/>
           <Route component={ ErrorPage }/>
         </Switch>
+
         <footer></footer>
       </div>
     );

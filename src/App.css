@@ -24,6 +24,10 @@
   color:#b10dc9;
 }
 
+.App-header b {
+  margin-right: 20px;
+}
+
 
 .App-title {
   font-size: 1.5em;
