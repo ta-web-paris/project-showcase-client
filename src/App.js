@@ -7,13 +7,15 @@ import api from './api.js';
 import Home from './components/Home';
 import ErrorPage from './components/ErrorPage';
 import Login from './components/Login';
+import SettingsPage from './components/SettingsPage';
 
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state = {
-      currentUser: null
+      isLoginChecked: false,
+      currentUser: null,
     };
   }
 
@@ -30,7 +32,9 @@ class App extends Component {
   }
 
   userLoggedIn = (user) => {
+    console.log('New USER\n', user);
     this.setState({
+      isLoginChecked: true,
       currentUser: user
     });
   }
@@ -43,12 +47,12 @@ class App extends Component {
       })
       .catch(err => {
         console.log(err);
-        alert("Sorry, there was an error");
+        alert('Sorry, there was an error');
       });
   }
 
   render() {
-    const {currentUser} = this.state;
+    const { isLoginChecked, currentUser } = this.state;
     return (
       <div className="App">
         <header className="App-header">
@@ -56,6 +60,7 @@ class App extends Component {
           <NavLink exact to="/">Home</NavLink>
           {currentUser ? (
             <React.Fragment>
+              <NavLink to="/settings">User Settings</NavLink>
               <b>{currentUser.email}</b>
               <button onClick={this.logUserOut}>Log out</button>
             </React.Fragment>
@@ -67,7 +72,14 @@ class App extends Component {
         <Switch>
           <Route exact path="/" component={ Home }/>
           <Route path="/login" render={() =>
-            currentUser ? <Redirect to="/" /> : <Login handleLogIn={this.userLoggedIn}/>
+            currentUser
+              ? <Redirect to="/" />
+              : <Login handleLogIn={this.userLoggedIn}/>
+          }/>
+          <Route path="/settings" render={() =>
+            (isLoginChecked && !currentUser)
+              ? <Redirect to="/login" />
+              : <SettingsPage currentUser={currentUser} />
           }/>
           <Route component={ ErrorPage }/>
         </Switch>
