@@ -91,7 +91,7 @@ class SettingsPage extends Component {
             <input id="avatar" type="file" onChange={this.updateFile} />
           </fieldset>
 
-          {avatar && <img src={avatar} />}
+          {avatar && <img src={avatar} alt={fullName} />}
 
           <button>Save Changes</button>
         </form>
