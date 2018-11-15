@@ -1,55 +1,56 @@
-import React, { Component } from 'react';
-import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route, Switch, NavLink, Redirect } from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
-import api from './api.js';
-import Home from './components/Home';
-import ErrorPage from './components/ErrorPage';
-import Login from './components/Login';
-import SettingsPage from './components/SettingsPage';
-
+import api from "./api.js";
+import Home from "./components/HomePage/Home";
+import ErrorPage from "./components/ErrorPage";
+import Login from "./components/Login";
+import SettingsPage from "./components/SettingsPage";
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       isLoginChecked: false,
-      currentUser: null,
+      currentUser: null
     };
   }
 
   componentDidMount() {
-    api.get('/check-login')
+    api
+      .get("/check-login")
       .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
       .catch(err => {
         console.log(err);
-        alert('Sorry, there was an error.');
+        alert("Sorry, there was an error.");
       });
   }
 
-  userLoggedIn = (user) => {
-    console.log('New USER\n', user);
+  userLoggedIn = user => {
+    console.log("New USER\n", user);
     this.setState({
       isLoginChecked: true,
       currentUser: user
     });
-  }
+  };
 
   logUserOut = () => {
-    api.delete('/logout')
+    api
+      .delete("/logout")
       .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
       .catch(err => {
         console.log(err);
-        alert('Sorry, there was an error');
+        alert("Sorry, there was an error");
       });
-  }
+  };
 
   render() {
     const { isLoginChecked, currentUser } = this.state;
@@ -57,7 +58,9 @@ class App extends Component {
       <div className="App">
         <header className="App-header">
           <h1>This is our Project Showcase app!</h1>
-          <NavLink exact to="/">Home</NavLink>
+          <NavLink exact to="/">
+            Home
+          </NavLink>
           {currentUser ? (
             <React.Fragment>
               <NavLink to="/settings">User Settings</NavLink>
@@ -70,25 +73,34 @@ class App extends Component {
         </header>
 
         <Switch>
-          <Route exact path="/" component={ Home }/>
-          <Route path="/login" render={() =>
-            currentUser
-              ? <Redirect to="/" />
-              : <Login handleLogIn={this.userLoggedIn}/>
-          }/>
-          <Route path="/settings" render={() =>
-            (isLoginChecked && !currentUser)
-              ? <Redirect to="/login" />
-              : <SettingsPage currentUser={currentUser} />
-          }/>
-          <Route component={ ErrorPage }/>
+          <Route exact path="/" component={Home} />
+          <Route
+            path="/login"
+            render={() =>
+              currentUser ? (
+                <Redirect to="/" />
+              ) : (
+                <Login handleLogIn={this.userLoggedIn} />
+              )
+            }
+          />
+          <Route
+            path="/settings"
+            render={() =>
+              isLoginChecked && !currentUser ? (
+                <Redirect to="/login" />
+              ) : (
+                <SettingsPage currentUser={currentUser} />
+              )
+            }
+          />
+          <Route component={ErrorPage} />
         </Switch>
 
-        <footer></footer>
+        <footer />
       </div>
     );
   }
 }
-
 
 export default App;
