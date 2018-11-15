@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Switch, NavLink, Redirect } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 
 import "./App.css";
 
@@ -8,6 +8,7 @@ import Home from "./components/HomePage/Home";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
+import HeaderHome from "./components/HomePage/HeaderHome";
 
 class App extends Component {
   constructor(props) {
@@ -56,21 +57,7 @@ class App extends Component {
     const { isLoginChecked, currentUser } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>This is our Project Showcase app!</h1>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
-          {currentUser ? (
-            <React.Fragment>
-              <NavLink to="/settings">User Settings</NavLink>
-              <b>{currentUser.email}</b>
-              <button onClick={this.logUserOut}>Log out</button>
-            </React.Fragment>
-          ) : (
-            <NavLink to="/login">Log in</NavLink>
-          )}
-        </header>
+        <HeaderHome currentUser={currentUser} />
 
         <Switch>
           <Route exact path="/" component={Home} />
