@@ -40,7 +40,7 @@ class App extends Component {
     });
   };
 
-  logUserOut = () => {
+  logUserOut = event => {
     api
       .delete("/logout")
       .then(response => {
@@ -57,7 +57,10 @@ class App extends Component {
     const { isLoginChecked, currentUser } = this.state;
     return (
       <div className="App">
-        <HeaderHome currentUser={currentUser} />
+        <HeaderHome
+          currentUser={currentUser}
+          logUserOut={event => this.logUserOut(event)}
+        />
 
         <Switch>
           <Route exact path="/" component={Home} />
