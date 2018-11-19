@@ -33,7 +33,6 @@ class App extends Component {
   }
 
   userLoggedIn = user => {
-    console.log("New USER\n", user);
     this.setState({
       isLoginChecked: true,
       currentUser: user
