@@ -4,10 +4,11 @@ import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
 import './App.css';
 
 import api from './api.js';
-import Home from './components/Home';
+import Home from './components/HomePage/Home';
 import ErrorPage from './components/ErrorPage';
 import Login from './components/Login';
 import SettingsPage from './components/SettingsPage';
+import AddProject from './components/AddProject';
 
 
 class App extends Component {
@@ -81,6 +82,7 @@ class App extends Component {
               ? <Redirect to="/login" />
               : <SettingsPage currentUser={currentUser} />
           }/>
+          <Route path="/add-project" component={ AddProject }/>
           <Route component={ ErrorPage }/>
         </Switch>
 
