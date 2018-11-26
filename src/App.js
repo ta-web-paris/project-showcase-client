@@ -70,36 +70,10 @@ class App extends Component {
       <div className="App">
         {/* index name is what i called the data on algolia */}
         <InstantSearch searchClient={searchClient} indexName="dev_data">
-          <HeaderHome currentUser={currentUser} />
           <HeaderHome
             currentUser={currentUser}
             logUserOut={event => this.logUserOut(event)}
           />
-
-          <Switch>
-            <Route exact path="/" component={Home} />
-            <Route
-              path="/login"
-              render={() =>
-                currentUser ? (
-                  <Redirect to="/" />
-                ) : (
-                  <Login handleLogIn={this.userLoggedIn} />
-                )
-              }
-            />
-            <Route
-              path="/settings"
-              render={() =>
-                isLoginChecked && !currentUser ? (
-                  <Redirect to="/login" />
-                ) : (
-                  <SettingsPage currentUser={currentUser} />
-                )
-              }
-            />
-            <Route component={ErrorPage} />
-          </Switch>
 
           <Switch>
             <Route exact path="/" component={Home} />

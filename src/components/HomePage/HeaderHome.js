@@ -23,7 +23,6 @@ class HomeHeader extends Component {
             <React.Fragment>
               <NavLink to="/settings">User Settings</NavLink>
               <b>{currentUser.email}</b>
-              <button onClick={this.logUserOut}>Log out</button>
               <button onClick={event => logUserOut(event)}>Log out</button>
             </React.Fragment>
           ) : (
