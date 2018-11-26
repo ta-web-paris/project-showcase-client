@@ -1,14 +1,25 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
-
 import "./App.css";
-
 import api from "./api.js";
 import Home from "./components/HomePage/Home";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
 import HeaderHome from "./components/HomePage/HeaderHome";
+
+//InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
+import { InstantSearch } from "react-instantsearch-dom";
+import "instantsearch.css/themes/algolia-min.css";
+import algoliasearch from "algoliasearch/lite";
+
+const searchClient = algoliasearch(
+  //app ID
+  process.env.REACT_APP_algoliaAppID,
+
+  //Search-Only API Key
+  process.env.REACT_APP_algoliaSearchKey
+);
 
 class App extends Component {
   constructor(props) {
@@ -57,33 +68,35 @@ class App extends Component {
     const { isLoginChecked, currentUser } = this.state;
     return (
       <div className="App">
-        <HeaderHome currentUser={currentUser} />
+        {/* index name is what i called the data on algolia */}
+        <InstantSearch searchClient={searchClient} indexName="dev_data">
+          <HeaderHome currentUser={currentUser} />
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route
-            path="/login"
-            render={() =>
-              currentUser ? (
-                <Redirect to="/" />
-              ) : (
-                <Login handleLogIn={this.userLoggedIn} />
-              )
-            }
-          />
-          <Route
-            path="/settings"
-            render={() =>
-              isLoginChecked && !currentUser ? (
-                <Redirect to="/login" />
-              ) : (
-                <SettingsPage currentUser={currentUser} />
-              )
-            }
-          />
-          <Route component={ErrorPage} />
-        </Switch>
-
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+              path="/login"
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Login handleLogIn={this.userLoggedIn} />
+                )
+              }
+            />
+            <Route
+              path="/settings"
+              render={() =>
+                isLoginChecked && !currentUser ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <SettingsPage currentUser={currentUser} />
+                )
+              }
+            />
+            <Route component={ErrorPage} />
+          </Switch>
+        </InstantSearch>
         <footer />
       </div>
     );
