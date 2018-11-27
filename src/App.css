@@ -37,7 +37,16 @@
   font-size: large;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 500px;
+  margin: 0 auto;
+  height: 800px;
+}
+
+form button {
+  width: 100px;
+  margin: 0 auto;
 }

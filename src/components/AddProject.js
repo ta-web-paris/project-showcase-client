@@ -1,11 +1,16 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-
+import { Redirect } from "react-router-dom";
+import api from "../api.js";
 
 class AddProject extends Component {
   constructor(props) {
     super(props);
-    this.state = {
+    this.state = this.getInitialState();
+  }
+
+  getInitialState(){
+    return {
       name: "",
       creators: [''],
       screenshotUrl: "",
@@ -15,15 +20,18 @@ class AddProject extends Component {
       tools: [''],
       linkedInUrl: "",
       projectCredentials: ['', ''],
-      display: "",
-      bootcamp: "",
-      squad: ""
+      display: "web",
+      bootcamp: "Web Dev Full Time",
+      squadNumber: 0,
+      squadMonth: "",
+      squadYear: "",
+      isSubmitSuccess: false,
     };
   }
 
+
   handleUserInput(event) {
     const { value, name } = event.target;
-
     this.setState({
       [name]: value
     });
@@ -35,15 +43,9 @@ class AddProject extends Component {
     });
   }
 
-  handleAddTools = () => {
-    this.setState({
-      tools: this.state.tools.concat([''])
-    });
-  }
-
   handleCredentialsInput = (idx) => (event) => {
     const {value}= event.target;
-    const credentialsCopy = {...this.state.projectCredentials};
+    const credentialsCopy = [...this.state.projectCredentials];
     credentialsCopy[idx]= value;
     this.setState({
       projectCredentials: credentialsCopy
@@ -72,34 +74,55 @@ class AddProject extends Component {
     this.setState({ tools: toolsCopy });
   }
 
+  formatSquadString(formField){
+    const {squadNumber, squadMonth, squadYear} = formField;
+    return `#${squadNumber} - ${squadMonth} ${squadYear}`
+  }
+
   submitProjectForm(event) {
     event.preventDefault();
 
-    const newProject = this.state;
-    this.props.AddProject(newProject);
-    this.setState({
-      name: "",
-      creators: [''],
-      screenshotUrl: "",
-      description: "",
-      gitHubUrl: "",
-      projectUrl: "",
-      tools: [''],
-      linkedInUrl: "",
-      projectCredentials: ['', ''],
-      display: "",
-      bootcamp: "",
-      squad: ""
-    });
+    const newProject = {...this.state};
+    newProject.squad = this.formatSquadString(newProject);
+
+    api.post(`/projects`, newProject)
+      .then(response => {
+        console.log("POST add project", response.data);
+        this.setState(this.getInitialState());
+      })
+      .catch(err => {
+        console.error(err);
+        alert("Sorry! Something went wrong. 💩");
+      });
+    
   }
 
   render() {
-    const { name, creators, screenshotUrl, description, gitHubUrl, projectUrl, display, tools, projectCredentials } = this.state;
-    const credPlaceholder = ["username", "password"]
-    // const { submitProjectForm } = this.props;
-    return (
-      //form[onSubmit]>(label+input)*6
+    const { 
+      name, 
+      creators, 
+      screenshotUrl, 
+      description, 
+      gitHubUrl, 
+      projectUrl,
+      display, 
+      tools, 
+      projectCredentials,
+      isSubmitSuccess,
+      bootcamp,
+      squadNumber,
+      squadMonth,
+      squadYear,
+    } = this.state;
 
+    const credPlaceholder = ["Username", "Password"]
+    const months = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
+    const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
+
+    if (isSubmitSuccess) {
+      return <Redirect to={`/`} />
+    }
+    return (
       <form onSubmit={event => this.submitProjectForm(event)}>
         <label htmlFor="name">Project name:</label>
         <input
@@ -109,6 +132,7 @@ class AddProject extends Component {
           value={name}
         />
 
+        <label>Creators: </label>
         {creators.map((oneCreator, idx) => (
             <input
               key={idx}
@@ -153,19 +177,19 @@ class AddProject extends Component {
         />
       
         <label htmlFor="display">Display:</label>
-        <select id="display" onChange={event => this.handleUserInput(event)} value={display}>
+        <select id="display" name="display" onChange={event => this.handleUserInput(event)} value={display}>
           <option value="mobile">Mobile</option> 
-          <option value="web" defaultValue>Web</option>
+          <option value="web">Web</option>
         </select>
               
-        
+        <label>Tools: </label>
         {tools.map((oneTool, idx) => (
             <input
               key={idx}
               type="text"
               placeholder={`React ? Express ?`}
               value={oneTool}
-             onChange={this.handleToolInput(idx)}
+              onChange={this.handleToolInput(idx)}
             />))}
         <button type="button" onClick={this.handleAddTools}>Add a tool</button>
 
@@ -174,15 +198,52 @@ class AddProject extends Component {
           <legend>Optional: provide credentials in order for recruters to be able to enter your website</legend>
 
            {projectCredentials.map((oneCred, idx) => (
+            <label key={idx}>{credPlaceholder[idx]}: 
             <input
               key={idx}
               type="text"
               placeholder={credPlaceholder[idx]}
               value={oneCred}
               onChange={this.handleCredentialsInput(idx)}
-            />))}
+            />
+            </label>
+            ))}
         </fieldset>        
     
+        <label htmlFor="bootcamp">Bootcamp:</label>
+        <select id="bootcamp" name="bootcamp" onChange={event => this.handleUserInput(event)} value={bootcamp}>
+          <option value="Web Dev Full Time">Web Dev Full Time</option> 
+          <option value="Web Dev Part Time">Web Dev Part Time</option>
+          <option value="UX/UI Full Time">UX/UI Full Time</option>
+          <option value="UX/UI Part Time">UX/UI Part Time</option> 
+          <option value="Data Analytics">Data Analytics</option>
+        </select>
+
+        <fieldset>
+          <legend>Squad :</legend>
+
+            <label>Squad Number: 
+              <input
+                type="number"
+                placeholder="128"
+                name="squadNumber"
+                value={squadNumber}
+                onChange={event => this.handleUserInput(event)}
+              />
+            </label>
+
+            <label>Squad Month: 
+              <select name="squadMonth" onChange={event => this.handleUserInput(event)} value={squadMonth}>
+                {months.map((oneMonth, idx)=> <option key={idx} value={oneMonth}>{oneMonth}</option> )}
+              </select>
+            </label>
+
+            <label>Squad Year: 
+              <select name="squadYear" onChange={event => this.handleUserInput(event)} value={squadYear}>
+                {years.map((oneYear, idx)=> <option key={idx} value={oneYear}>{oneYear}</option> )}
+              </select>
+            </label>
+        </fieldset>  
 
         <button>Submit</button>
       </form>
