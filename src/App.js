@@ -8,7 +8,7 @@ import Home from './components/HomePage/Home';
 import ErrorPage from './components/ErrorPage';
 import Login from './components/Login';
 import SettingsPage from './components/SettingsPage';
-import AddProject from './components/AddProject';
+import AddProject from './components/AddProjectPage/AddProject';
 
 
 class App extends Component {
@@ -62,6 +62,7 @@ class App extends Component {
           {currentUser ? (
             <React.Fragment>
               <NavLink to="/settings">User Settings</NavLink>
+              <NavLink to="/add-project">Add a project</NavLink>
               <b>{currentUser.email}</b>
               <button onClick={this.logUserOut}>Log out</button>
             </React.Fragment>

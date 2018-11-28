@@ -1,7 +1,11 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Redirect } from "react-router-dom";
-import api from "../api.js";
+import api from "../../api.js";
+
+//NEED: 
+//-feedback messages
+//-create separate components
+//-handle linkedin question
+//-improve file upload function
 
 class AddProject extends Component {
   constructor(props) {
@@ -23,92 +27,86 @@ class AddProject extends Component {
       display: "web",
       bootcamp: "Web Dev Full Time",
       squadNumber: 0,
-      squadMonth: "",
-      squadYear: "",
-      isSubmitSuccess: false,
+      squadMonth: "January",
+      squadYear: "2011"
     };
   }
 
-
-  handleUserInput(event) {
+  handleUserInput = (event) => {
     const { value, name } = event.target;
     this.setState({
       [name]: value
     });
   }
 
-  handleAddCreator = () => {
+  addField = (field) => {
     this.setState({
-      creators: this.state.creators.concat([''])
+      [field]: this.state[field].concat([''])
     });
   }
 
-  handleCredentialsInput = (idx) => (event) => {
-    const {value}= event.target;
-    const credentialsCopy = [...this.state.projectCredentials];
-    credentialsCopy[idx]= value;
-    this.setState({
-      projectCredentials: credentialsCopy
-    });
+  handleArrayInput = (idx) => (event) => {
+    const {value, name} = event.target;
+    const stateCopy = [...this.state[name]];
+    stateCopy[idx] = value;
+    this.setState({ [name]: stateCopy });
   }
 
-  handleAddTools = () => {
-    this.setState({
-      tools: this.state.tools.concat([''])
-    });
-  }
-
-  handleCreatorInput = (idx) => (event) => {
-    const {value} = event.target;
-    const {creators} = this.state;
-    const creatorsCopy = [...creators];
-    creatorsCopy[idx]=value;
-    this.setState({ creators: creatorsCopy });
-  }
-
-  handleToolInput = (idx) => (event) => {
-    const {value} = event.target;
-    const {tools} = this.state;
-    const toolsCopy = [...tools];
-    toolsCopy[idx]=value;
-    this.setState({ tools: toolsCopy });
-  }
 
   formatSquadString(formField){
     const {squadNumber, squadMonth, squadYear} = formField;
     return `#${squadNumber} - ${squadMonth} ${squadYear}`
   }
 
-  submitProjectForm(event) {
+  submitProjectForm = (event) => {
     event.preventDefault();
 
     const newProject = {...this.state};
     newProject.squad = this.formatSquadString(newProject);
 
     api.post(`/projects`, newProject)
-      .then(response => {
-        console.log("POST add project", response.data);
-        this.setState(this.getInitialState());
-      })
+      .then(() => this.setState(this.getInitialState()))
       .catch(err => {
         console.error(err);
         alert("Sorry! Something went wrong. 💩");
       });
-    
   }
+
+  updateFile = (event) => {
+    const { files } = event.target;
+
+    console.log('New FILE\n', files[0]);
+
+    if (!files[0]) {
+      return;
+    }
+
+    const uploadForm = new FormData();
+    uploadForm.append('imageFile', files[0]);
+
+    api.post('/upload-image', uploadForm)
+      .then(response => {
+        console.log('File UPLOADED', response.data);
+        const { imageUrl } = response.data;
+        this.setState({ screenshotUrl: imageUrl });
+      })
+      .catch(err => {
+        console.log(err);
+        alert('Sorry, there was an error.');
+      });
+  }
+
 
   render() {
     const { 
       name, 
       creators, 
-      screenshotUrl, 
       description, 
       gitHubUrl, 
       projectUrl,
       display, 
       tools, 
       projectCredentials,
-      isSubmitSuccess,
       bootcamp,
       squadNumber,
       squadMonth,
@@ -118,45 +116,38 @@ class AddProject extends Component {
     const credPlaceholder = ["Username", "Password"]
     const months = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
     const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
-
-    if (isSubmitSuccess) {
-      return <Redirect to={`/`} />
-    }
+    const bootcamps = ["Web Dev Full Time", "Web Dev Part Time", "UX/UI Part Time", "UX/UI Full Time", "Data Analytics" ]
+   
     return (
-      <form onSubmit={event => this.submitProjectForm(event)}>
+      <form onSubmit={this.submitProjectForm}>
         <label htmlFor="name">Project name:</label>
         <input
           type="text"
           name="name"
-          onChange={event => this.handleUserInput(event)}
+          onChange={this.handleUserInput}
           value={name}
         />
 
         <label>Creators: </label>
         {creators.map((oneCreator, idx) => (
-            <input
-              key={idx}
-              type="text"
-              placeholder={`Creator #${idx + 1} name`}
-              value={oneCreator}
-              onChange={this.handleCreatorInput(idx)}
-            />))}
-        <button type="button" onClick={this.handleAddCreator}>Add a creator</button>
+          <input
+            key={idx}
+            type="text"
+            name="creators"
+            placeholder={`Creator #${idx + 1} name`}
+            value={oneCreator}
+            onChange={this.handleArrayInput(idx)}
+          />))}
+        <button type="button" onClick={() => this.addField("creators")}>Add a creator</button>
        
         <label htmlFor="screenshotUrl">Screenshot URL:</label>
-        <input
-          type="text"
-          name="screenshotUrl"
-          onChange={event => this.handleUserInput(event)}
-          value={screenshotUrl}
-        />
+        <input id="screenshotUrl" name="screenshotUrl" type="file" onChange={this.updateFile} />
       
-
         <label htmlFor="description">Description:</label>
         <input
           type="text"
           name="description"
-          onChange={event => this.handleUserInput(event)}
+          onChange={this.handleUserInput}
           value={description}
         />
       
@@ -164,7 +155,7 @@ class AddProject extends Component {
         <input
           type="text"
           name="gitHubUrl"
-          onChange={event => this.handleUserInput(event)}
+          onChange={this.handleUserInput}
           value={gitHubUrl}
         />
       
@@ -172,26 +163,27 @@ class AddProject extends Component {
         <input
           type="text"
           name="projectUrl"
-          onChange={event => this.handleUserInput(event)}
+          onChange={this.handleUserInput}
           value={projectUrl}
         />
       
         <label htmlFor="display">Display:</label>
-        <select id="display" name="display" onChange={event => this.handleUserInput(event)} value={display}>
+        <select id="display" name="display" onChange={this.handleUserInput} value={display}>
           <option value="mobile">Mobile</option> 
           <option value="web">Web</option>
         </select>
               
         <label>Tools: </label>
         {tools.map((oneTool, idx) => (
-            <input
-              key={idx}
-              type="text"
-              placeholder={`React ? Express ?`}
-              value={oneTool}
-              onChange={this.handleToolInput(idx)}
-            />))}
-        <button type="button" onClick={this.handleAddTools}>Add a tool</button>
+          <input
+            key={idx}
+            type="text"
+            name="tools"
+            placeholder={`React ? Express ?`}
+            value={oneTool}
+            onChange={this.handleArrayInput(idx)}
+          />))}
+        <button type="button" onClick={() => this.addField("tools")}>Add a tool</button>
 
            
         <fieldset>
@@ -202,21 +194,18 @@ class AddProject extends Component {
             <input
               key={idx}
               type="text"
+              name="projectCredentials"
               placeholder={credPlaceholder[idx]}
               value={oneCred}
-              onChange={this.handleCredentialsInput(idx)}
+              onChange={this.handleArrayInput(idx)}
             />
             </label>
             ))}
         </fieldset>        
     
         <label htmlFor="bootcamp">Bootcamp:</label>
-        <select id="bootcamp" name="bootcamp" onChange={event => this.handleUserInput(event)} value={bootcamp}>
-          <option value="Web Dev Full Time">Web Dev Full Time</option> 
-          <option value="Web Dev Part Time">Web Dev Part Time</option>
-          <option value="UX/UI Full Time">UX/UI Full Time</option>
-          <option value="UX/UI Part Time">UX/UI Part Time</option> 
-          <option value="Data Analytics">Data Analytics</option>
+        <select id="bootcamp" name="bootcamp" onChange={this.handleUserInput} value={bootcamp}>
+          {bootcamps.map((oneBootcamp, idx)=> <option key={idx} value={oneBootcamp}>{oneBootcamp}</option> )}
         </select>
 
         <fieldset>
@@ -228,18 +217,18 @@ class AddProject extends Component {
                 placeholder="128"
                 name="squadNumber"
                 value={squadNumber}
-                onChange={event => this.handleUserInput(event)}
+                onChange={this.handleUserInput}
               />
             </label>
 
             <label>Squad Month: 
-              <select name="squadMonth" onChange={event => this.handleUserInput(event)} value={squadMonth}>
+              <select name="squadMonth" onChange={this.handleUserInput} value={squadMonth}>
                 {months.map((oneMonth, idx)=> <option key={idx} value={oneMonth}>{oneMonth}</option> )}
               </select>
             </label>
 
             <label>Squad Year: 
-              <select name="squadYear" onChange={event => this.handleUserInput(event)} value={squadYear}>
+              <select name="squadYear" onChange={this.handleUserInput} value={squadYear}>
                 {years.map((oneYear, idx)=> <option key={idx} value={oneYear}>{oneYear}</option> )}
               </select>
             </label>
@@ -250,9 +239,5 @@ class AddProject extends Component {
     );
   }
 }
-
-AddProject.propTypes = {
-  AddProject: PropTypes.func
-};
 
 export default AddProject;
