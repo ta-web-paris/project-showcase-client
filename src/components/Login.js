@@ -1,11 +1,10 @@
 import React from 'react';
-
 import api from '../api.js';
 
 
 class Login extends React.Component {
 
-    constructor( props ) {
+    constructor(props){
         super(props)
         this.state = {
             email: '',
@@ -21,11 +20,10 @@ class Login extends React.Component {
         });
     }
 
-    handleSubmit = (event)=>{
-        console.log(this.state);
+    handleSubmit = (event) => {
         event.preventDefault();
         api.post('/login', this.state)
-          .then((response)=>{
+          .then(response=>{
             const {userDoc} = response.data;
             this.props.handleLogIn(userDoc);
           })

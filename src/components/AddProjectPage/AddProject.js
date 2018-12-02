@@ -1,11 +1,16 @@
-import React, { Component } from "react";
-import api from "../../api.js";
+import    React, { Component }    from     "react";
+import    Joi                     from     "joi-browser";
+import    api                     from     "../../api.js";
+import    Input                   from     "./Input.js";
+import    Select                  from     "./Select.js";
+import    ArrayInput              from     "./ArrayInput.js";
 
 //NEED: 
 //-feedback messages
-//-create separate components
 //-handle linkedin question
 //-improve file upload function
+//-tokens to be sent to students
+//-propTypes
 
 class AddProject extends Component {
   constructor(props) {
@@ -28,30 +33,56 @@ class AddProject extends Component {
       bootcamp: "Web Dev Full Time",
       squadNumber: 0,
       squadMonth: "January",
-      squadYear: "2011"
+      squadYear: "2011",
+      feedbackMessage: "",
+      errors: {}
     };
+  }
+
+  schema = {
+    name: Joi.string().trim().required(),
+    creators: Joi.array().min(1).items(Joi.string()),
+    screenshotUrl: Joi.string().trim().required(),
+    description: Joi.string().trim().required().max(150),
+    gitHubUrl: Joi.string().uri(),
+    projectUrl: Joi.string().trim().uri().required(),
+    tools: Joi.array().min(1).items(Joi.string()),
+    projectCredentials: Joi.array(),
+    display: Joi.string().valid('web', 'mobile'),
+    bootcamp: Joi.string().valid("Web Dev Full Time", "Web Dev Part Time", "UX/UI Part Time", "UX/UI Full Time", "Data Analytics"),
+    squadNumber: Joi.number().integer().positive(),
+    squadMonth: Joi.string().valid("January","February","March","April","May","June","July","August","September","October","November","December"),
+    squadYear: Joi.string().valid('2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020'),
+  };
+
+  validateInput() {
+    const result = Joi.validate(this.state, this.schema, { abortEarly: false });
+    console.log(result);
+
+    const errors = {};
+    result.error.details.map(oneItem => {
+      return (errors[oneItem.path[0]] = oneItem.message);
+    });
+    return errors;
   }
 
   handleUserInput = (event) => {
     const { value, name } = event.target;
-    this.setState({
-      [name]: value
-    });
+    this.setState({ [name]: value });
   }
-
-  addField = (field) => {
-    this.setState({
-      [field]: this.state[field].concat([''])
-    });
-  }
-
+  
   handleArrayInput = (idx) => (event) => {
     const {value, name} = event.target;
     const stateCopy = [...this.state[name]];
     stateCopy[idx] = value;
     this.setState({ [name]: stateCopy });
   }
-
+  
+  addField = (field) => {
+    this.setState({
+      [field]: this.state[field].concat([''])
+    });
+  }
 
   formatSquadString(formField){
     const {squadNumber, squadMonth, squadYear} = formField;
@@ -61,14 +92,27 @@ class AddProject extends Component {
   submitProjectForm = (event) => {
     event.preventDefault();
 
+    const errors = this.validateInput();
+    this.setState({ errors });
+    if (errors) {
+      return;
+    }
+
     const newProject = {...this.state};
     newProject.squad = this.formatSquadString(newProject);
 
     api.post(`/projects`, newProject)
-      .then(() => this.setState(this.getInitialState()))
+      .then(() => {
+        this.setState({
+          ...this.getInitialState(), 
+          feedbackMessage: "Thank You! Your project was properly saved."
+        })
+      })
       .catch(err => {
         console.error(err);
-        alert("Sorry! Something went wrong. 💩");
+        this.setState({
+          feedbackMessage: "Sorry, something went wrong... Your information were not submitted."
+        })
       });
   }
 
@@ -78,6 +122,7 @@ class AddProject extends Component {
     console.log('New FILE\n', files[0]);
 
     if (!files[0]) {
+      this.setState({ screenshotUrl: "https://course_report_production.s3.amazonaws.com/rich/rich_files/rich_files/4017/s300/logo-ironhack-blue.png" });
       return;
     }
 
@@ -96,11 +141,11 @@ class AddProject extends Component {
       });
   }
 
-
   render() {
     const { 
       name, 
-      creators, 
+      creators,
+      screenshotUrl, 
       description, 
       gitHubUrl, 
       projectUrl,
@@ -111,127 +156,149 @@ class AddProject extends Component {
       squadNumber,
       squadMonth,
       squadYear,
+      feedbackMessage,
+      errors
     } = this.state;
 
     const credPlaceholder = ["Username", "Password"]
-    const months = ["January","February","March","April","May","June","July", "August","September","October","November","December"];
+    const displays = ["mobile", "web"]
+    const months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
     const years = ['2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020']
     const bootcamps = ["Web Dev Full Time", "Web Dev Part Time", "UX/UI Part Time", "UX/UI Full Time", "Data Analytics" ]
    
     return (
       <form onSubmit={this.submitProjectForm}>
-        <label htmlFor="name">Project name:</label>
-        <input
-          type="text"
+
+        {feedbackMessage && <p>{feedbackMessage}</p>}
+
+        <Input 
           name="name"
           onChange={this.handleUserInput}
-          value={name}
-        />
+          value={name} 
+          label="Project name"
+          />
+        {errors.name && <p>{errors.name}</p>}
 
-        <label>Creators: </label>
-        {creators.map((oneCreator, idx) => (
-          <input
-            key={idx}
-            type="text"
-            name="creators"
-            placeholder={`Creator #${idx + 1} name`}
-            value={oneCreator}
-            onChange={this.handleArrayInput(idx)}
-          />))}
-        <button type="button" onClick={() => this.addField("creators")}>Add a creator</button>
-       
-        <label htmlFor="screenshotUrl">Screenshot URL:</label>
-        <input id="screenshotUrl" name="screenshotUrl" type="file" onChange={this.updateFile} />
-      
-        <label htmlFor="description">Description:</label>
-        <input
-          type="text"
+        <ArrayInput 
+          label="Creators" 
+          fieldArray={creators} 
+          name="creators" 
+          onChange={idx => this.handleArrayInput(idx)} 
+          onClick={() => this.addField("creators")} 
+        />
+        {errors.creators && <p>{errors.creators}</p>}
+
+        <Input 
+          type="file" 
+          name="screenshotUrl" 
+          onChange={this.updateFile} 
+          label="Screenshot URL" 
+        />
+        {errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
+
+        {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
+        
+        <Input
           name="description"
           onChange={this.handleUserInput}
           value={description}
+          label="Description"
         />
+        {errors.description && <p>{errors.description}</p>}
       
-        <label htmlFor="gitHubUrl">GitHub Repository URL:</label>
-        <input
-          type="text"
+        <Input
           name="gitHubUrl"
           onChange={this.handleUserInput}
           value={gitHubUrl}
+          label="GitHub Repository URL"
         />
-      
-        <label htmlFor="projectUrl">Project URL:</label>
-        <input
-          type="text"
+        {errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
+
+        <Input
           name="projectUrl"
           onChange={this.handleUserInput}
           value={projectUrl}
+          label="Project URL"
         />
+        {errors.projectUrl && <p>{errors.projectUrl}</p>}
       
-        <label htmlFor="display">Display:</label>
-        <select id="display" name="display" onChange={this.handleUserInput} value={display}>
-          <option value="mobile">Mobile</option> 
-          <option value="web">Web</option>
-        </select>
-              
-        <label>Tools: </label>
-        {tools.map((oneTool, idx) => (
-          <input
-            key={idx}
-            type="text"
-            name="tools"
-            placeholder={`React ? Express ?`}
-            value={oneTool}
-            onChange={this.handleArrayInput(idx)}
-          />))}
-        <button type="button" onClick={() => this.addField("tools")}>Add a tool</button>
+        <Select 
+          label="Display" 
+          name="display" 
+          onChange={this.handleUserInput} 
+          value={display} 
+          optionsArray={displays}
+        />
+        {errors.display && <p>{errors.display}</p>}
+
+        <ArrayInput 
+          label="Tools" 
+          fieldArray={tools}  
+          name="tools" 
+          onChange={idx => this.handleArrayInput(idx)} 
+          onClick={() => this.addField("tools")} 
+        />
+        {errors.tools && <p>{errors.tools}</p>}
 
            
         <fieldset>
           <legend>Optional: provide credentials in order for recruters to be able to enter your website</legend>
 
-           {projectCredentials.map((oneCred, idx) => (
-            <label key={idx}>{credPlaceholder[idx]}: 
-            <input
-              key={idx}
-              type="text"
+          {projectCredentials.map((oneCred, idx) => (
+            <Input
               name="projectCredentials"
-              placeholder={credPlaceholder[idx]}
-              value={oneCred}
               onChange={this.handleArrayInput(idx)}
+              value={oneCred}
+              label={credPlaceholder[idx]}
             />
-            </label>
-            ))}
+          ))}
+          {errors.projectCredentials && <p>{errors.projectCredentials}</p>}
+
         </fieldset>        
-    
-        <label htmlFor="bootcamp">Bootcamp:</label>
-        <select id="bootcamp" name="bootcamp" onChange={this.handleUserInput} value={bootcamp}>
-          {bootcamps.map((oneBootcamp, idx)=> <option key={idx} value={oneBootcamp}>{oneBootcamp}</option> )}
-        </select>
+  
+        <Select 
+          label="Bootcamp" 
+          name="bootcamp" 
+          onChange={this.handleUserInput} 
+          value={bootcamp} 
+          optionsArray={bootcamps}
+        />
+        {errors.bootcamp && <p>{errors.bootcamp}</p>}
+
 
         <fieldset>
           <legend>Squad :</legend>
 
-            <label>Squad Number: 
-              <input
-                type="number"
-                placeholder="128"
-                name="squadNumber"
-                value={squadNumber}
-                onChange={this.handleUserInput}
-              />
-            </label>
+            <Input
+              type="number"
+              placeholder="128"
+              name="squadNumber"
+              value={squadNumber}
+              onChange={this.handleUserInput}
+              label="Squad Number"
+            />
+            {errors.squadNumber && <p>{errors.squadNumber}</p>}
+        
+            <Select 
+              label="Squad Month" 
+              name="squadMonth" 
+              onChange={this.handleUserInput} 
+              value={squadMonth} 
+              optionsArray={months}
+            />
+            {errors.squadMonth && <p>{errors.squadMonth}</p>}
 
-            <label>Squad Month: 
-              <select name="squadMonth" onChange={this.handleUserInput} value={squadMonth}>
-                {months.map((oneMonth, idx)=> <option key={idx} value={oneMonth}>{oneMonth}</option> )}
-              </select>
-            </label>
 
-            <label>Squad Year: 
-              <select name="squadYear" onChange={this.handleUserInput} value={squadYear}>
-                {years.map((oneYear, idx)=> <option key={idx} value={oneYear}>{oneYear}</option> )}
-              </select>
-            </label>
+            <Select
+              label="Squad Year" 
+              name="squadYear" 
+              onChange={this.handleUserInput} 
+              value={squadYear} 
+              optionsArray={years}
+            />
+            {errors.squadYear && <p>{errors.squadYear}</p>}
+
+
         </fieldset>  
 
         <button>Submit</button>
