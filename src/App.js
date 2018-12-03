@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
+
 import "./App.css";
 import api from "./api.js";
 import Home from "./components/HomePage/Home";
@@ -44,14 +45,13 @@ class App extends Component {
   }
 
   userLoggedIn = user => {
-    console.log("New USER\n", user);
     this.setState({
       isLoginChecked: true,
       currentUser: user
     });
   };
 
-  logUserOut = () => {
+  logUserOut = event => {
     api
       .delete("/logout")
       .then(response => {
@@ -70,7 +70,10 @@ class App extends Component {
       <div className="App">
         {/* index name is what i called the data on algolia */}
         <InstantSearch searchClient={searchClient} indexName="dev_data">
-          <HeaderHome currentUser={currentUser} />
+          <HeaderHome
+            currentUser={currentUser}
+            logUserOut={event => this.logUserOut(event)}
+          />
 
           <Switch>
             <Route exact path="/" component={Home} />
