@@ -6,10 +6,9 @@ import    Select                  from     "./Select.js";
 import    ArrayInput              from     "./ArrayInput.js";
 
 //NEED: 
-//-feedback messages
 //-handle linkedin question
-//-improve file upload function
-//-tokens to be sent to students
+//-extract file upload function to other file ?
+//-tokens to be sent to students ?
 //-propTypes
 
 class AddProject extends Component {
