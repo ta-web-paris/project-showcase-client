@@ -1,97 +1,112 @@
-import React, { Component } from 'react';
-import { Route, Switch, NavLink, Redirect } from 'react-router-dom';
+import React, { Component } from "react";
+import { Route, Switch, Redirect } from "react-router-dom";
 
-import './App.css';
-
-import api from './api.js';
-import Home from './components/HomePage/Home';
-import ErrorPage from './components/ErrorPage';
-import Login from './components/Login';
-import SettingsPage from './components/SettingsPage';
+import "./App.css";
+import api from "./api.js";
+import Home from "./components/HomePage/Home";
+import ErrorPage from "./components/ErrorPage";
+import Login from "./components/Login";
+import SettingsPage from "./components/SettingsPage";
+import HeaderHome from "./components/HomePage/HeaderHome";
 import AddProject from './components/AddProjectPage/AddProject';
+//InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
+import { InstantSearch } from "react-instantsearch-dom";
+import "instantsearch.css/themes/algolia-min.css";
+import algoliasearch from "algoliasearch/lite";
 
+
+const searchClient = algoliasearch(
+  //app ID
+  process.env.REACT_APP_algoliaAppID,
+
+  //Search-Only API Key
+  process.env.REACT_APP_algoliaSearchKey
+);
 
 class App extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       isLoginChecked: false,
-      currentUser: null,
+      currentUser: null
     };
   }
 
   componentDidMount() {
-    api.get('/check-login')
+    api
+      .get("/check-login")
       .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
       .catch(err => {
         console.log(err);
-        alert('Sorry, there was an error.');
+        alert("Sorry, there was an error.");
       });
   }
 
-  userLoggedIn = (user) => {
-    console.log('New USER\n', user);
+  userLoggedIn = user => {
     this.setState({
       isLoginChecked: true,
       currentUser: user
     });
-  }
+  };
 
-  logUserOut = () => {
-    api.delete('/logout')
+  logUserOut = event => {
+    api
+      .delete("/logout")
       .then(response => {
         const { userDoc } = response.data;
         this.userLoggedIn(userDoc);
       })
       .catch(err => {
         console.log(err);
-        alert('Sorry, there was an error');
+        alert("Sorry, there was an error");
       });
-  }
+  };
 
   render() {
     const { isLoginChecked, currentUser } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <h1>This is our Project Showcase app!</h1>
-          <NavLink exact to="/">Home</NavLink>
-          {currentUser ? (
-            <React.Fragment>
-              <NavLink to="/settings">User Settings</NavLink>
-              <NavLink to="/add-project">Add a project</NavLink>
-              <b>{currentUser.email}</b>
-              <button onClick={this.logUserOut}>Log out</button>
-            </React.Fragment>
-          ) : (
-            <NavLink to="/login">Log in</NavLink>
-          )}
-        </header>
+        {/* index name is what i called the data on algolia */}
+        <InstantSearch searchClient={searchClient} indexName="dev_data">
+          <HeaderHome
+            currentUser={currentUser}
+            logUserOut={event => this.logUserOut(event)}
+          />
 
-        <Switch>
-          <Route exact path="/" component={ Home }/>
-          <Route path="/login" render={() =>
-            currentUser
-              ? <Redirect to="/" />
-              : <Login handleLogIn={this.userLoggedIn}/>
-          }/>
-          <Route path="/settings" render={() =>
-            (isLoginChecked && !currentUser)
-              ? <Redirect to="/login" />
-              : <SettingsPage currentUser={currentUser} />
-          }/>
-          <Route path="/add-project" component={ AddProject }/>
-          <Route component={ ErrorPage }/>
-        </Switch>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route
+              path="/login"
+              render={() =>
+                currentUser ? (
+                  <Redirect to="/" />
+                ) : (
+                  <Login handleLogIn={this.userLoggedIn} />
+                )
+              }
+            />
+            <Route
+              path="/settings"
+              render={() =>
+                isLoginChecked && !currentUser ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <SettingsPage currentUser={currentUser} />
+                )
+              }
+            />
+            <Route path="/add-project" component={ AddProject }/>
+            <Route component={ErrorPage} />
+          </Switch>
+        </InstantSearch>
+        <footer />
 
-        <footer></footer>
       </div>
     );
   }
 }
-
 
 export default App;
