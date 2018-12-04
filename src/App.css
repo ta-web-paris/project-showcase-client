@@ -21,13 +21,12 @@
 }
 
 .App-header a.active {
-  color:#b10dc9;
+  color: #b10dc9;
 }
 
 .App-header b {
   margin-right: 20px;
 }
-
 
 .App-title {
   font-size: 1.5em;
@@ -37,7 +36,7 @@
   font-size: large;
 }
 
-form {
+.loginForm {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -46,7 +45,7 @@ form {
   height: 800px;
 }
 
-form button {
+.loginForm button {
   width: 100px;
   margin: 0 auto;
 }
