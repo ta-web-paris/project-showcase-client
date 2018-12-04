@@ -55,14 +55,46 @@ class AddProject extends Component {
   };
 
   validateInput() {
-    const result = Joi.validate(this.state, this.schema, { abortEarly: false });
+    const { 
+      name, 
+      creators,
+      screenshotUrl, 
+      description, 
+      gitHubUrl, 
+      projectUrl,
+      display, 
+      tools, 
+      projectCredentials,
+      bootcamp,
+      squadNumber,
+      squadMonth,
+      squadYear,
+    } = this.state;
+    const result = Joi.validate(
+      { name, 
+        creators,
+        screenshotUrl, 
+        description, 
+        gitHubUrl, 
+        projectUrl,
+        display, 
+        tools, 
+        projectCredentials,
+        bootcamp,
+        squadNumber,
+        squadMonth,
+        squadYear},
+    this.schema, { abortEarly: false });
     console.log(result);
 
     const errors = {};
-    result.error.details.map(oneItem => {
-      return (errors[oneItem.path[0]] = oneItem.message);
-    });
-    return errors;
+    if (result.error){
+        result.error.details.map(oneItem => {
+        return (errors[oneItem.path[0]] = oneItem.message);
+      });
+      return errors;
+    }
+    return null;
   }
 
   handleUserInput = (event) => {
@@ -176,7 +208,7 @@ class AddProject extends Component {
           value={name} 
           label="Project name"
           />
-        {errors.name && <p>{errors.name}</p>}
+        {errors && errors.name && <p>{errors.name}</p>}
 
         <ArrayInput 
           label="Creators" 
@@ -185,7 +217,7 @@ class AddProject extends Component {
           onChange={idx => this.handleArrayInput(idx)} 
           onClick={() => this.addField("creators")} 
         />
-        {errors.creators && <p>{errors.creators}</p>}
+        {errors && errors.creators && <p>{errors.creators}</p>}
 
         <Input 
           type="file" 
@@ -193,7 +225,7 @@ class AddProject extends Component {
           onChange={this.updateFile} 
           label="Screenshot URL" 
         />
-        {errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
+        {errors && errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
 
         {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
         
@@ -203,7 +235,7 @@ class AddProject extends Component {
           value={description}
           label="Description"
         />
-        {errors.description && <p>{errors.description}</p>}
+        {errors && errors.description && <p>{errors.description}</p>}
       
         <Input
           name="gitHubUrl"
@@ -211,7 +243,7 @@ class AddProject extends Component {
           value={gitHubUrl}
           label="GitHub Repository URL"
         />
-        {errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
+        {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
 
         <Input
           name="projectUrl"
@@ -219,7 +251,7 @@ class AddProject extends Component {
           value={projectUrl}
           label="Project URL"
         />
-        {errors.projectUrl && <p>{errors.projectUrl}</p>}
+        {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
       
         <Select 
           label="Display" 
@@ -228,7 +260,7 @@ class AddProject extends Component {
           value={display} 
           optionsArray={displays}
         />
-        {errors.display && <p>{errors.display}</p>}
+        {errors && errors.display && <p>{errors.display}</p>}
 
         <ArrayInput 
           label="Tools" 
@@ -237,7 +269,7 @@ class AddProject extends Component {
           onChange={idx => this.handleArrayInput(idx)} 
           onClick={() => this.addField("tools")} 
         />
-        {errors.tools && <p>{errors.tools}</p>}
+        {errors && errors.tools && <p>{errors.tools}</p>}
 
            
         <fieldset>
@@ -251,7 +283,7 @@ class AddProject extends Component {
               label={credPlaceholder[idx]}
             />
           ))}
-          {errors.projectCredentials && <p>{errors.projectCredentials}</p>}
+          {errors && errors.projectCredentials && <p>{errors.projectCredentials}</p>}
 
         </fieldset>        
   
@@ -262,7 +294,7 @@ class AddProject extends Component {
           value={bootcamp} 
           optionsArray={bootcamps}
         />
-        {errors.bootcamp && <p>{errors.bootcamp}</p>}
+        {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
 
 
         <fieldset>
@@ -276,7 +308,7 @@ class AddProject extends Component {
               onChange={this.handleUserInput}
               label="Squad Number"
             />
-            {errors.squadNumber && <p>{errors.squadNumber}</p>}
+            {errors && errors.squadNumber && <p>{errors.squadNumber}</p>}
         
             <Select 
               label="Squad Month" 
@@ -285,7 +317,7 @@ class AddProject extends Component {
               value={squadMonth} 
               optionsArray={months}
             />
-            {errors.squadMonth && <p>{errors.squadMonth}</p>}
+            {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
 
 
             <Select
@@ -295,7 +327,7 @@ class AddProject extends Component {
               value={squadYear} 
               optionsArray={years}
             />
-            {errors.squadYear && <p>{errors.squadYear}</p>}
+            {errors && errors.squadYear && <p>{errors.squadYear}</p>}
 
 
         </fieldset>  

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 const Input = (props) => {
   const {label, type = "text", name, onChange, value} = props;
