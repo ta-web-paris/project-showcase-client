@@ -20,11 +20,12 @@ class HomeHeader extends Component {
             Home
           </NavLink>
           {currentUser ? (
-            <React.Fragment>
+            <div>
+              <NavLink to="/add-project">Add Project</NavLink>
               <NavLink to="/settings">User Settings</NavLink>
               <b>{currentUser.email}</b>
               <button onClick={event => logUserOut(event)}>Log out</button>
-            </React.Fragment>
+            </div>
           ) : (
             <NavLink to="/login">Log in</NavLink>
           )}

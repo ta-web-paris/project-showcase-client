@@ -98,6 +98,7 @@ class App extends Component {
                 )
               }
             />
+            <Route path="/add-project" component={AddProject} />
             <Route path="/projects/:id" component={ProjectHeader} />
             <Route component={ErrorPage} />
           </Switch>
