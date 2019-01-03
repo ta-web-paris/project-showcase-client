@@ -9,6 +9,7 @@ import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
 import HeaderHome from "./components/HomePage/HeaderHome";
 import AddProject from "./components/AddProjectPage/AddProject";
+import ProjectHeader from "./components/ProjectPage/HeaderProject";
 //InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
 import { InstantSearch } from "react-instantsearch-dom";
 import "instantsearch.css/themes/algolia-min.css";
@@ -97,7 +98,7 @@ class App extends Component {
                 )
               }
             />
-            <Route path="/add-project" component={AddProject} />
+            <Route path="/projects/:id" component={ProjectHeader} />
             <Route component={ErrorPage} />
           </Switch>
         </InstantSearch>
