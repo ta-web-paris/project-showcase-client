@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { NavLink } from "react-router-dom";
 import SearchBar from "../SearchBar";
 
+import './style/HeaderHome.scss';
+
 class HomeHeader extends Component {
   state = {};
 
@@ -13,12 +15,10 @@ class HomeHeader extends Component {
   render() {
     const { currentUser, logUserOut } = this.props;
     return (
-      <div>
-        <header className="App-header">
+      <section id="HomeHeader" className="col-12">
           <h1>This is our Project Showcase app!</h1>
-          <NavLink exact to="/">
-            Home
-          </NavLink>
+          <NavLink exact to="/">Home</NavLink>
+          <NavLink to="/projects">Projects List</NavLink>
           {currentUser ? (
             <div>
               <NavLink to="/add-project">Add Project</NavLink>
@@ -29,10 +29,8 @@ class HomeHeader extends Component {
           ) : (
             <NavLink to="/login">Log in</NavLink>
           )}
-
           <SearchBar />
-        </header>
-      </div>
+      </section>
     );
   }
 }

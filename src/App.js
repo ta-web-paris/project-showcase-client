@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import "./App.css";
+import "./style/App.scss";
+
 import api from "./api.js";
 import Home from "./components/HomePage/Home";
 import ErrorPage from "./components/ErrorPage";
@@ -9,6 +10,7 @@ import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
 import HeaderHome from "./components/HomePage/HeaderHome";
 import AddProject from "./components/AddProjectPage/AddProject";
+import ProjectsList from "./components/ProjectsList";
 import ProjectHeader from "./components/ProjectPage/HeaderProject";
 //InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
 import { InstantSearch } from "react-instantsearch-dom";
@@ -68,7 +70,7 @@ class App extends Component {
   render() {
     const { isLoginChecked, currentUser } = this.state;
     return (
-      <div className="App">
+      <div id="App">
         {/* index name is what i called the data on algolia */}
         <InstantSearch searchClient={searchClient} indexName="search_data">
           <HeaderHome
@@ -99,7 +101,8 @@ class App extends Component {
               }
             />
             <Route path="/add-project" component={AddProject} />
-            <Route path="/projects/:id" component={ProjectHeader} />
+            <Route path="/projects/:projectId" component={ProjectHeader} />
+            <Route path="/projects" component={ProjectsList} />
             <Route component={ErrorPage} />
           </Switch>
         </InstantSearch>

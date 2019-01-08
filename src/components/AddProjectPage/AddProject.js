@@ -284,140 +284,142 @@ class AddProject extends Component {
     ];
 
     return (
-      <form className="addProject" onSubmit={this.submitProjectForm}>
-        {feedbackMessage && <p>{feedbackMessage}</p>}
-
-        <Input
-          name="name"
-          onChange={this.handleUserInput}
-          value={name}
-          label="Project name"
-        />
-        {errors && errors.name && <p>{errors.name}</p>}
-
-        <ArrayInput
-          label="Creators"
-          fieldArray={creators}
-          name="creators"
-          onChange={idx => this.handleArrayInput(idx)}
-          onClick={() => this.addField("creators")}
-        />
-        {errors && errors.creators && <p>{errors.creators}</p>}
-
-        <Input
-          type="file"
-          name="screenshotUrl"
-          onChange={this.updateFile}
-          label="Screenshot URL"
-        />
-        {errors && errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
-
-        {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
-
-        <Input
-          name="description"
-          onChange={this.handleUserInput}
-          value={description}
-          label="Description"
-        />
-        {errors && errors.description && <p>{errors.description}</p>}
-
-        <Input
-          name="gitHubUrl"
-          onChange={this.handleUserInput}
-          value={gitHubUrl}
-          label="GitHub Repository URL"
-        />
-        {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
-
-        <Input
-          name="projectUrl"
-          onChange={this.handleUserInput}
-          value={projectUrl}
-          label="Project URL"
-        />
-        {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
-
-        <Select
-          label="Display"
-          name="display"
-          onChange={this.handleUserInput}
-          value={display}
-          optionsArray={displays}
-        />
-        {errors && errors.display && <p>{errors.display}</p>}
-
-        <ArrayInput
-          label="Tools"
-          fieldArray={tools}
-          name="tools"
-          onChange={idx => this.handleArrayInput(idx)}
-          onClick={() => this.addField("tools")}
-        />
-        {errors && errors.tools && <p>{errors.tools}</p>}
-
-        <fieldset>
-          <legend>
-            Optional: provide credentials in order for recruters to be able to
-            enter your website
-          </legend>
-
-          {projectCredentials.map((oneCred, idx) => (
-            <Input
-              name="projectCredentials"
-              onChange={this.handleArrayInput(idx)}
-              value={oneCred}
-              label={credPlaceholder[idx]}
-            />
-          ))}
-          {errors && errors.projectCredentials && (
-            <p>{errors.projectCredentials}</p>
-          )}
-        </fieldset>
-
-        <Select
-          label="Bootcamp"
-          name="bootcamp"
-          onChange={this.handleUserInput}
-          value={bootcamp}
-          optionsArray={bootcamps}
-        />
-        {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
-
-        <fieldset>
-          <legend>Squad :</legend>
+      <section id="AddProject">
+        <form className="addProject" onSubmit={this.submitProjectForm}>
+          {feedbackMessage && <p>{feedbackMessage}</p>}
 
           <Input
-            type="number"
-            placeholder="128"
-            name="squadNumber"
-            value={squadNumber}
+            name="name"
             onChange={this.handleUserInput}
-            label="Squad Number"
+            value={name}
+            label="Project name"
           />
-          {errors && errors.squadNumber && <p>{errors.squadNumber}</p>}
+          {errors && errors.name && <p>{errors.name}</p>}
+
+          <ArrayInput
+            label="Creators"
+            fieldArray={creators}
+            name="creators"
+            onChange={idx => this.handleArrayInput(idx)}
+            onClick={() => this.addField("creators")}
+          />
+          {errors && errors.creators && <p>{errors.creators}</p>}
+
+          <Input
+            type="file"
+            name="screenshotUrl"
+            onChange={this.updateFile}
+            label="Screenshot URL"
+          />
+          {errors && errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
+
+          {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
+
+          <Input
+            name="description"
+            onChange={this.handleUserInput}
+            value={description}
+            label="Description"
+          />
+          {errors && errors.description && <p>{errors.description}</p>}
+
+          <Input
+            name="gitHubUrl"
+            onChange={this.handleUserInput}
+            value={gitHubUrl}
+            label="GitHub Repository URL"
+          />
+          {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
+
+          <Input
+            name="projectUrl"
+            onChange={this.handleUserInput}
+            value={projectUrl}
+            label="Project URL"
+          />
+          {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
 
           <Select
-            label="Squad Month"
-            name="squadMonth"
+            label="Display"
+            name="display"
             onChange={this.handleUserInput}
-            value={squadMonth}
-            optionsArray={months}
+            value={display}
+            optionsArray={displays}
           />
-          {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
+          {errors && errors.display && <p>{errors.display}</p>}
+
+          <ArrayInput
+            label="Tools"
+            fieldArray={tools}
+            name="tools"
+            onChange={idx => this.handleArrayInput(idx)}
+            onClick={() => this.addField("tools")}
+          />
+          {errors && errors.tools && <p>{errors.tools}</p>}
+
+          <fieldset>
+            <legend>
+              Optional: provide credentials in order for recruters to be able to
+              enter your website
+            </legend>
+
+            {projectCredentials.map((oneCred, idx) => (
+              <Input
+                name="projectCredentials"
+                onChange={this.handleArrayInput(idx)}
+                value={oneCred}
+                label={credPlaceholder[idx]}
+              />
+            ))}
+            {errors && errors.projectCredentials && (
+              <p>{errors.projectCredentials}</p>
+            )}
+          </fieldset>
 
           <Select
-            label="Squad Year"
-            name="squadYear"
+            label="Bootcamp"
+            name="bootcamp"
             onChange={this.handleUserInput}
-            value={squadYear}
-            optionsArray={years}
+            value={bootcamp}
+            optionsArray={bootcamps}
           />
-          {errors && errors.squadYear && <p>{errors.squadYear}</p>}
-        </fieldset>
+          {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
 
-        <button>Submit</button>
-      </form>
+          <fieldset>
+            <legend>Squad :</legend>
+
+            <Input
+              type="number"
+              placeholder="128"
+              name="squadNumber"
+              value={squadNumber}
+              onChange={this.handleUserInput}
+              label="Squad Number"
+            />
+            {errors && errors.squadNumber && <p>{errors.squadNumber}</p>}
+
+            <Select
+              label="Squad Month"
+              name="squadMonth"
+              onChange={this.handleUserInput}
+              value={squadMonth}
+              optionsArray={months}
+            />
+            {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
+
+            <Select
+              label="Squad Year"
+              name="squadYear"
+              onChange={this.handleUserInput}
+              value={squadYear}
+              optionsArray={years}
+            />
+            {errors && errors.squadYear && <p>{errors.squadYear}</p>}
+          </fieldset>
+
+          <button>Submit</button>
+        </form>
+      </section>
     );
   }
 }

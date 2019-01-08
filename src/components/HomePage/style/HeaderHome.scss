@@ -1,0 +1,21 @@
+#HomeHeader{
+    text-align: center;
+    background-color: #222;
+    padding: 20px;
+    color: white;
+    a {
+      color: gray;
+      margin-right: 20px;
+      text-decoration: none;
+      :active {
+        color: #b10dc9;
+      }
+    }
+    b {
+      margin-right: 20px;
+    }
+}
+
+#HomeHeader h1 {
+  color: yellow;
+}
