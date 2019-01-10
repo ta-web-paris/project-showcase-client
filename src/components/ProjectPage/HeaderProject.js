@@ -67,7 +67,7 @@ class ProjectHeader extends Component {
             </div>
 
             <div className="project-image col-lg-8 col-md-6 col-sm-12">
-              <img src={screenshotUrl} class="big-img" alt={name} />
+              <img src={screenshotUrl} className="big-img" alt={name} />
             </div>  
 
           </div>
