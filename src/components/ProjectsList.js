@@ -37,7 +37,7 @@ render(){
                 {projects.map(oneProject => {
                     return (
                         <li key={oneProject._id} className="col-lg-4 col-md-6 col-sm-12">
-                          <div class="content mx-1">
+                          <div className="content mx-1">
                             <Link to ={getProjectUrl(oneProject)}>
                                 <h1>{oneProject.name}</h1>
                             </Link>
