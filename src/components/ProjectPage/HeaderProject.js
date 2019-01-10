@@ -36,39 +36,41 @@ class ProjectHeader extends Component {
     
       <section id="ProjectHeader">
 
-        <h1>{name}</h1>
+      <div className="container col-lg-12">
 
-        <h6>{projectType}</h6>
-        <h6>{squad}</h6>
-
-        <h5>{description}</h5>
-
-        <h5>TOOLS :</h5>
-        <ul>
-          {tools.map((oneTool, index) => {
-            return <li key={index}><h5>{oneTool}</h5></li>
-          })}
-        </ul>
-
-        <h5>PROJECT :</h5>
-        <h5>{projectUrl}</h5>
-        <h5>Github : {gitHubUrl}</h5>
-
-          {creators.map((oneInfo, index) => {
-            return (
-            <div className="creatorInfo">
-              <h5 key={index}>{oneInfo.name}</h5>
-              {oneInfo.linkedInUrl ?
-                <h5>{oneInfo.linkedInUrl}</h5>
-                :
-                null
-              }
+        <div className="project-details col-lg-4 col-md-6 col-sm-12">
+          <h1>{name}</h1>
+          <h6>{projectType}</h6>
+          <h6>{squad}</h6>
+          <h5>{description}</h5>
+          <h5>TOOLS :</h5>
+          <ul>
+            {tools.map((oneTool, index) => {
+              return <li key={index}><h5>{oneTool}</h5></li>
+            })}
+          </ul>
+          <h5>PROJECT :</h5>
+          <h5>{projectUrl}</h5>
+          <h5>Github : {gitHubUrl}</h5>
+            {creators.map((oneInfo, index) => {
+              return (
+              <div className="creatorInfo">
+                <h5 key={index}>{oneInfo.name}</h5>
+                {oneInfo.linkedInUrl ?
+                  <h5>{oneInfo.linkedInUrl}</h5>
+                  :
+                  null
+                }
+              </div>
+              )
+            })}
             </div>
-            )
-          })}
 
-          <img src={screenshotUrl} alt={name} />
+            <div className="project-image col-lg-8 col-md-6 col-sm-12">
+              <img src={screenshotUrl} class="big-img" alt={name} />
+            </div>  
 
+          </div>
       </section>
   
       )

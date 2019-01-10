@@ -4,11 +4,16 @@
     flex-wrap: wrap;
     margin: 25px 0;  
     li{
-      .content{
-        margin: 10px 0;
-        border: 1px solid rgb(241, 241, 241);
-        padding: 25px;
-        a{
+      a{
+        text-decoration: none;
+        .content{
+          height: 200px;
+          margin: 10px 0;
+          border: 1px solid rgb(241, 241, 241);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 25px;
           h1{
             color:black;
           }

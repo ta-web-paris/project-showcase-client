@@ -17,18 +17,20 @@ class HomeHeader extends Component {
     return (
       <section id="HomeHeader" className="col-12">
           <h1>This is our Project Showcase app!</h1>
-          <NavLink exact to="/">Home</NavLink>
-          <NavLink to="/projects">Projects List</NavLink>
-          {currentUser ? (
-            <div>
-              <NavLink to="/add-project">Add Project</NavLink>
-              <NavLink to="/settings">User Settings</NavLink>
-              <b>{currentUser.email}</b>
-              <button onClick={event => logUserOut(event)}>Log out</button>
-            </div>
-          ) : (
-            <NavLink to="/login">Log in</NavLink>
-          )}
+          <div className= "menu">
+            <NavLink exact to="/">Home</NavLink>
+            <NavLink to="/projects">Projects List</NavLink>
+            {currentUser ? (
+              <div>
+                <NavLink to="/add-project">Add Project</NavLink>
+                <NavLink to="/settings">User Settings</NavLink>
+                <b>{currentUser.email}</b>
+                <button onClick={event => logUserOut(event)}>Log out</button>
+              </div>
+            ) : (
+              <NavLink to="/login">Log in</NavLink>
+            )}
+          </div>
           <SearchBar />
       </section>
     );
