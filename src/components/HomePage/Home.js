@@ -1,6 +1,7 @@
 import React from "react";
 import { Hits, Highlight, connectStateResults } from "react-instantsearch-dom";
 import { Thumb } from "./ProjectThumbnail";
+import Filters from "./FilterButton";
 
 const Result = ({ hit }) => (
   <div>
@@ -36,6 +37,7 @@ const ConditionalHits = connectStateResults(({ searchState }) =>
 const Home = () => {
   return (
     <div>
+      <Filters />
       <ConditionalHits />
     </div>
   );
