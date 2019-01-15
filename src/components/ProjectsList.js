@@ -31,17 +31,27 @@ class ProjectsList extends Component {
 
 render(){
     const { projects } = this.state;
+
     return(
         <section id="ProjectsList">
-            <ul className="col-lg-12">
+            <ul className="row no-gutters">
                 {projects.map(oneProject => {
                     return (
                         <li key={oneProject._id} className="col-lg-4 col-md-6 col-sm-12">
+                        <div class="li-content">
                           <Link to ={getProjectUrl(oneProject)}>
+                                <img src={oneProject.screenshotUrl} alt="project img" className="image"/>
                             <div className="content">
-                                <h1>{oneProject.name}</h1>
+                                <div className="top-content">
+                                    <p><b>{oneProject.name}</b></p>
+                                </div>
+                                <div className="bottom-content">
+                                    <h6>Type</h6>
+                                    <h6>From</h6>
+                                </div>
                             </div>
                           </Link>
+                        </div>
                         </li>
                     );
                 })}
