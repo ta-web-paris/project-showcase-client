@@ -1,14 +1,67 @@
 #ProjectHeader{
-  padding: 50px;
-  .container{
-    display: flex;
-    flex-wrap: wrap;
+  padding: 0 10%;
+  .row{
+    margin-top: 50px;
+    a{
+      color: black;
+      text-decoration: underline;
+    }
     .project-details{
       text-align: left;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      .type, .creatorInfo li{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        line-height: 0;
+        margin-top: 5px;
+        .creator-links{
+          display: flex;
+        }
+      }
+      .type{
+        margin : 15px 0;
+      }
+      .creatorInfo{
+        margin: 0;
+      }
+      .tools, .link {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+          .h6{
+            line-height: 1.5;
+          }
+          p{
+            margin-bottom: 0;
+          }
+          ul{
+            margin: 0 5px;
+            li{
+              display: inline-block;
+
+              line-height: 0;
+            }
+          }
+          @media (max-width:767px){
+            justify-content: space-between;
+          }
+      }
+      .space{
+        margin-left: 5px;
+      }
     }
     .project-image{
       .big-img{
         width: 100%;
+        min-height: 330px;
+        object-fit: cover;
+      }
+      @media (max-width:991px){
+        margin-top: 30px;
       }
     }
   }

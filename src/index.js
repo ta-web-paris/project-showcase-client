@@ -6,6 +6,7 @@ import registerServiceWorker from './registerServiceWorker';
 import App from './App';
 
 import 'bootstrap/dist/css/bootstrap.css';
+import "./style/FontColors.scss";
 import './style/index.scss';
 
 ReactDOM.render(

@@ -36,37 +36,51 @@ class ProjectHeader extends Component {
     
       <section id="ProjectHeader">
 
-      <div className="container col-lg-12">
+      <div className="row">
 
-        <div className="project-details col-lg-4 col-md-6 col-sm-12">
-          <h1>{name}</h1>
-          <h6>{projectType}</h6>
-          <h6>{squad}</h6>
-          <h5>{description}</h5>
-          <h5>TOOLS :</h5>
-          <ul>
-            {tools.map((oneTool, index) => {
-              return <li key={index}><h5>{oneTool}</h5></li>
-            })}
-          </ul>
-          <h5>PROJECT :</h5>
-          <h5>{projectUrl}</h5>
-          <h5>Github : {gitHubUrl}</h5>
+        <div className="project-details col-lg-5 col-md-12 col-sm-12">
+          <div className="top-details">
+            <h1 class="h1">{name}</h1>
+            <div className="type">
+              <p className="mono-medium">{projectType}</p>
+              <p className="mono-medium">{squad}</p>
+            </div>
+            <p>{description}</p>
+            <div className="tools">
+              <p className="h6"><b>TOOLS :</b></p>
+              <ul>
+                {tools.map((oneTool, index) => {
+                  return <li key={index}><p className="space">{oneTool}</p></li>
+                })}
+              </ul>
+            </div>
+            <div className="link">
+              <p className="h6"><b>PROJECT :</b></p>
+              <p className="space"><a href="projecturl">{projectUrl}</a></p>
+            </div>
+          </div>
+          <div className="bottom-details">
             {creators.map((oneInfo, index) => {
               return (
-              <div className="creatorInfo">
-                <h5 key={index}>{oneInfo.name}</h5>
+              <ul className="creatorInfo">
                 {oneInfo.linkedInUrl ?
-                  <h5>{oneInfo.linkedInUrl}</h5>
+                  <li key={index}>
+                    <p><b>{oneInfo.name}</b></p>
+                    <div className="creator-links">
+                      <p className="space"><a href={oneInfo.linkedInUrl}>LinkedIn</a></p>
+                      <p className="space"><a href={gitHubUrl}>Github</a></p>
+                    </div>
+                </li>
                   :
                   null
                 }
-              </div>
+              </ul>
               )
             })}
-            </div>
+          </div>
+        </div>
 
-            <div className="project-image col-lg-8 col-md-6 col-sm-12">
+            <div className="project-image col-lg-7 col-md-12 col-sm-12">
               <img src={screenshotUrl} className="big-img" alt={name} />
             </div>  
 

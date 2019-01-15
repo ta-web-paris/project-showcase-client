@@ -30,7 +30,7 @@ class ProjectsList extends Component {
     }
 
 render(){
-    const { projects } = this.state;
+    const { projects, creators } = this.state;
 
     return(
         <section id="ProjectsList">
@@ -38,7 +38,7 @@ render(){
                 {projects.map(oneProject => {
                     return (
                         <li key={oneProject._id} className="col-lg-4 col-md-6 col-sm-12">
-                        <div class="li-content">
+                        <div className="li-content">
                           <Link to ={getProjectUrl(oneProject)}>
                                 <img src={oneProject.screenshotUrl} alt="project img" className="image"/>
                             <div className="content">
@@ -46,8 +46,14 @@ render(){
                                     <p><b>{oneProject.name}</b></p>
                                 </div>
                                 <div className="bottom-content">
-                                    <h6>Type</h6>
-                                    <h6>From</h6>
+                                    <h6>{oneProject.projectType}</h6>
+                                    {oneProject.creators.length > 1 ?
+                                    <h6>Group project</h6>
+                                    :
+                                    oneProject.creators.map((oneCreator, index) => {
+                                        return <li key={index}><h6>{oneCreator.name}</h6></li>
+                                    })
+                                    }
                                 </div>
                             </div>
                           </Link>

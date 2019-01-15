@@ -16,7 +16,8 @@ class HomeHeader extends Component {
     const { currentUser, logUserOut } = this.props;
     return (
       <section id="HomeHeader" className="col-12">
-          <h1>This is our Project Showcase app!</h1>
+          <h6>Welcome to Ironhack</h6>
+          <h1>Showcases plateform</h1>
           <div className= "menu">
             <NavLink exact to="/">Home</NavLink>
             <NavLink to="/projects">Projects List</NavLink>

@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { SearchBox } from "react-instantsearch-dom";
 
+import './style/SearchBox.scss';
+
 class SearchBar extends Component {
   render() {
     return (
-      <div>
+      <section id="SearchBox">
         <SearchBox />
-      </div>
+      </section>
     );
   }
 }
