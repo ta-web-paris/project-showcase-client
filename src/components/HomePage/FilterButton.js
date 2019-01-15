@@ -45,6 +45,7 @@ class Filters extends Component {
       <div>
         <Filter attribute="bootcamp" />
         <Filter attribute="squad" />
+        <Filter attribute="projectType" />
 
         {/* we need to alter out model for the project filter (front, fullstack, react etc) */}
         {/* <RefinementList attribute="project" /> */}
