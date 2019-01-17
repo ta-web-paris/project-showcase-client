@@ -3,6 +3,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 
 import "./style/App.scss";
 
+import "./script";
 import api from "./api.js";
 import Home from "./components/HomePage/Home";
 import ErrorPage from "./components/ErrorPage";
@@ -16,6 +17,12 @@ import ProjectHeader from "./components/ProjectPage/HeaderProject";
 import { InstantSearch } from "react-instantsearch-dom";
 import "instantsearch.css/themes/algolia-min.css";
 import algoliasearch from "algoliasearch/lite";
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+ 
+library.add(fab, faCheckSquare, faCoffee)
 
 const searchClient = algoliasearch(
   //app ID

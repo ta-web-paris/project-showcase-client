@@ -30,6 +30,7 @@ class ProjectsList extends Component {
     }
 
 render(){
+    
     const { projects } = this.state;
 
     return(

@@ -1,6 +1,10 @@
 import React, { Component } from "react";
 import axios from "axios";
 
+import ProgressBar from "./ProgressBar";
+import ProjectSuggestion from "./ProjectSuggestion";
+import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
+
 import "./style/HeaderProject.scss";
 
 import github from '../../images/icon-github.svg';
@@ -39,7 +43,9 @@ class ProjectHeader extends Component {
     
       <section id="ProjectHeader">
 
-      <div className="row">
+      <ProgressBar />
+
+      <div className="row row1">
 
         <div className="project-details col-lg-5 col-md-12 col-sm-12">
           <div className="top-details">
@@ -67,10 +73,10 @@ class ProjectHeader extends Component {
               return (
               <ul className="creatorInfo">
                   <li key={index}>
-                    <p><b>{oneInfo.name}</b></p>
+                    <p className="mono-light"><b>{oneInfo.name}</b></p>
                     <div className="creator-links">
-                      {oneInfo.linkedInUrl ? <a href={oneInfo.linkedInUrl}><img src={linkedin} alt="linkedin" /></a> : null }
-                      {oneInfo.linkedInUrl ? <a href={gitHubUrl}><img src={github} alt="github" /></a> : null } 
+                      {oneInfo.linkedInUrl ? <a href={oneInfo.linkedInUrl}><img src={linkedin} alt="linkedin" className="socialmedias" /></a> : null }
+                      {oneInfo.linkedInUrl ? <a href={gitHubUrl}><img src={github} alt="github" className="socialmedias" /></a> : null } 
                     </div>
                 </li>
               </ul>
@@ -84,6 +90,13 @@ class ProjectHeader extends Component {
             </div>  
 
           </div>
+
+          <hr />
+
+          <ProjectSuggestion />
+
+          <ProjectSuggestionThumbnail />
+
       </section>
   
       )
