@@ -104,7 +104,18 @@ class App extends Component {
             <Route path="/add-project" component={AddProject} />
             <Route path="/projects/:projectId" component={ProjectHeader} />
             <Route path="/projects" component={ProjectsList} />
-            <Route path="/notverified" component={Admin} />
+
+            <Route
+              path="/notverified"
+              render={() =>
+                isLoginChecked && !currentUser ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <Admin />
+                )
+              }
+            />
+
             <Route component={ErrorPage} />
           </Switch>
         </InstantSearch>
