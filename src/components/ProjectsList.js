@@ -30,7 +30,7 @@ class ProjectsList extends Component {
     }
 
 render(){
-    const { projects, creators } = this.state;
+    const { projects } = this.state;
 
     return(
         <section id="ProjectsList">

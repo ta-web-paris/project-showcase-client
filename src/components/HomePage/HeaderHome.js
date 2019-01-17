@@ -4,6 +4,8 @@ import SearchBar from "../SearchBar";
 
 import './style/HeaderHome.scss';
 
+import logo from '../../images/ironhack-logo.png';
+
 class HomeHeader extends Component {
   state = {};
 
@@ -16,20 +18,21 @@ class HomeHeader extends Component {
     const { currentUser, logUserOut } = this.props;
     return (
       <section id="HomeHeader" className="col-12">
-          <h6>Welcome to Ironhack</h6>
+          <img src={logo} alt="logo" className="logo"/>
+          <h6 className="mono-light">Welcome to Ironhack</h6>
           <h1>Showcases plateform</h1>
           <div className= "menu">
-            <NavLink exact to="/">Home</NavLink>
-            <NavLink to="/projects">Projects List</NavLink>
+            <NavLink exact to="/"><p>Home</p></NavLink>
+            <NavLink to="/projects"><p>Projects List</p></NavLink>
             {currentUser ? (
               <div>
-                <NavLink to="/add-project">Add Project</NavLink>
-                <NavLink to="/settings">User Settings</NavLink>
+                <NavLink to="/add-project"><p>Add Project</p></NavLink>
+                <NavLink to="/settings"><p>User Settings</p></NavLink>
                 <b>{currentUser.email}</b>
-                <button onClick={event => logUserOut(event)}>Log out</button>
+                <button onClick={event => logUserOut(event)}><p>Log out</p></button>
               </div>
             ) : (
-              <NavLink to="/login">Log in</NavLink>
+              <NavLink to="/login"><p>Log in</p></NavLink>
             )}
           </div>
           <SearchBar />

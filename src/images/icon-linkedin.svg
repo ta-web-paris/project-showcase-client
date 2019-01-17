@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="16px" viewBox="0 0 16 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 52.6 (67491) - http://www.bohemiancoding.com/sketch -->
+    <title>linkedin-filled</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Atoms-(Typography-/-Icons-/-Colors-/-Shadows-/-Grids-/-Layout-/-Input-(checkbox/radio-button))-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Atom/icon/Linkedin" transform="translate(-2.000000, -2.000000)" fill="#000000" fill-rule="nonzero">
+            <g id="linkedin-filled" transform="translate(2.000000, 2.000000)">
+                <path d="M11.7666667,4.55257732 C10.4,4.55257732 9.53333333,5.17938144 9.13333333,5.54226804 L8.26666667,6.35051546 L8.26666667,4.83298969 L5.11666667,4.83298969 L5.11666667,15.8350515 L8.4,15.8350515 L8.4,10.3917526 C8.4,8.98969072 8.65,7.38969072 10.6333333,7.38969072 C12.5833333,7.38969072 12.5833333,9.25360825 12.5833333,10.4907216 L12.5833333,15.8350515 L15.8666667,15.8350515 L15.8666667,9.79793814 C15.8833333,6.64742268 15.1833333,4.55257732 11.7666667,4.55257732 Z" id="Shape"></path>
+                <rect id="Rectangle-path" x="0.4" y="4.83298969" width="3.3" height="11.0020619"></rect>
+                <path d="M2.05,0.0659793814 C0.983333333,0.0659793814 0.116666667,0.92371134 0.116666667,1.97938144 C0.116666667,3.03505155 0.983333333,3.89278351 2.05,3.89278351 C3.11666667,3.89278351 3.98333333,3.03505155 3.98333333,1.97938144 C3.96666667,0.92371134 3.1,0.0659793814 2.05,0.0659793814 Z" id="Shape"></path>
+            </g>
+        </g>
+    </g>
+</svg>

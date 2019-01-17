@@ -1,7 +1,13 @@
+$lightblue : #00b4fe;
+$darkblue : #2d354c;
+$pink : rgba(236,58,53,.6);
+$darkgrey : rgba(45,53,76,.4);
+$lightgrey : #f8f8f8;
+
 #ProjectHeader{
   padding: 0 10%;
   .row{
-    margin-top: 50px;
+    margin : 50px 0;
     a{
       color: black;
       text-decoration: underline;
@@ -19,6 +25,9 @@
         margin-top: 5px;
         .creator-links{
           display: flex;
+          a{
+            margin-left: 10px;
+          }
         }
       }
       .type{

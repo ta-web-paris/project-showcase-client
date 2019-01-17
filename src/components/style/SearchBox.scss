@@ -1,3 +1,19 @@
+$lightblue : #00b4fe;
+$darkblue : #2d354c;
+$pink : rgba(236,58,53,.6);
+$darkgrey : rgba(45,53,76,.4);
+$lightgrey : #f8f8f8;
+
 #SearchBox{
-  margin-top: 20px;
+  margin-top: 10px;
+  .ais-SearchBox-input{
+    background-color: transparent;
+    color: white;
+    border: 0.5px solid white;
+    font-family:'RobotoMono-Light', serif;
+    font-size: 12px;
+    width: 350px;
+    height: 35px;
+    border-radius: 0;
+  }
 }

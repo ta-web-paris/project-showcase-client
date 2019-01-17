@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { connectRefinementList } from "react-instantsearch-dom";
 
+import './style/FilterButton.scss';
+
 class RawFilter extends Component {
   state = { open: false };
   render() {
@@ -42,14 +44,17 @@ class Filters extends Component {
   state = {};
   render() {
     return (
-      <div>
-        <Filter attribute="bootcamp" />
-        <Filter attribute="squad" />
-        <Filter attribute="projectType" />
-
+      <section id="Filters">
+        <div className="container">
+          <div className="row">
+            <Filter attribute="bootcamp"/>
+            <Filter attribute="squad"/>
+            <Filter attribute="projectType"/>
+          </div>
+        </div>
         {/* we need to alter out model for the project filter (front, fullstack, react etc) */}
         {/* <RefinementList attribute="project" /> */}
-      </div>
+      </section>
     );
   }
 }

@@ -10,14 +10,68 @@ $lightgrey : #f8f8f8;
 // // FONTS
 // // ----------------------------------------------------------------
 
+// Roboto Mono
+
 @font-face {
   font-family: 'RobotoMono-Bold';
   src: url('../font/RobotoMono-Bold.ttf') format('truetype');
 }
 
 @font-face {
+  font-family: 'RobotoMono-BoldItalic';
+  src: url('../font/RobotoMono-BoldItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-Italic';
+  src: url('../font/RobotoMono-Italic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-Light';
+  src: url('../font/RobotoMono-Light.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-LightItalic';
+  src: url('../font/RobotoMono-LightItalic.ttf') format('truetype');
+}
+
+@font-face {
   font-family: 'RobotoMono-Medium';
   src: url('../font/RobotoMono-Medium.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-MediumItalic';
+  src: url('../font/RobotoMono-MediumItalic.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-Regular';
+  src: url('../font/RobotoMono-Regular.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-Thin';
+  src: url('../font/RobotoMono-Thin.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoMono-ThinItalic';
+  src: url('../font/RobotoMono-ThinItalic.ttf') format('truetype');
+}
+
+// Roboto
+
+@font-face {
+  font-family: 'Roboto-Black';
+  src: url('../font/Roboto-Black.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Roboto-BlackItalic';
+  src: url('../font/Roboto-BlackItalic.ttf') format('truetype');
 }
 
 @font-face {
@@ -71,7 +125,17 @@ $lightgrey : #f8f8f8;
 }
 
 $RMb: 'RobotoMono-Bold', serif;
+$RMbi: 'RobotoMono-BoldItalic', serif;
+$RMi: 'RobotoMono-Italic', serif;
+$RMl: 'RobotoMono-Light', serif;
+$RMli: 'RobotoMono-LightItalic', serif;
 $RMm: 'RobotoMono-Medium', serif;
+$RMmi: 'RobotoMono-MediumItalic', serif;
+$RMr: 'RobotMono-Regular', serif;
+$RMt: 'RobotoMono-Thin', serif;
+$RMti: 'RobotoMono-ThinItalic', serif;
+$Rbk: 'Roboto-Black', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+$Rbki: 'Roboto-BlackItalic', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 $Rb: 'Roboto-Bold', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 $Rbi: 'Roboto-BoldItalic', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
 $Ri: 'Roboto-Italic', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
@@ -95,6 +159,11 @@ p{
 .mono-bold{
   font-family: $RMb;
 }
+
 .mono-medium{
-  font-family: $RMm;
+  font-family: $RMr;
+}
+
+.mono-light{
+  font-family: $RMl;
 }

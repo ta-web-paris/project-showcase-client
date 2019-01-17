@@ -1,0 +1,29 @@
+$lightblue : #00b4fe;
+$darkblue : #2d354c;
+$pink : rgba(236,58,53,.6);
+$darkgrey : rgba(45,53,76,.4);
+$lightgrey : #f8f8f8;
+
+#Filters{
+  .container{
+    .row{
+      button{
+        width: 150px;
+        height: 35px;
+        margin: 20px 0 20px 20px;
+        border: 1px solid $darkgrey;
+        color: $darkgrey;
+        background-color: transparent;
+        font-family:'RobotoMono-Light', serif;
+        font-size: 12px;
+        @media (max-width: 767px){
+          margin: 5px;
+        }
+      }
+      @media (max-width: 767px){
+        flex-direction: column;
+        margin: 5px 0;
+      }
+    }
+  }
+}

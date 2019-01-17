@@ -3,6 +3,9 @@ import axios from "axios";
 
 import "./style/HeaderProject.scss";
 
+import github from '../../images/icon-github.svg';
+import linkedin from '../../images/icon-linkedin.svg';
+
 class ProjectHeader extends Component {
 
   constructor(props) {
@@ -42,8 +45,8 @@ class ProjectHeader extends Component {
           <div className="top-details">
             <h1 class="h1">{name}</h1>
             <div className="type">
-              <p className="mono-medium">{projectType}</p>
-              <p className="mono-medium">{squad}</p>
+              <p className="mono-light">{projectType}</p>
+              <p className="mono-light">{squad}</p>
             </div>
             <p>{description}</p>
             <div className="tools">
@@ -63,17 +66,13 @@ class ProjectHeader extends Component {
             {creators.map((oneInfo, index) => {
               return (
               <ul className="creatorInfo">
-                {oneInfo.linkedInUrl ?
                   <li key={index}>
                     <p><b>{oneInfo.name}</b></p>
                     <div className="creator-links">
-                      <p className="space"><a href={oneInfo.linkedInUrl}>LinkedIn</a></p>
-                      <p className="space"><a href={gitHubUrl}>Github</a></p>
+                      {oneInfo.linkedInUrl ? <a href={oneInfo.linkedInUrl}><img src={linkedin} alt="linkedin" /></a> : null }
+                      {oneInfo.linkedInUrl ? <a href={gitHubUrl}><img src={github} alt="github" /></a> : null } 
                     </div>
                 </li>
-                  :
-                  null
-                }
               </ul>
               )
             })}
