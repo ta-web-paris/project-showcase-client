@@ -16,6 +16,7 @@ import ProjectHeader from "./components/ProjectPage/HeaderProject";
 import { InstantSearch } from "react-instantsearch-dom";
 import "instantsearch.css/themes/algolia-min.css";
 import algoliasearch from "algoliasearch/lite";
+import Admin from "./components/Admin/Admin";
 
 const searchClient = algoliasearch(
   //app ID
@@ -103,6 +104,7 @@ class App extends Component {
             <Route path="/add-project" component={AddProject} />
             <Route path="/projects/:projectId" component={ProjectHeader} />
             <Route path="/projects" component={ProjectsList} />
+            <Route path="/notverified" component={Admin} />
             <Route component={ErrorPage} />
           </Switch>
         </InstantSearch>
