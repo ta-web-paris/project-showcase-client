@@ -12,6 +12,8 @@ $lightgrey : #f8f8f8;
     justify-content: space-between;
     @media(max-width: 767px){
       padding: 0;  
+      max-width: 767px;
+      margin: 0 auto;
     }
   }
   .projectlist{
