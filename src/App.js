@@ -17,13 +17,14 @@ import ProjectHeader from "./components/ProjectPage/HeaderProject";
 import { InstantSearch } from "react-instantsearch-dom";
 import "instantsearch.css/themes/algolia-min.css";
 import algoliasearch from "algoliasearch/lite";
-import Admin from "./components/Admin/Admin";
+import NotVerifed from "./components/Admin/NotVerifed";
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { fab } from '@fortawesome/free-brands-svg-icons'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
- 
-library.add(fab, faCheckSquare, faCoffee)
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { fab } from "@fortawesome/free-brands-svg-icons";
+import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
+import Verifed from "./components/Admin/Verifed";
+
+library.add(fab, faCheckSquare, faCoffee);
 
 const searchClient = algoliasearch(
   //app ID
@@ -118,7 +119,18 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <Admin />
+                  <NotVerifed />
+                )
+              }
+            />
+
+            <Route
+              path="/verified"
+              render={() =>
+                isLoginChecked && !currentUser ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <Verifed />
                 )
               }
             />

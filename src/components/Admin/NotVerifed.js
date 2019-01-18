@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class Admin extends Component {
+class NotVerifed extends Component {
   state = {
     nonverifed: []
   };
@@ -46,4 +46,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default NotVerifed;
