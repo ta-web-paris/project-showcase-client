@@ -17,6 +17,7 @@ $lightgrey : #f8f8f8;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      padding-right: 50px;
       .type, .creatorInfo li{
         display: flex;
         flex-direction: row;
@@ -66,8 +67,12 @@ $lightgrey : #f8f8f8;
       .space{
         margin-left: 5px;
       }
+      @media(max-width: 767px){
+        padding: 0;  
+      }
     }
     .project-image{
+      padding: 0;
       .big-img{
         width: 100%;
         min-height: 330px;

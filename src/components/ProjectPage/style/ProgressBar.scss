@@ -1,0 +1,71 @@
+$lightblue : #00b4fe;
+$darkblue : #2d354c;
+$pink : rgba(236,58,53,.6);
+$darkgrey : rgba(45,53,76,.4);
+$lightgrey : #f8f8f8;
+
+#ProgressBar{
+  margin: 50px auto;
+  .container{
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    @media(max-width: 767px){
+      padding: 0;  
+    }
+  }
+  .projectlist{
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+    @media(max-width: 600px){
+      justify-content: center;
+    }
+  }
+  .btm-title{
+    margin-bottom: 10px;
+  }
+  .oneproject{
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+    .dot{
+      margin-top: 10px;
+      width: 14px;
+      height: 14px;
+      border-radius: 7px;
+      background-color: $lightgrey;
+      border: 1px solid rgba(177, 177, 177, 1);
+      opacity: 1;
+      z-index: 100;
+    }
+  }
+  .active{
+    .dot{
+      background-color: rgba(177, 177, 177, 1);
+    }
+  }
+  hr{
+    position: absolute;
+    opacity: 1;
+    width:99%;
+    bottom: -10px;
+    border-top: 1px solid rgba(177, 177, 177, 0.5);
+    display: flex;
+    justify-content: space-between;
+    @media(max-width: 767px){
+      width:100%;
+    }
+  }
+  hr:before, hr:after{
+    content:"\A";
+    width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    background-color: rgba(177, 177, 177, 1);
+    display: inline-block;
+    margin-top: -10px;
+  }
+}

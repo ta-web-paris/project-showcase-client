@@ -49,7 +49,7 @@ class ProjectHeader extends Component {
 
         <div className="project-details col-lg-5 col-md-12 col-sm-12">
           <div className="top-details">
-            <h1 class="h1">{name}</h1>
+            <h1 className="h1">{name}</h1>
             <div className="type">
               <p className="mono-light">{projectType}</p>
               <p className="mono-light">{squad}</p>

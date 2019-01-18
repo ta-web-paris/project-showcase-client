@@ -10,6 +10,31 @@ class ProgressBar extends Component {
     
       <section id="ProgressBar">
 
+        <div className="container">
+        
+          <div className="projectlist">
+
+            <div className="oneproject active">
+              <div className="project-title mono-light btm-title">
+                Project 1
+              </div>
+              <div className="dot"></div>
+            </div>
+
+            <div className="oneproject">
+              <div className="dot"></div>
+            </div>
+
+            <div className="oneproject">
+              <div className="dot"></div>
+            </div>
+          
+          </div>
+
+          <hr/>
+
+        </div>
+
       </section>
   
       )
