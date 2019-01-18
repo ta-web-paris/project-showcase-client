@@ -4,6 +4,7 @@ import api from "../../api.js";
 import Input from "./Input.js";
 import Select from "./Select.js";
 import ArrayInput from "./ArrayInput.js";
+import { join } from "path";
 
 //NEED:
 //-handle linkedin question
@@ -26,10 +27,11 @@ class AddProject extends Component {
       gitHubUrl: "",
       projectUrl: "",
       tools: [""],
-      linkedInUrl: "",
+      // linkedInUrl: "",
       projectCredentials: ["", ""],
       display: "web",
       bootcamp: "Web Dev Full Time",
+      projectType: "front-end",
       squadNumber: 0,
       squadMonth: "January",
       squadYear: "2011",
@@ -53,6 +55,7 @@ class AddProject extends Component {
       .required()
       .max(150),
     gitHubUrl: Joi.string().uri(),
+    // linkedInUrl: Joi.string().uri(),
     projectUrl: Joi.string()
       .trim()
       .uri()
@@ -69,6 +72,17 @@ class AddProject extends Component {
       "UX/UI Full Time",
       "Data Analytics"
     ),
+
+    projectType: Joi.string().valid(
+      "fullstack",
+      "fullstack - framework",
+      "front-end",
+      "UX",
+      "UI",
+      "UX/UI",
+      "data"
+    ),
+
     squadNumber: Joi.number()
       .integer()
       .positive(),
@@ -107,11 +121,13 @@ class AddProject extends Component {
       screenshotUrl,
       description,
       gitHubUrl,
+      // linkedInUrl,
       projectUrl,
       display,
       tools,
       projectCredentials,
       bootcamp,
+      projectType,
       squadNumber,
       squadMonth,
       squadYear
@@ -123,11 +139,13 @@ class AddProject extends Component {
         screenshotUrl,
         description,
         gitHubUrl,
+        // linkedInUrl,
         projectUrl,
         display,
         tools,
         projectCredentials,
         bootcamp,
+        projectType,
         squadNumber,
         squadMonth,
         squadYear
@@ -235,11 +253,13 @@ class AddProject extends Component {
       screenshotUrl,
       description,
       gitHubUrl,
+      // linkedInUrl,
       projectUrl,
       display,
       tools,
       projectCredentials,
       bootcamp,
+      projectType,
       squadNumber,
       squadMonth,
       squadYear,
@@ -283,6 +303,15 @@ class AddProject extends Component {
       "Data Analytics"
     ];
 
+    const projectTypes = [
+      "fullstack",
+      "fullstack - framework",
+      "front-end",
+      "UX",
+      "UI",
+      "UX/UI",
+      "data"
+    ];
     return (
       <section id="AddProject">
         <form className="addProject" onSubmit={this.submitProjectForm}>
@@ -384,6 +413,15 @@ class AddProject extends Component {
             optionsArray={bootcamps}
           />
           {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
+
+          <Select
+            label="project Type"
+            name="projectType"
+            onChange={this.handleUserInput}
+            value={projectType}
+            optionsArray={projectTypes}
+          />
+          {errors && errors.projectType && <p>{errors.projectType}</p>}
 
           <fieldset>
             <legend>Squad :</legend>
