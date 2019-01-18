@@ -23,6 +23,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import Verifed from "./components/Admin/Verifed";
+import EditProject from "./components/Admin/EditProject";
 
 library.add(fab, faCheckSquare, faCoffee);
 
@@ -131,6 +132,17 @@ class App extends Component {
                   <Redirect to="/login" />
                 ) : (
                   <Verifed />
+                )
+              }
+            />
+
+            <Route
+              path="/edit"
+              render={() =>
+                isLoginChecked && !currentUser ? (
+                  <Redirect to="/login" />
+                ) : (
+                  <EditProject />
                 )
               }
             />
