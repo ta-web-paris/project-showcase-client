@@ -62,7 +62,7 @@ class ProjectsList extends Component {
   componentDidMount() {
     window.scrollTo(0, 0);
     axios
-      .get("http://localhost:4000/api/projects", { withCredentials: true })
+      .get("http://localhost:4000/api/", { withCredentials: true })
       .then(response => {
         this.setState({ projects: response.data });
       })

@@ -5,7 +5,7 @@ import "./style/App.scss";
 
 import "./script";
 import api from "./api.js";
-import Home from "./components/HomePage/Home";
+// import Home from "./components/HomePage/Home";
 import ErrorPage from "./components/ErrorPage";
 import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
@@ -89,7 +89,7 @@ class App extends Component {
           />
 
           <Switch>
-            <Route exact path="/" component={Home} />
+            {/* <Route exact path="/" component={Home} /> */}
             <Route
               path="/login"
               render={() =>
@@ -112,7 +112,7 @@ class App extends Component {
             />
             <Route path="/add-project" component={AddProject} />
             <Route path="/projects/:projectId" component={ProjectHeader} />
-            <Route path="/projects" component={ProjectsList} />
+            <Route path="/" component={ProjectsList} />
 
             <Route
               path="/notverified"
