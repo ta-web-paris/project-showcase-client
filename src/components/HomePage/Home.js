@@ -1,12 +1,12 @@
 import React from "react";
 import { Hits, Highlight, connectStateResults } from "react-instantsearch-dom";
-import { Thumb } from "./ProjectThumbnail";
-import Filters from "./FilterButton";
+// import { Thumb } from "../ProjectThumbnail";
+// import Filters from "../FilterButton";
 
 const Result = ({ hit }) => (
   <div>
     <div>
-      <Thumb src={hit.screenshotUrl} alt={hit.name} objectID={hit.objectID} />
+      {/* <Thumb src={hit.screenshotUrl} alt={hit.name} objectID={hit.objectID} /> */}
       <Highlight hit={hit} attribute="name" tagName="mark" />
     </div>
     <div>
@@ -37,7 +37,7 @@ const ConditionalHits = connectStateResults(({ searchState }) =>
 const Home = () => {
   return (
     <div>
-      <Filters />
+      {/* <Filters /> */}
       <ConditionalHits />
     </div>
   );
