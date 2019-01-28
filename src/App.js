@@ -1,29 +1,31 @@
 import React, { Component } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 
-import "./style/App.scss";
+//------------- ALGOLIA --------------
+import algoliasearch from "algoliasearch/lite";
+//InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
+import { InstantSearch } from "react-instantsearch-dom";
 
+import ErrorPage from "./components/ErrorPage";
 import "./script";
 import api from "./api.js";
-// import Home from "./components/HomePage/Home";
-import ErrorPage from "./components/ErrorPage";
-import Login from "./components/Login";
-import SettingsPage from "./components/SettingsPage";
 import HeaderHome from "./components/HomePage/HeaderHome";
 import AddProject from "./components/AddProjectPage/AddProject";
 import ProjectsList from "./components/ProjectsList";
 import ProjectHeader from "./components/ProjectPage/HeaderProject";
-//InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
-import { InstantSearch } from "react-instantsearch-dom";
-import "instantsearch.css/themes/algolia-min.css";
-import algoliasearch from "algoliasearch/lite";
-import NotVerifed from "./components/Admin/NotVerifed";
 
+//----------------- ADMIN ONLY  ------------
+import Login from "./components/Login";
+import SettingsPage from "./components/SettingsPage";
+import EditProject from "./components/Admin/EditProject";
+import NotVerifed from "./components/Admin/NotVerifed";
+import Verifed from "./components/Admin/Verifed";
+
+//------------------ STYLING -----------
+import "./style/App.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import Verifed from "./components/Admin/Verifed";
-import EditProject from "./components/Admin/EditProject";
 
 library.add(fab, faCheckSquare, faCoffee);
 
