@@ -7,117 +7,154 @@ import $ from "jquery";
 import "./style/ProjectSuggestion.scss";
 
 class ProjectSuggestion extends Component {
-
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
-        projects: [],
-    }
+      projects: []
+    };
   }
 
-  componentDidMount(){
+  componentDidMount() {
+    $("#blogCarousel").carousel({
+      interval: 3000
+    });
 
-        $('#blogCarousel').carousel({
-          interval: 3000
-      });
-
-  window.scrollTo(0,0)
-  axios.get('http://localhost:4000/api/projects', { withCredentials: true })
-    .then(response =>{
-        this.setState({projects : response.data})
-    })
-    .catch(err=>{
+    window.scrollTo(0, 0);
+    axios
+      .get("http://localhost:4000/api/", { withCredentials: true })
+      .then(response => {
+        this.setState({ projects: response.data });
+      })
+      .catch(err => {
         console.log("Listing Info Error", err);
-        alert("Sorry something went wrong")
-    })
+        alert("Sorry something went wrong");
+      });
   }
 
   render() {
-
     const { projects } = this.state;
-    const { name, creators, screenshotUrl, description, gitHubUrl, projectUrl, projectType, tools, likes, projectCredentials, display, bootcamp, squad } = this.props;
+    const {
+      name,
+      creators,
+      screenshotUrl,
+      description,
+      gitHubUrl,
+      projectUrl,
+      projectType,
+      tools,
+      likes,
+      projectCredentials,
+      display,
+      bootcamp,
+      squad
+    } = this.props;
 
     return (
-    
       <section id="ProjectSuggestion">
         <h2 className="h2">Projects from X</h2>
 
         <div className="container">
-            <div className="row blog">
-                <div className="col-md-12">
-                    <div id="blogCarousel" className="carousel slide" data-ride="carousel">
-
-                        <div className="carousel-inner">
-
-                            <div className="carousel-item active">
-
-                                <div className="row row3">
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                </div>
-
-                            </div>
-
-
-                            <div className="carousel-item">
-                                <div className="row row3">
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                    <div className="col-lg-3 col-md-6">
-                                        <a href="0">
-                                            <img src="http://placehold.it/250x250" alt="placehold"/>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <ol className="carousel-indicators">
-                          <li data-target="#blogCarousel" data-slide-to="0" className="active indic"></li>
-                          <li data-target="#blogCarousel" data-slide-to="1" className="indic"></li>
-                      </ol>
+          <div className="row blog">
+            <div className="col-md-12">
+              <div
+                id="blogCarousel"
+                className="carousel slide"
+                data-ride="carousel"
+              >
+                <div className="carousel-inner">
+                  <div className="carousel-item active">
+                    <div className="row row3">
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
                     </div>
+                  </div>
+
+                  <div className="carousel-item">
+                    <div className="row row3">
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                      <div className="col-lg-3 col-md-6">
+                        <a href="0">
+                          <img
+                            src="http://placehold.it/250x250"
+                            alt="placehold"
+                          />
+                        </a>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+                <ol className="carousel-indicators">
+                  <li
+                    data-target="#blogCarousel"
+                    data-slide-to="0"
+                    className="active indic"
+                  />
+                  <li
+                    data-target="#blogCarousel"
+                    data-slide-to="1"
+                    className="indic"
+                  />
+                </ol>
+              </div>
             </div>
-      </div>
-
-       
-</section>
-  
-      )
-
+          </div>
+        </div>
+      </section>
+    );
   }
-
 }
 
 export default ProjectSuggestion;
