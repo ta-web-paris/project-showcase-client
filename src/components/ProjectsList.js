@@ -28,7 +28,7 @@ const Result = ({ hit }) => (
                 <h6>Group project</h6>
               ) : (
                 hit.creators.map((oneCreator, index) => {
-                  return <h6>{oneCreator.name}</h6>;
+                  return <h6 key={index}>{oneCreator.name}</h6>;
                 })
               )}
             </div>
