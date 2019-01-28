@@ -18,8 +18,8 @@ import ProjectHeader from "./components/ProjectPage/HeaderProject";
 import Login from "./components/Login";
 import SettingsPage from "./components/SettingsPage";
 import EditProject from "./components/Admin/EditProject";
-import NotVerifed from "./components/Admin/NotVerifed";
-import Verifed from "./components/Admin/Verifed";
+import NotVerified from "./components/Admin/NotVerified";
+import Verified from "./components/Admin/Verified";
 
 //------------------ STYLING -----------
 import "./style/App.scss";
@@ -91,7 +91,8 @@ class App extends Component {
           />
 
           <Switch>
-            {/* <Route exact path="/" component={Home} /> */}
+            <Route exact path="/" component={ProjectsList} />
+
             <Route
               path="/login"
               render={() =>
@@ -114,7 +115,6 @@ class App extends Component {
             />
             <Route path="/add-project" component={AddProject} />
             <Route path="/projects/:projectId" component={ProjectHeader} />
-            <Route path="/" component={ProjectsList} />
 
             <Route
               path="/notverified"
@@ -122,7 +122,7 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <NotVerifed />
+                  <NotVerified />
                 )
               }
             />
@@ -133,7 +133,7 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <Verifed />
+                  <Verified />
                 )
               }
             />

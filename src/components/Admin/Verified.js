@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 
-class Verifed extends Component {
+class Verified extends Component {
   state = {
     verifed: []
   };
@@ -44,4 +44,4 @@ class Verifed extends Component {
   }
 }
 
-export default Verifed;
+export default Verified;
