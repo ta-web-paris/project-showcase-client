@@ -18,8 +18,12 @@ class HomeHeader extends Component {
     const { currentUser, logUserOut } = this.props;
     return (
       <section id="HomeHeader" className="col-12">
-        <NavLink exact to="/"><img src={logo} alt="logo" className="logo" /></NavLink>
-        <h6 className="mono-light">Welcome to Ironhack showcases plateform & discover</h6>
+        <NavLink exact to="/">
+          <img src={logo} alt="logo" className="logo" />
+        </NavLink>
+        <h6 className="mono-light">
+          Welcome to Ironhack showcases plateform & discover
+        </h6>
         <h1>212 squads, 23 alumnis, 363 projects</h1>
         <div className="menu">
           {/* <NavLink exact to="/">
@@ -27,7 +31,7 @@ class HomeHeader extends Component {
           </NavLink> */}
           {/* <NavLink to="/projects"><p>Projects List</p></NavLink> */}
           {currentUser ? (
-            <div class="user">
+            <div className="user">
               <NavLink to="/add-project">
                 <p>Add Project</p>
               </NavLink>
@@ -36,7 +40,7 @@ class HomeHeader extends Component {
               </NavLink>
               {/* <b>{currentUser.email}</b> */}
               {/* <button > */}
-                <p onClick={event => logUserOut(event)}>Log out</p>
+              <p onClick={event => logUserOut(event)}>Log out</p>
               {/* </button> */}
             </div>
           ) : (
