@@ -37,6 +37,7 @@ class NotVerifed extends Component {
                 )}
 
                 <p>{oneProject.name}</p>
+                <button>Edit</button>
               </li>
             );
           })}

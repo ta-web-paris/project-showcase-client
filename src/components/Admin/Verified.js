@@ -35,6 +35,7 @@ class Verified extends Component {
                 )}
 
                 <p>{oneProject.name}</p>
+                <button>Edit</button>
               </li>
             );
           })}
