@@ -7,7 +7,8 @@ import "./style/ProjectsList.scss";
 import Filters from "./FilterButton";
 
 function getProjectUrl(oneProject) {
-  return `/projects/${oneProject._id}`;
+  console.log(oneProject);
+  return `/projects/${oneProject.searchId}`;
 }
 
 const Result = ({ hit }) => (
