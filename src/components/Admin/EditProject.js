@@ -6,9 +6,9 @@ class EditProject extends Component {
 
   componentDidMount() {
     const { params } = this.props.match;
-    console.log(params);
+    console.log(params.id);
     axios
-      .get(`http://localhost:4000/api/projects/edit/${params._id}`, {
+      .get(`http://localhost:4000/api/projects/edit/${params.id}`, {
         withCredentials: true
       })
       .then(response => {
