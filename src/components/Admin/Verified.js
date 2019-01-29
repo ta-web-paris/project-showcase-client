@@ -1,5 +1,11 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
+
+function getProjectUrl(oneProject) {
+  console.log(oneProject, "zozozozozzozo");
+  return `/projects/edit/${oneProject._id}`;
+}
 
 class Verified extends Component {
   state = {
@@ -10,6 +16,7 @@ class Verified extends Component {
     axios
       .get("http://localhost:4000/api/verified", { withCredentials: true })
       .then(response => {
+        console.log(response);
         this.setState({ verifed: response.data });
       })
       .catch(err => {
@@ -18,12 +25,15 @@ class Verified extends Component {
       });
   }
   render() {
-    const { verifed } = this.state;
+    const { verifed, _id } = this.state;
+    console.log(this.state);
+
     return (
       <div>
         <h3>verifed projects</h3>
         <ul>
           {verifed.map(oneProject => {
+            console.log(oneProject);
             return (
               <li key={oneProject._id}>
                 {oneProject.creators.length > 1 ? (
@@ -35,7 +45,9 @@ class Verified extends Component {
                 )}
 
                 <p>{oneProject.name}</p>
-                <button>Edit</button>
+                <Link to={`/projects/edit/${oneProject._id}`}>
+                  <button>Edit</button>
+                </Link>
               </li>
             );
           })}

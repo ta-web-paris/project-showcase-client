@@ -114,7 +114,13 @@ class App extends Component {
               }
             />
             <Route path="/add-project" component={AddProject} />
-            <Route path="/projects/:projectId" component={ProjectHeader} />
+            <Route path="/projects/edit/:id" component={EditProject} />
+
+            <Route
+              exact
+              path="/projects/:projectId"
+              component={ProjectHeader}
+            />
 
             <Route
               path="/notverified"
@@ -138,7 +144,7 @@ class App extends Component {
               }
             />
 
-            <Route
+            {/* <Route
               path="/edit"
               render={() =>
                 isLoginChecked && !currentUser ? (
@@ -147,7 +153,7 @@ class App extends Component {
                   <EditProject />
                 )
               }
-            />
+            /> */}
 
             <Route component={ErrorPage} />
           </Switch>
