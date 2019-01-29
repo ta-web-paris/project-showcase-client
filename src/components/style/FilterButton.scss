@@ -6,11 +6,35 @@ $lightgrey : #f8f8f8;
 
 #Filters{
   .container{
+    padding-right: 0;
+    padding-left: 0;
     .row{
+      .RefinementList-container{
+        position: absolute;
+        z-index: 100;
+        ul{
+          display: flex;
+          flex-direction: column;
+          border: 1px solid $darkgrey;
+          margin-top: 0;
+          li{ 
+            background-color: $lightgrey;
+            width: 100%;
+            flex: 0 0 100%;
+            max-width: 100%;
+            justify-content: flex-start;
+            text-align: left;
+            color: $darkgrey;
+            input{
+              margin-right: 10px;
+            }
+          }
+        }
+      }
       button{
         width: 150px;
         height: 35px;
-        margin: 20px 0 20px 20px;
+        margin: 20px 0 -1px 20px;
         border: 1px solid $darkgrey;
         color: $darkgrey;
         background-color: transparent;

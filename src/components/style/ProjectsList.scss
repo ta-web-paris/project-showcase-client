@@ -8,14 +8,35 @@ $lightgrey : #f8f8f8;
   padding: 0 10%;
   ul {
     margin-top: 10px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
     li{
       padding: 10px;
+      -ms-flex: 0 0 33.333333%;
+      flex: 0 0 33.333333%;
+      max-width: 33.333333%;
+      @media (max-width: 768px){
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
+      }
+      @media (max-width: 576px){
+        -ms-flex: 0 0 100%;
+        flex: 0 0 100%;
+        max-width: 100%;
+      }
       .li-content{
         border-radius: 6px;
         box-shadow: 0 16px 32px 0 rgba(0,0,0,.1);
         height: 210px;
         padding: 0;
         background-color: white;
+        // width: 100%;
+        min-width: 100%;
         // margin: 10px;
         // box-sizing: border-box;
         // background-clip: padding-box;

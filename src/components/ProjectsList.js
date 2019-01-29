@@ -11,9 +11,7 @@ function getProjectUrl(oneProject) {
 }
 
 const Result = ({ hit }) => (
-  <ul>
-    <li key={hit._id} className="col-lg-4 col-md-6 col-sm-12">
-      <div className="li-content">
+      <div key={hit._id} className="li-content col-lg-4 col-md-6 col-sm-12">
         <Link to={getProjectUrl(hit)}>
           <img src={hit.screenshotUrl} alt="project img" className="image" />
           <div className="content">
@@ -35,8 +33,6 @@ const Result = ({ hit }) => (
           </div>
         </Link>
       </div>
-    </li>
-  </ul>
 );
 
 const ConditionalHits = connectStateResults(({ searchState }) =>
