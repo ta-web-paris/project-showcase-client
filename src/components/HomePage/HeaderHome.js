@@ -27,17 +27,17 @@ class HomeHeader extends Component {
           </NavLink> */}
           {/* <NavLink to="/projects"><p>Projects List</p></NavLink> */}
           {currentUser ? (
-            <div>
+            <div class="user">
               <NavLink to="/add-project">
                 <p>Add Project</p>
               </NavLink>
               <NavLink to="/settings">
                 <p>User Settings</p>
               </NavLink>
-              <b>{currentUser.email}</b>
-              <button onClick={event => logUserOut(event)}>
-                <p>Log out</p>
-              </button>
+              {/* <b>{currentUser.email}</b> */}
+              {/* <button > */}
+                <p onClick={event => logUserOut(event)}>Log out</p>
+              {/* </button> */}
             </div>
           ) : (
             <NavLink to="/login">
