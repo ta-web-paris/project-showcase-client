@@ -45,17 +45,17 @@ class ProjectHeader extends Component {
     const {
       name,
       creators,
-      screenshotUrl,
-      description,
-      gitHubUrl,
-      projectUrl,
-      projectType,
-      tools,
-      likes,
-      projectCredentials,
-      display,
-      bootcamp,
-      squad
+      gitHubUrl
+      // screenshotUrl,
+      // description,
+      // projectUrl,
+      // projectType,
+      // tools,
+      // likes,
+      // projectCredentials,
+      // display,
+      // bootcamp,
+      // squad
     } = this.state;
 
     return (

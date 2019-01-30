@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import { Hits, Highlight, connectStateResults } from "react-instantsearch-dom";
+import { Hits, connectStateResults } from "react-instantsearch-dom";
 
 import "./style/ProjectsList.scss";
 import Filters from "./FilterButton";
@@ -12,28 +12,28 @@ function getProjectUrl(oneProject) {
 }
 
 const Result = ({ hit }) => (
-      <div key={hit._id} className="li-content col-lg-4 col-md-6 col-sm-12">
-        <Link to={getProjectUrl(hit)}>
-          <img src={hit.screenshotUrl} alt="project img" className="image" />
-          <div className="content">
-            <div className="top-content">
-              <p>
-                <b>{hit.name}</b>
-              </p>
-            </div>
-            <div className="bottom-content">
-              <h6>{hit.projectType}</h6>
-              {hit.creators.length > 1 ? (
-                <h6>Group project</h6>
-              ) : (
-                hit.creators.map((oneCreator, index) => {
-                  return <h6 key={index}>{oneCreator.name}</h6>;
-                })
-              )}
-            </div>
-          </div>
-        </Link>
+  <div key={hit._id} className="li-content col-lg-4 col-md-6 col-sm-12">
+    <Link to={getProjectUrl(hit)}>
+      <img src={hit.screenshotUrl} alt="project img" className="image" />
+      <div className="content">
+        <div className="top-content">
+          <p>
+            <b>{hit.name}</b>
+          </p>
+        </div>
+        <div className="bottom-content">
+          <h6>{hit.projectType}</h6>
+          {hit.creators.length > 1 ? (
+            <h6>Group project</h6>
+          ) : (
+            hit.creators.map((oneCreator, index) => {
+              return <h6 key={index}>{oneCreator.name}</h6>;
+            })
+          )}
+        </div>
       </div>
+    </Link>
+  </div>
 );
 
 const ConditionalHits = connectStateResults(({ searchState }) =>
@@ -70,8 +70,6 @@ class ProjectsList extends Component {
   }
 
   render() {
-    const { projects } = this.state;
-
     return (
       <section id="ProjectsList">
         <Filters />

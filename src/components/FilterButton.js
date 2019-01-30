@@ -7,7 +7,7 @@ class RawFilter extends Component {
   state = { open: false };
   render() {
     const { attribute, items, refine } = this.props;
-    console.log(this.props);
+    // console.log(this.props);
 
     return (
       <div>

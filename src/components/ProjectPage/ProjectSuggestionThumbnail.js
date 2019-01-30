@@ -32,22 +32,22 @@ class ProjectSuggestionThumbnail extends Component {
   }
 
   render() {
-    const { projects } = this.state;
-    const {
-      name,
-      creators,
-      screenshotUrl,
-      description,
-      gitHubUrl,
-      projectUrl,
-      projectType,
-      tools,
-      likes,
-      projectCredentials,
-      display,
-      bootcamp,
-      squad
-    } = this.props;
+    // const { projects } = this.state;
+    // const {
+    //   name,
+    //   creators,
+    //   screenshotUrl,
+    //   description,
+    //   gitHubUrl,
+    //   projectUrl,
+    //   projectType,
+    //   tools,
+    //   likes,
+    //   projectCredentials,
+    //   display,
+    //   bootcamp,
+    //   squad
+    // } = this.props;
 
     return (
       <section id="ProjectSuggestionThumbnail">
