@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 class NotVerifed extends Component {
   state = {
@@ -37,7 +38,7 @@ class NotVerifed extends Component {
                 )}
 
                 <p>{oneProject.name}</p>
-                <button>Edit</button>
+                <Link to={`/projects/edit/${oneProject._id}`}>Edit</Link>
               </li>
             );
           })}

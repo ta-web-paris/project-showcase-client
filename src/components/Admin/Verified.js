@@ -33,7 +33,6 @@ class Verified extends Component {
         <h3>verifed projects</h3>
         <ul>
           {verifed.map(oneProject => {
-            console.log(oneProject);
             return (
               <li key={oneProject._id}>
                 {oneProject.creators.length > 1 ? (
@@ -45,9 +44,7 @@ class Verified extends Component {
                 )}
 
                 <p>{oneProject.name}</p>
-                <Link to={`/projects/edit/${oneProject._id}`}>
-                  <button>Edit</button>
-                </Link>
+                <Link to={`/projects/edit/${oneProject._id}`}>Edit</Link>
               </li>
             );
           })}
