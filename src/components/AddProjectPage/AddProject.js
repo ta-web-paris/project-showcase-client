@@ -394,6 +394,7 @@ class AddProject extends Component {
 
             {projectCredentials.map((oneCred, idx) => (
               <Input
+                key={idx}
                 name="projectCredentials"
                 onChange={this.handleArrayInput(idx)}
                 value={oneCred}
