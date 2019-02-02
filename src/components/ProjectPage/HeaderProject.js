@@ -45,13 +45,13 @@ class ProjectHeader extends Component {
     const {
       name,
       creators,
-      gitHubUrl
+      gitHubUrl,
       // screenshotUrl,
       // description,
       // projectUrl,
       // projectType,
       // tools,
-      // likes,
+      likes
       // projectCredentials,
       // display,
       // bootcamp,
@@ -93,6 +93,12 @@ class ProjectHeader extends Component {
                   <a href="projecturl">{this.state[0].projectUrl}</a>
                 </p>
               </div>
+            </div>
+            <div>
+              <p className="h6">
+                <b>LIKES :</b>
+              </p>
+              <p>{this.state[0].likes}</p>
             </div>
             <div className="bottom-details">
               {creators.map((oneInfo, index) => {
