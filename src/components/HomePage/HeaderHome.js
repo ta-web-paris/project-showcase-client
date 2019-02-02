@@ -26,10 +26,6 @@ class HomeHeader extends Component {
         </h6>
         <h1>212 squads, 23 alumnis, 363 projects</h1>
         <div className="menu">
-          {/* <NavLink exact to="/">
-            <p>Home</p>
-          </NavLink> */}
-          {/* <NavLink to="/projects"><p>Projects List</p></NavLink> */}
           {currentUser ? (
             <div className="user">
               <NavLink to="/add-project">
@@ -38,10 +34,16 @@ class HomeHeader extends Component {
               <NavLink to="/settings">
                 <p>User Settings</p>
               </NavLink>
-              {/* <b>{currentUser.email}</b> */}
-              {/* <button > */}
+
+              <NavLink to="/verified">
+                <p>Verifed Projects</p>
+              </NavLink>
+
+              <NavLink to="/notverified">
+                <p>Nonverifed Projects</p>
+              </NavLink>
+
               <p onClick={event => logUserOut(event)}>Log out</p>
-              {/* </button> */}
             </div>
           ) : (
             <NavLink to="/login">
