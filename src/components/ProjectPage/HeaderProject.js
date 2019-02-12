@@ -90,7 +90,9 @@ class ProjectHeader extends Component {
                   <b>PROJECT :</b>
                 </p>
                 <p className="space">
-                  <a href="projecturl">{this.state[0].projectUrl}</a>
+                  <a target="_blank" href={this.state[0].projectUrl}>
+                    {this.state[0].projectUrl}
+                  </a>
                 </p>
               </div>
             </div>
