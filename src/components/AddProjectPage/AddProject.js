@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import api from "../../api.js";
-import Input from "./Input.js";
-import Select from "./Select.js";
-import ArrayInput from "./ArrayInput.js";
+import Input from "../../utils/Input.js";
+import Select from "../../utils/Select.js";
+import ArrayInput from "../../utils/ArrayInput.js";
 import { join } from "path";
 
 //NEED:
