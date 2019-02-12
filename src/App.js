@@ -11,12 +11,12 @@ import "./script";
 import api from "./api.js";
 import HeaderHome from "./components/HomePage/HeaderHome";
 import AddProject from "./components/AddProjectPage/AddProject";
-import ProjectsList from "./components/ProjectsList";
+import ProjectsList from "./components/HomePage/ProjectsList";
 import ProjectHeader from "./components/ProjectPage/HeaderProject";
 
 //----------------- ADMIN ONLY  ------------
-import Login from "./components/Login";
-import SettingsPage from "./components/SettingsPage";
+import Login from "./components/HomePage/Login";
+import SettingsPage from "./components/Admin/SettingsPage";
 import EditProject from "./components/Admin/EditProject";
 import NotVerified from "./components/Admin/NotVerified";
 import Verified from "./components/Admin/Verified";
@@ -26,7 +26,7 @@ import "./style/App.scss";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
-import "../node_modules/instantsearch.css/themes/reset-min.css"
+import "../node_modules/instantsearch.css/themes/reset-min.css";
 
 library.add(fab, faCheckSquare, faCoffee);
 
