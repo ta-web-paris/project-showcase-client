@@ -4,7 +4,7 @@ import api from "../../api.js";
 import Input from "../../utils/Input.js";
 import Select from "../../utils/Select.js";
 import ArrayInput from "../../utils/ArrayInput.js";
-import { join } from "path";
+// import { join } from "path";
 
 //NEED:
 //-handle linkedin question
@@ -250,7 +250,7 @@ class AddProject extends Component {
     const {
       name,
       creators,
-      screenshotUrl,
+      // screenshotUrl,
       description,
       gitHubUrl,
       // linkedInUrl,

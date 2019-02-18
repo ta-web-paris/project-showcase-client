@@ -10,7 +10,6 @@ class HomeHeader extends Component {
   state = {};
 
   logUserOut(event) {
-    console.log("gogoggogogo", this.props);
     this.setState({ isLoginChecked: false });
   }
 

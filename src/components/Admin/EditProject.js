@@ -146,7 +146,6 @@ class EditProject extends Component {
       this.schema,
       { abortEarly: false }
     );
-    console.log(result);
 
     const errors = {};
     if (result.error) {
@@ -244,7 +243,7 @@ class EditProject extends Component {
     const {
       name,
       creators,
-      screenshotUrl,
+      // screenshotUrl,
       description,
       gitHubUrl,
       // linkedInUrl,
