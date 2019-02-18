@@ -4,34 +4,40 @@ import axios from "axios";
 import ProgressBar from "./ProgressBar";
 import ProjectSuggestion from "./ProjectSuggestion";
 import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
-
 import "./style/HeaderProject.scss";
-
-import github from "../../images/icon-github.svg";
-import linkedin from "../../images/icon-linkedin.svg";
 
 class ProjectHeader extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      creators: [],
-      tools: [],
-      projectCredentials: [],
-      0: {}
+      projectInfo: {
+        name: "",
+        projectType: "",
+        squad: "",
+        description: "",
+        gitHubUrl: " ",
+        projectUrl: "",
+        github: "",
+        linkedin: "",
+        screenshotUrl: "",
+        likes: "",
+        tools: [],
+        creators: [],
+        projectCredentials: []
+      }
     };
   }
 
   componentDidMount() {
     const { params } = this.props.match;
-    console.log(params);
-    // retrieve the info from the API as soon as the component loads
     axios
       .get(`http://localhost:4000/api/projects/${params.projectId}`, {
         withCredentials: true
       })
       .then(response => {
-        console.log(response.data);
-        this.setState(response.data);
+        this.setState({
+          projectInfo: response.data
+        });
       })
       .catch(err => {
         console.log("Project Details ERROR", err);
@@ -40,23 +46,20 @@ class ProjectHeader extends Component {
   }
 
   render() {
-    console.log(this.state[0].tools);
-    console.log(this.state[0]);
     const {
       name,
-      creators,
+      projectType,
+      squad,
+      description,
       gitHubUrl,
-      // screenshotUrl,
-      // description,
-      // projectUrl,
-      // projectType,
-      // tools,
-      likes
-      // projectCredentials,
-      // display,
-      // bootcamp,
-      // squad
-    } = this.state;
+      projectUrl,
+      github,
+      linkedin,
+      screenshotUrl,
+      likes,
+      tools,
+      creators
+    } = this.state.projectInfo;
 
     return (
       <section id="ProjectHeader">
@@ -65,18 +68,18 @@ class ProjectHeader extends Component {
         <div className="row row1">
           <div className="project-details col-lg-5 col-md-12 col-sm-12">
             <div className="top-details">
-              <h1 className="h1">{this.state[0].name}</h1>
+              <h1 className="h1">{name}</h1>
               <div className="type">
-                <p className="mono-light">{this.state[0].projectType}</p>
-                <p className="mono-light">{this.state[0].squad}</p>
+                <p className="mono-light">{projectType}</p>
+                <p className="mono-light">{squad}</p>
               </div>
-              <p>{this.state[0].description}</p>
+              <p>{description}</p>
               <div className="tools">
                 <p className="h6">
                   <b>TOOLS :</b>
                 </p>
                 <ul>
-                  {this.state.tools.map((oneTool, index) => {
+                  {tools.map((oneTool, index) => {
                     return (
                       <li key={index}>
                         <p className="space">{oneTool}</p>
@@ -90,8 +93,8 @@ class ProjectHeader extends Component {
                   <b>PROJECT :</b>
                 </p>
                 <p className="space">
-                  <a target="_blank" href={this.state[0].projectUrl}>
-                    {this.state[0].projectUrl}
+                  <a target="_blank" href={projectUrl}>
+                    {projectUrl}
                   </a>
                 </p>
               </div>
@@ -100,13 +103,13 @@ class ProjectHeader extends Component {
               <p className="h6">
                 <b>LIKES :</b>
               </p>
-              <p>{this.state[0].likes}</p>
+              <p>{likes}</p>
             </div>
             <div className="bottom-details">
               {creators.map((oneInfo, index) => {
                 return (
-                  <ul className="creatorInfo">
-                    <li key={index}>
+                  <ul key={index} className="creatorInfo">
+                    <li>
                       <p className="mono-light">
                         <b>{oneInfo.name}</b>
                       </p>
@@ -138,11 +141,7 @@ class ProjectHeader extends Component {
           </div>
 
           <div className="project-image col-lg-7 col-md-12 col-sm-12">
-            <img
-              src={this.state[0].screenshotUrl}
-              className="big-img"
-              alt={name}
-            />
+            <img src={screenshotUrl} className="big-img" alt={name} />
           </div>
         </div>
 
