@@ -12,12 +12,12 @@ const ArrayInput = (props) => {
               name={name}
               placeholder={`${name.slice(0,name.length-1)} #${idx+1}`}
               value={oneItem}
-              onChange={onChange(idx)}
+              onChange={onChange(idx)} className="form-control"
             />
           ))}
       </label>
 
-      <button type="button" onClick={onClick}>
+      <button type="button" onClick={onClick} className="btn btn-primary more">
        Add More {label}
       </button>
     </React.Fragment>

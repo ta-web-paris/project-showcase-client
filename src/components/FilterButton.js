@@ -47,7 +47,7 @@ class Filters extends Component {
     return (
       <section id="Filters">
         <div className="container">
-          <div className="row">
+          <div className="row filter-buttons">
             <Filter attribute="bootcamp" />
             <Filter attribute="squad" />
             <Filter attribute="projectType" />

@@ -1,17 +1,17 @@
 import React from 'react';
 
-const Input = (props) => {
+const TextAreaInput = (props) => {
   const {label, type = "text", name, onChange, value} = props;
   return (
       <label>{label}:
-        <input
+        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"
           type={type}
           name={name}
           onChange={onChange}
-          value={value} className="form-control"
-        />
+          value={value}></textarea>
+        
       </label>
    )
 }
  
-export default Input;
+export default TextAreaInput;

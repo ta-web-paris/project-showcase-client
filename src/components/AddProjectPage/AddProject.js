@@ -4,7 +4,10 @@ import api from "../../api.js";
 import Input from "./Input.js";
 import Select from "./Select.js";
 import ArrayInput from "./ArrayInput.js";
+import TextAreaInput from "./TextAreaInput.js";
 import { join } from "path";
+
+import "./style/AddProject.scss";
 
 //NEED:
 //-handle linkedin question
@@ -313,150 +316,173 @@ class AddProject extends Component {
       "data"
     ];
     return (
+
       <section id="AddProject">
+
+        <h2>Add a new project</h2>
+
         <form className="addProject" onSubmit={this.submitProjectForm}>
           {feedbackMessage && <p>{feedbackMessage}</p>}
 
+          <div className="row justify-content-center">
+          <div className="form-group col-lg-4">
           <Input
             name="name"
             onChange={this.handleUserInput}
             value={name}
-            label="Project name"
+            label="Project name "
           />
           {errors && errors.name && <p>{errors.name}</p>}
-
+          </div>
+          <div className="form-group col-lg-4">
           <ArrayInput
-            label="Creators"
+            label="Creators "
             fieldArray={creators}
             name="creators"
             onChange={idx => this.handleArrayInput(idx)}
             onClick={() => this.addField("creators")}
           />
           {errors && errors.creators && <p>{errors.creators}</p>}
-
+          </div>
+          <div className="form-group col-lg-4">
           <Input
             type="file"
             name="screenshotUrl"
             onChange={this.updateFile}
-            label="Screenshot URL"
+            label="Picture "
           />
           {errors && errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
-
+          </div>
           {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
-
-          <Input
+          <div className="form-group col-lg-12">
+          <TextAreaInput
             name="description"
             onChange={this.handleUserInput}
             value={description}
-            label="Description"
+            label="Description "
           />
           {errors && errors.description && <p>{errors.description}</p>}
-
+          </div>
+          <div className="form-group col-lg-4">
           <Input
             name="gitHubUrl"
             onChange={this.handleUserInput}
             value={gitHubUrl}
-            label="GitHub Repository URL"
+            label="GitHub Repository URL "
           />
           {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
-
+          </div>
+          <div className="form-group col-lg-4">
           <Input
             name="projectUrl"
             onChange={this.handleUserInput}
             value={projectUrl}
-            label="Project URL"
+            label="Project URL "
           />
           {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
-
+          </div>
+          <div className="form-group col-lg-4">
           <Select
-            label="Display"
+            label="Display "
             name="display"
             onChange={this.handleUserInput}
             value={display}
             optionsArray={displays}
           />
           {errors && errors.display && <p>{errors.display}</p>}
-
+          </div>
+          <div className="form-group col-lg-12">
           <ArrayInput
-            label="Tools"
+            label="Tools "
             fieldArray={tools}
             name="tools"
             onChange={idx => this.handleArrayInput(idx)}
             onClick={() => this.addField("tools")}
           />
           {errors && errors.tools && <p>{errors.tools}</p>}
-
-          <fieldset>
-            <legend>
-              Optional: provide credentials in order for recruters to be able to
-              enter your website
-            </legend>
-
-            {projectCredentials.map((oneCred, idx) => (
-              <Input
-                key={idx}
-                name="projectCredentials"
-                onChange={this.handleArrayInput(idx)}
-                value={oneCred}
-                label={credPlaceholder[idx]}
-              />
-            ))}
-            {errors && errors.projectCredentials && (
-              <p>{errors.projectCredentials}</p>
-            )}
-          </fieldset>
-
+          </div>
+          <div className="form-group col-lg-6">
           <Select
-            label="Bootcamp"
+            label="Bootcamp "
             name="bootcamp"
             onChange={this.handleUserInput}
             value={bootcamp}
             optionsArray={bootcamps}
           />
           {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
-
+          </div>
+          <div className="form-group col-lg-6">
           <Select
-            label="project Type"
+            label="Project type "
             name="projectType"
             onChange={this.handleUserInput}
             value={projectType}
             optionsArray={projectTypes}
           />
           {errors && errors.projectType && <p>{errors.projectType}</p>}
-
-          <fieldset>
-            <legend>Squad :</legend>
-
+          </div>
+          <fieldset className="form-group col-lg-12">
+            <h4>Squad :</h4>
+            <div className="row">
+            <div className="form-group col-lg-4">
             <Input
               type="number"
               placeholder="128"
               name="squadNumber"
               value={squadNumber}
               onChange={this.handleUserInput}
-              label="Squad Number"
+              label="Squad number "
             />
             {errors && errors.squadNumber && <p>{errors.squadNumber}</p>}
-
+            </div>
+            <div className="form-group col-lg-4">
             <Select
-              label="Squad Month"
+              label="Squad month "
               name="squadMonth"
               onChange={this.handleUserInput}
               value={squadMonth}
               optionsArray={months}
             />
             {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
-
+            </div>
+            <div className="form-group col-lg-4">
             <Select
-              label="Squad Year"
+              label="Squad year "
               name="squadYear"
               onChange={this.handleUserInput}
               value={squadYear}
               optionsArray={years}
             />
             {errors && errors.squadYear && <p>{errors.squadYear}</p>}
+            </div>
+            </div>
           </fieldset>
+          <fieldset className="form-group col-lg-12">
+            <h4>
+              Optional: provide credentials in order for recruters to be able to
+              enter your website
+            </h4>
+            <div className="row">
+            {projectCredentials.map((oneCred, idx) => (
 
-          <button>Submit</button>
+              <div className="form-group col-lg-6">
+              <Input
+                key={idx}
+                name="projectCredentials"
+                onChange={this.handleArrayInput(idx)}
+                value={oneCred}
+                label={credPlaceholder[idx]}
+  
+              />
+              </div>
+            ))}
+            </div>
+            {errors && errors.projectCredentials && (
+              <p>{errors.projectCredentials}</p>
+            )}
+          </fieldset>
+          <button className="btn btn-primary submit-btn">Submit</button>
+          </div>
         </form>
       </section>
     );

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 import api from '../api.js';
 
+import "./style/SettingsPage.scss";
 
 class SettingsPage extends Component {
   constructor(props) {
@@ -70,30 +71,32 @@ class SettingsPage extends Component {
   render () {
     const { fullName, email, avatar } = this.state;
     return (
-      <section>
+
+      <section id="SettingsPage">
         <h2>User Settings</h2>
 
-        <form onSubmit={this.handleSubmit}>
-          <fieldset>
-            <label htmlFor="fullName">Full Name:</label>
-            <input id="fullName" type="text" value={fullName}
+        <form onSubmit={this.handleSubmit} className="container">
+        <div className="row">
+          <fieldset className="form-group col-lg-6">
+            <label htmlFor="fullName">Full Name :</label>
+            <input id="fullName" className="form-control" type="text" value={fullName}
                 onChange={this.updateText} />
           </fieldset>
 
-          <fieldset>
-            <label htmlFor="email">Email:</label>
-            <input id="email" type="email" value={email}
+          <fieldset className="form-group col-lg-6">
+            <label htmlFor="email">Email :</label>
+            <input id="email" type="email" className="form-control" value={email}
                 onChange={this.updateText} />
           </fieldset>
 
-          <fieldset>
-            <label htmlFor="avatar">Avatar:</label>
-            <input id="avatar" type="file" onChange={this.updateFile} />
+          <fieldset className="form-group col-lg-12">
+            <label htmlFor="avatar">Avatar :</label>
+            <input id="avatar" type="file" className="form-control" onChange={this.updateFile} />
           </fieldset>
 
           {avatar && <img src={avatar} alt={fullName} />}
-
-          <button>Save Changes</button>
+          </div>
+          <button className="btn btn-primary">Save Changes</button>
         </form>
       </section>
     );
