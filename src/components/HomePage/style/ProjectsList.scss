@@ -56,13 +56,18 @@ $lightgrey : #f8f8f8;
               }
               .bottom-content{
                 display: flex;
-                flex-wrap: wrap;
                 justify-content: space-between;
+                white-space: nowrap;
                 li{
                   padding: 0;
                 }
                 p:first-letter,h6:first-letter{
                   text-transform: uppercase;
+                }
+                .name{
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  padding-left: 12px;
                 }
               }
           }

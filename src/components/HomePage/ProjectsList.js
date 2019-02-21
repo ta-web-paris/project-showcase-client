@@ -23,10 +23,10 @@ const Result = ({ hit }) => (
         <div className="bottom-content">
           <h6>{hit.projectType}</h6>
           {hit.creators.length > 1 ? (
-            <h6>Group project</h6>
+            <h6 className="name">Group project</h6>
           ) : (
             hit.creators.map((oneCreator, index) => {
-              return <h6 key={index}>{oneCreator.name}</h6>;
+              return <h6 key={index} className="name">{oneCreator.name}</h6>;
             })
           )}
         </div>

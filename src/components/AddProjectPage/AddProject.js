@@ -317,7 +317,7 @@ class AddProject extends Component {
     ];
     return (
 
-      <section id="AddProject">
+      <section id="AddProject" className="ProjectForm">
 
         <h2>Add a new project</h2>
 
@@ -464,7 +464,6 @@ class AddProject extends Component {
             </h4>
             <div className="row">
             {projectCredentials.map((oneCred, idx) => (
-
               <div className="form-group col-lg-6">
               <Input
                 key={idx}
@@ -472,7 +471,6 @@ class AddProject extends Component {
                 onChange={this.handleArrayInput(idx)}
                 value={oneCred}
                 label={credPlaceholder[idx]}
-  
               />
               </div>
             ))}
