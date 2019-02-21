@@ -100,12 +100,12 @@ class ProjectHeader extends Component {
                   </a>
                 </p>
               </div>
-            </div>
-            <div>
+            <div className="likes">
               <p className="h6">
                 <b>LIKES :</b>
               </p>
-              <p>{likes}</p>
+              <p class="space">{likes}</p>
+            </div>
             </div>
             <div className="bottom-details">
               {creators.map((oneInfo, index) => {

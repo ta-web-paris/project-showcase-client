@@ -43,7 +43,7 @@ $lightgrey : #f8f8f8;
       .creatorInfo{
         margin: 0;
       }
-      .tools, .link {
+      .tools, .link, .likes {
           display: flex;
           flex-direction: row;
           flex-wrap: wrap;
@@ -55,7 +55,7 @@ $lightgrey : #f8f8f8;
             margin-bottom: 0;
           }
           ul{
-            margin: 0 5px;
+            margin: 0 0 0 5px;
             li{
               display: inline-block;
             }
