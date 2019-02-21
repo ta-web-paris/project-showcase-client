@@ -32,14 +32,10 @@ $lightgrey : #f8f8f8;
       .li-content{
         border-radius: 6px;
         box-shadow: 0 16px 32px 0 rgba(0,0,0,.1);
-        height: 210px;
+        height: auto;
         padding: 0;
         background-color: white;
-        // width: 100%;
         min-width: 100%;
-        // margin: 10px;
-        // box-sizing: border-box;
-        // background-clip: padding-box;
         a{
           text-decoration: none;
           .image{

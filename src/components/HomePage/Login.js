@@ -1,7 +1,7 @@
 import React from "react";
 import api from "../../api.js";
 
-import "./style/Login.scss";
+import "../style/Login.scss";
 
 class Login extends React.Component {
   constructor(props) {

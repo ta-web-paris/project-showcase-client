@@ -1,0 +1,30 @@
+$lightblue : #00b4fe;
+$darkblue : #2d354c;
+$pink : rgba(236,58,53,.6);
+$darkgrey : rgba(45,53,76,.4);
+$lightgrey : #f8f8f8;
+
+#Verified{
+  padding: 0 10%;
+  h2{
+    margin: 20px 0;
+  }
+  a{
+    text-decoration: none;
+  }
+  button{
+    background-color:$pink;
+    border: none;
+  }
+  li{
+    padding: 10px;
+    .li-content{
+      padding: 20px 10px;
+      border-radius: 6px;
+      box-shadow: 0 16px 32px 0 rgba(0,0,0,.1);
+      height: auto;
+      background-color: white;
+      min-width: 100%;
+    }
+  }
+}

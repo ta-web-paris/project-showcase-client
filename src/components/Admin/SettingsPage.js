@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import "./style/SettingsPage.scss";
+import "../style/SettingsPage.scss";
 import api from "../../api.js";
 
 class SettingsPage extends Component {
