@@ -4,6 +4,10 @@ import axios from "axios";
 import ProgressBar from "./ProgressBar";
 import ProjectSuggestion from "./ProjectSuggestion";
 import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
+
+import githubLogo from "../../images/icon-github.svg";
+import linkedinLogo from "../../images/icon-linkedin.svg";
+
 import "./style/HeaderProject.scss";
 
 class ProjectHeader extends Component {
@@ -53,8 +57,6 @@ class ProjectHeader extends Component {
       description,
       gitHubUrl,
       projectUrl,
-      github,
-      linkedin,
       screenshotUrl,
       likes,
       tools,
@@ -117,7 +119,7 @@ class ProjectHeader extends Component {
                         {oneInfo.linkedInUrl ? (
                           <a href={oneInfo.linkedInUrl}>
                             <img
-                              src={linkedin}
+                              src={linkedinLogo}
                               alt="linkedin"
                               className="socialmedias"
                             />
@@ -126,7 +128,7 @@ class ProjectHeader extends Component {
                         {oneInfo.linkedInUrl ? (
                           <a href={gitHubUrl}>
                             <img
-                              src={github}
+                              src={githubLogo}
                               alt="github"
                               className="socialmedias"
                             />

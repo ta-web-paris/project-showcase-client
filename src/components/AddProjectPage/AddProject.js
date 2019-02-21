@@ -323,7 +323,7 @@ class AddProject extends Component {
 
         <form className="addProject" onSubmit={this.submitProjectForm}>
           {feedbackMessage && <p>{feedbackMessage}</p>}
-
+          <div className="container">
           <div className="row justify-content-center">
           <div className="form-group col-lg-4">
           <Input
@@ -480,6 +480,7 @@ class AddProject extends Component {
             )}
           </fieldset>
           <button className="btn btn-primary submit-btn">Submit</button>
+          </div>
           </div>
         </form>
       </section>

@@ -27,6 +27,7 @@ class NotVerifed extends Component {
     return (
       <section id="NotVerified">
         <h2>Nonverifed projects</h2>
+        <div className="container">
         <ul className="row justify-content-center">
           {nonverifed.map(oneProject => {
             return (
@@ -47,6 +48,7 @@ class NotVerifed extends Component {
             );
           })}
         </ul>
+        </div>
       </section>
     );
   }

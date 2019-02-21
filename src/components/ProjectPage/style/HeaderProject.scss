@@ -73,9 +73,10 @@ $lightgrey : #f8f8f8;
     }
     .project-image{
       padding: 0;
+      height: 450px;
       .big-img{
         width: 100%;
-        min-height: 330px;
+        height: 100%;
         object-fit: cover;
       }
       @media (max-width:991px){
