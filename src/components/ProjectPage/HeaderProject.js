@@ -147,7 +147,7 @@ class ProjectHeader extends Component {
 
         <hr />
 
-        <ProjectSuggestion />
+        <ProjectSuggestion ProjectSuggest={this.state.projectInfo} />
 
         <ProjectSuggestionThumbnail />
       </section>

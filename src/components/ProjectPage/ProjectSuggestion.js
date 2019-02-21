@@ -10,13 +10,13 @@ class ProjectSuggestion extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      projectSuggest: []
+      ProjectSuggest: {}
     };
   }
 
   render() {
+    console.log(this.props);
     // const { projectSuggest } = this.props;
-
     // const { projects } = this.state;
     // const {
     //   name,
