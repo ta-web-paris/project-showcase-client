@@ -6,6 +6,7 @@ import Select from "./Select.js";
 import ArrayInput from "./ArrayInput.js";
 import TextAreaInput from "./TextAreaInput.js";
 import { join } from "path";
+// import { join } from "path";
 
 import "./style/AddProject.scss";
 
@@ -253,7 +254,7 @@ class AddProject extends Component {
     const {
       name,
       creators,
-      screenshotUrl,
+      // screenshotUrl,
       description,
       gitHubUrl,
       // linkedInUrl,

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import axios from "axios";
-import $ from "jquery";
+// import axios from "axios";
+// import $ from "jquery";
 
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -14,22 +14,22 @@ class ProjectSuggestionThumbnail extends Component {
     };
   }
 
-  componentDidMount() {
-    $("#blogCarousel").carousel({
-      interval: 3000
-    });
+  // componentDidMount() {
+  //   $("#blogCarousel").carousel({
+  //     interval: 3000
+  //   });
 
-    window.scrollTo(0, 0);
-    axios
-      .get("http://localhost:4000/api/", { withCredentials: true })
-      .then(response => {
-        this.setState({ projects: response.data });
-      })
-      .catch(err => {
-        console.log("Listing Info Error", err);
-        alert("Sorry something went wrong");
-      });
-  }
+  //   window.scrollTo(0, 0);
+  //   axios
+  //     .get("http://localhost:4000/api/", { withCredentials: true })
+  //     .then(response => {
+  //       this.setState({ projects: response.data });
+  //     })
+  //     .catch(err => {
+  //       console.log("Listing Info Error", err);
+  //       alert("Sorry something went wrong");
+  //     });
+  // }
 
   render() {
     // const { projects } = this.state;

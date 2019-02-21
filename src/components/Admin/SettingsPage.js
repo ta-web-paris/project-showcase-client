@@ -1,19 +1,18 @@
-import React, { Component } from 'react';
-
-import api from '../api.js';
+import React, { Component } from "react";
 
 import "./style/SettingsPage.scss";
+import api from "../../api.js";
 
 class SettingsPage extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      fullName: '',
-      email: '',
-      avatar: '',
-      originalAvatar: '',
-      stateLoaded: false,
+      fullName: "",
+      email: "",
+      avatar: "",
+      originalAvatar: "",
+      stateLoaded: false
     };
   }
 
@@ -28,14 +27,14 @@ class SettingsPage extends Component {
       email,
       avatar,
       originalAvatar: avatar,
-      stateLoaded: true,
+      stateLoaded: true
     };
   }
 
-  updateFile = (event) => {
+  updateFile = event => {
     const { files } = event.target;
 
-    console.log('New FILE\n', files[0]);
+    console.log("New FILE\n", files[0]);
 
     if (!files[0]) {
       const { originalAvatar } = this.state;
@@ -44,31 +43,31 @@ class SettingsPage extends Component {
     }
 
     const uploadForm = new FormData();
-    uploadForm.append('imageFile', files[0]);
+    uploadForm.append("imageFile", files[0]);
 
-    api.post('/upload-image', uploadForm)
+    api
+      .post("/upload-image", uploadForm)
       .then(response => {
-        console.log('File UPLOADED', response.data);
+        console.log("File UPLOADED", response.data);
         const { imageUrl } = response.data;
         this.setState({ avatar: imageUrl });
       })
       .catch(err => {
         console.log(err);
-        alert('Sorry, there was an error.');
+        alert("Sorry, there was an error.");
       });
-  }
+  };
 
-  updateText = (event) => {
+  updateText = event => {
     const { id, value } = event.target;
     this.setState({ [id]: value });
-  }
+  };
 
-  handleSubmit = (event) => {
+  handleSubmit = event => {
     event.preventDefault();
-    console.log(this.state);
-  }
+  };
 
-  render () {
+  render() {
     const { fullName, email, avatar } = this.state;
     return (
 
@@ -102,6 +101,5 @@ class SettingsPage extends Component {
     );
   }
 }
-
 
 export default SettingsPage;
