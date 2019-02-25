@@ -5,15 +5,6 @@ $darkgrey: rgba(45, 53, 76, 0.4);
 $lightgrey: #f8f8f8;
 
 #Filters {
-  .filter-buttons {
-    button {
-      transition: all 0.3s;
-      :hover {
-        color: white;
-        background-color: $darkgrey !important;
-      }
-    }
-  }
   .container {
     padding-right: 0;
     padding-left: 0;
@@ -149,7 +140,7 @@ $lightgrey: #f8f8f8;
         background-color: transparent;
         font-family: "RobotoMono-Light", serif;
         font-size: 12px;
-        @media (max-width: 767px) {
+        @media (max-width: 600px) {
           margin: 5px;
         }
         @media (max-width: 600px) {
