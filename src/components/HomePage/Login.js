@@ -12,6 +12,10 @@ class Login extends React.Component {
     };
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   handleChange = event => {
     let myInput = event.target;
     let name = myInput.id;
@@ -34,38 +38,35 @@ class Login extends React.Component {
   render() {
     return (
       <section id="Login">
-
         <h2>Please, log in</h2>
 
         <form onSubmit={this.handleSubmit} className="container">
+          <div className="row">
+            <div className="form-group col-lg-6">
+              <label htmlFor="email">Email</label>
+              <input
+                onChange={this.handleChange}
+                id="email"
+                type="email"
+                placeholder="Your email here"
+                className="form-control"
+              />
+            </div>
 
-        <div className="row">
-          <div className="form-group col-lg-6">
-          <label htmlFor="email">Email</label>
-          <input
-            onChange={this.handleChange}
-            id="email"
-            type="email"
-            placeholder="Your email here"
-            className="form-control"
-          />
-          </div>
-
-          <div className="form-group col-lg-6">
-          <label htmlFor="password">Password</label>
-          <input
-            onChange={this.handleChange}
-            id="password"
-            type="password"
-            placeholder="We won't tell"
-            className="form-control"
-          />
-          </div>
+            <div className="form-group col-lg-6">
+              <label htmlFor="password">Password</label>
+              <input
+                onChange={this.handleChange}
+                id="password"
+                type="password"
+                placeholder="We won't tell"
+                className="form-control"
+              />
+            </div>
           </div>
 
           <button className="btn btn-primary">Submit</button>
         </form>
-
       </section>
     );
   }

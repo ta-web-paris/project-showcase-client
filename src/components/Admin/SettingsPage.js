@@ -16,6 +16,10 @@ class SettingsPage extends Component {
     };
   }
 
+  componentDidMount() {
+    window.scrollTo(0, 0);
+  }
+
   static getDerivedStateFromProps(props, state) {
     if (!props.currentUser || state.stateLoaded) {
       return null;
@@ -70,30 +74,44 @@ class SettingsPage extends Component {
   render() {
     const { fullName, email, avatar } = this.state;
     return (
-
       <section id="SettingsPage">
         <h2>User Settings</h2>
 
         <form onSubmit={this.handleSubmit} className="container">
-        <div className="row">
-          <fieldset className="form-group col-lg-6">
-            <label htmlFor="fullName">Full Name :</label>
-            <input id="fullName" className="form-control" type="text" value={fullName}
-                onChange={this.updateText} />
-          </fieldset>
+          <div className="row">
+            <fieldset className="form-group col-lg-6">
+              <label htmlFor="fullName">Full Name :</label>
+              <input
+                id="fullName"
+                className="form-control"
+                type="text"
+                value={fullName}
+                onChange={this.updateText}
+              />
+            </fieldset>
 
-          <fieldset className="form-group col-lg-6">
-            <label htmlFor="email">Email :</label>
-            <input id="email" type="email" className="form-control" value={email}
-                onChange={this.updateText} />
-          </fieldset>
+            <fieldset className="form-group col-lg-6">
+              <label htmlFor="email">Email :</label>
+              <input
+                id="email"
+                type="email"
+                className="form-control"
+                value={email}
+                onChange={this.updateText}
+              />
+            </fieldset>
 
-          <fieldset className="form-group col-lg-12">
-            <label htmlFor="avatar">Avatar :</label>
-            <input id="avatar" type="file" className="form-control" onChange={this.updateFile} />
-          </fieldset>
+            <fieldset className="form-group col-lg-12">
+              <label htmlFor="avatar">Avatar :</label>
+              <input
+                id="avatar"
+                type="file"
+                className="form-control"
+                onChange={this.updateFile}
+              />
+            </fieldset>
 
-          {avatar && <img src={avatar} alt={fullName} />}
+            {avatar && <img src={avatar} alt={fullName} />}
           </div>
           <button className="btn btn-primary">Save Changes</button>
         </form>

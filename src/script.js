@@ -1,7 +1,6 @@
 import $ from "jquery";
 
 $(document).ready(function() {
-  console.log("Scrolling!");
   var scrollTop = 0;
   $(window).scroll(function() {
     scrollTop = $(window).scrollTop();
@@ -19,4 +18,19 @@ $(document).ready(function() {
       $(".menu").show();
     }
   });
+
+  // $(".li-content").hover(
+  // function() {
+  //   $(this)
+  //     .find(".hidden-content")
+  //     .css("display", "flex");
+  //   // .show();
+  // },
+  // function() {
+  //   $(this)
+  //     .find(".hidden-content")
+  //     .css("display", "none");
+  //   // .hide();
+  // }
+  // );
 });

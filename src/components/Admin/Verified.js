@@ -10,6 +10,7 @@ class Verified extends Component {
   };
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     axios
       .get("http://localhost:4000/api/verified", { withCredentials: true })
       .then(response => {
@@ -27,25 +28,27 @@ class Verified extends Component {
       <section id="Verified">
         <h2>Verifed projects</h2>
         <div className="container">
-        <ul className="row justify-content-center">
-          {verifed.map(oneProject => {
-            return (
-              <li key={oneProject._id} className="col-lg-3 col-md-4 col-sm-6">
-                <div className="li-content">
-                  {oneProject.creators.length > 1 ? (
-                    <h6>Group project</h6>
-                  ) : (
-                    oneProject.creators.map((oneCreator, index) => {
-                      return <h6 key={index}>{oneCreator.name}</h6>;
-                    })
-                  )}
-                  <p>{oneProject.name}</p>
-                <Link to={`/projects/edit/${oneProject._id}`}><button className="btn btn-primary">Edit</button></Link>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+          <ul className="row justify-content-center">
+            {verifed.map(oneProject => {
+              return (
+                <li key={oneProject._id} className="col-lg-3 col-md-4 col-sm-6">
+                  <div className="li-content">
+                    {oneProject.creators.length > 1 ? (
+                      <h6>Group project</h6>
+                    ) : (
+                      oneProject.creators.map((oneCreator, index) => {
+                        return <h6 key={index}>{oneCreator.name}</h6>;
+                      })
+                    )}
+                    <p>{oneProject.name}</p>
+                    <Link to={`/projects/edit/${oneProject._id}`}>
+                      <button className="btn btn-primary">Edit</button>
+                    </Link>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       </section>
     );

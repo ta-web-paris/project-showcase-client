@@ -33,7 +33,25 @@ $lightgrey: #f8f8f8;
         flex: 0 0 100%;
         max-width: 100%;
       }
+
+      & .hidden-content {
+        max-height: 75px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: left;
+        transition: opacity 0.1s linear;
+      }
+
+      &.is-active .hidden-content {
+        opacity: 1;
+      }
+
+      &:not(.is-active) .hidden-content {
+        opacity: 0;
+      }
+
       .li-content {
+        overflow: hidden;
         :hover {
           .image {
             height: 60px;

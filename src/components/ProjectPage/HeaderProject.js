@@ -33,6 +33,7 @@ class ProjectHeader extends Component {
   }
 
   componentDidMount() {
+    window.scrollTo(0, 0);
     const { params } = this.props.match;
     axios
       .get(`http://localhost:4000/api/projects/${params.projectId}`, {
@@ -100,12 +101,12 @@ class ProjectHeader extends Component {
                   </a>
                 </p>
               </div>
-            <div className="likes">
-              <p className="h6">
-                <b>LIKES :</b>
-              </p>
-              <p class="space">{likes}</p>
-            </div>
+              <div className="likes">
+                <p className="h6">
+                  <b>LIKES :</b>
+                </p>
+                <p class="space">{likes}</p>
+              </div>
             </div>
             <div className="bottom-details">
               {creators.map((oneInfo, index) => {

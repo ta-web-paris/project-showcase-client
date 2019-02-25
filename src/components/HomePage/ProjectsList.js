@@ -10,6 +10,32 @@ function getProjectUrl(oneProject) {
   return `/projects/${oneProject.searchId}`;
 }
 
+function toggleStyle(evt) {
+  const el = evt.target || evt.srcElement;
+
+  if (this === "in" && !el.classList.contains("is-active")) {
+    window.setTimeout(() => {
+      el.classList.add("is-active");
+    }, 200);
+  } else if (this === "out") {
+    el.classList.remove("is-active");
+  }
+}
+
+function parseProjects() {
+  const items = document.querySelectorAll(".ais-Hits-list .ais-Hits-item");
+  if (!items.length)
+    window.setTimeout(() => {
+      return parseProjects();
+    }, 500);
+  else {
+    items.forEach(item => {
+      item.onmouseenter = toggleStyle.bind("in");
+      item.onmouseleave = toggleStyle.bind("out");
+    });
+  }
+}
+
 const Result = ({ hit }) => (
   <div key={hit._id} className="li-content col-lg-4 col-md-6 col-sm-12">
     <Link to={getProjectUrl(hit)}>
@@ -26,9 +52,16 @@ const Result = ({ hit }) => (
             <h6 className="name">Group project</h6>
           ) : (
             hit.creators.map((oneCreator, index) => {
-              return <h6 key={index} className="name">{oneCreator.name}</h6>;
+              return (
+                <h6 key={index} className="name">
+                  {oneCreator.name}
+                </h6>
+              );
             })
           )}
+        </div>
+        <div className="hidden-content">
+          <p>{hit.description}</p>
         </div>
       </div>
     </Link>
@@ -55,12 +88,25 @@ class ProjectsList extends Component {
     };
   }
 
+  componentDidUpdate() {
+    // if (this.state.projects.length) {
+    //   console.log("yahoo");
+    //   parseProjects(); // exec only once the data are fetched from db
+    // } else {
+    //   console.log("meeehhhh");
+    // }
+  }
+
   componentDidMount() {
+    console.log("list mounted");
+
     window.scrollTo(0, 0);
     axios
       .get("http://localhost:4000/api/", { withCredentials: true })
       .then(response => {
-        this.setState({ projects: response.data });
+        this.setState({ projects: response.data }, () => {
+          parseProjects();
+        });
       })
       .catch(err => {
         console.log("Listing Info Error", err);
