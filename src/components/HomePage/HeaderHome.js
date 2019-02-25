@@ -20,10 +20,10 @@ class HomeHeader extends Component {
         <NavLink exact to="/">
           <img src={logo} alt="logo" className="logo" />
         </NavLink>
-        <h6 className="mono-light">
+        <h6 className="mono-light big-subtitle">
           Welcome to Ironhack showcases plateform & discover
         </h6>
-        <h1>212 squads, 23 alumnis, 363 projects</h1>
+        <h1 className="big-title">24 squads, 329 alumnis, 960 projects</h1>
         <div className="menu">
           {currentUser ? (
             <div className="user">

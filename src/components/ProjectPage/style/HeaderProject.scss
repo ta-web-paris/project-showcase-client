@@ -1,85 +1,94 @@
-$lightblue : #00b4fe;
-$darkblue : #2d354c;
-$pink : rgba(236,58,53,.6);
-$darkgrey : rgba(45,53,76,.4);
-$lightgrey : #f8f8f8;
+$lightblue: #00b4fe;
+$darkblue: #2d354c;
+$pink: rgba(236, 58, 53, 0.6);
+$darkgrey: rgba(45, 53, 76, 0.4);
+$lightgrey: #f8f8f8;
 
-#ProjectHeader{
+#ProjectHeader {
   padding: 0 10%;
-  .row1{
-    margin : 50px 0;
-    a{
+  margin-top: 440px;
+  @media (max-width: 767px) {
+    margin-top: 460px;
+  }
+  .row1 {
+    margin: 50px 0;
+    a {
       color: black;
       text-decoration: underline;
     }
-    .project-details{
+    .project-details {
       text-align: left;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
       padding-right: 50px;
-      .type, .creatorInfo li{
+      .type,
+      .creatorInfo li {
         display: flex;
         flex-direction: row;
         justify-content: space-between;
         align-items: center;
         margin-top: 5px;
-        p{margin: 0;}
-        .creator-links{
+        p {
+          margin: 0;
+        }
+        .creator-links {
           display: flex;
           align-items: center;
           margin-bottom: 2px;
-          a{
+          a {
             margin-left: 10px;
-            .socialmedias{
+            .socialmedias {
               height: 20px;
             }
           }
         }
       }
-      .type{
-        margin : 15px 0;
+      .type {
+        margin: 15px 0;
       }
-      .creatorInfo{
+      .creatorInfo {
         margin: 0;
       }
-      .tools, .link, .likes {
-          display: flex;
-          flex-direction: row;
-          flex-wrap: wrap;
-          margin-bottom: 10px;
-          .h6{
-            line-height: 1.5;
+      .tools,
+      .link,
+      .likes {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+        .h6 {
+          line-height: 1.5;
+        }
+        p {
+          margin-bottom: 0;
+        }
+        ul {
+          margin: 0 0 0 5px;
+          li {
+            display: inline-block;
           }
-          p{
-            margin-bottom: 0;
-          }
-          ul{
-            margin: 0 0 0 5px;
-            li{
-              display: inline-block;
-            }
-          }
-          @media (max-width:767px){
-            justify-content: space-between;
-          }
+        }
+        @media (max-width: 767px) {
+          justify-content: space-between;
+        }
       }
-      .space{
+      .space {
         margin-left: 5px;
       }
-      @media(max-width: 767px){
-        padding: 0;  
+      @media (max-width: 767px) {
+        padding: 0;
       }
     }
-    .project-image{
+    .project-image {
       padding: 0;
       height: 425px;
-      .big-img{
+      .big-img {
         width: 100%;
         height: 100%;
         object-fit: cover;
       }
-      @media (max-width:991px){
+      @media (max-width: 991px) {
         margin-top: 30px;
       }
     }

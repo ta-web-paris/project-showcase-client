@@ -1,29 +1,30 @@
-$lightblue : #00b4fe;
-$darkblue : #2d354c;
-$pink : rgba(236,58,53,.6);
-$darkgrey : rgba(45,53,76,.4);
-$lightgrey : #f8f8f8;
+$lightblue: #00b4fe;
+$darkblue: #2d354c;
+$pink: rgba(236, 58, 53, 0.6);
+$darkgrey: rgba(45, 53, 76, 0.4);
+$lightgrey: #f8f8f8;
 
-.ProjectForm{
+.ProjectForm {
   padding: 50px;
   display: flex;
   justify-content: center;
   flex-direction: column;
-  .row{
+  margin-top: 400px;
+  .row {
     text-align: left;
   }
-  h2{
+  h2 {
     margin-bottom: 20px;
   }
-  label{
+  label {
     width: 100%;
   }
-  .more{
-    background-color:$darkblue; 
+  .more {
+    background-color: $darkblue;
     border: none;
     float: right;
   }
-  .submit-btn{
+  .submit-btn {
     background-color: transparent;
     border: 1px solid $lightblue;
     color: $lightblue;
@@ -36,7 +37,7 @@ $lightgrey : #f8f8f8;
     -webkit-transition-duration: 0.5s;
     -webkit-transition-timing-function: linear;
   }
-  .submit-btn:hover{
+  .submit-btn:hover {
     border: 1px solid white;
     color: white;
     -webkit-box-shadow: 230px 0 0 $lightblue inset;

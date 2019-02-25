@@ -1,27 +1,28 @@
-$lightblue : #00b4fe;
-$darkblue : #2d354c;
-$pink : rgba(236,58,53,.6);
-$darkgrey : rgba(45,53,76,.4);
-$lightgrey : #f8f8f8;
+$lightblue: #00b4fe;
+$darkblue: #2d354c;
+$pink: rgba(236, 58, 53, 0.6);
+$darkgrey: rgba(45, 53, 76, 0.4);
+$lightgrey: #f8f8f8;
 
-#NotVerified{
+#NotVerified {
   padding: 50px;
-  h2{
+  margin-top: 400px;
+  h2 {
     margin-bottom: 20px;
   }
-  a{
+  a {
     text-decoration: none;
   }
-  button{
-    background-color:$pink;
+  button {
+    background-color: $pink;
     border: none;
   }
-  li{
+  li {
     padding: 10px;
-    .li-content{
+    .li-content {
       padding: 20px 10px;
       border-radius: 6px;
-      box-shadow: 0 16px 32px 0 rgba(0,0,0,.1);
+      box-shadow: 0 16px 32px 0 rgba(0, 0, 0, 0.1);
       height: auto;
       background-color: white;
       min-width: 100%;

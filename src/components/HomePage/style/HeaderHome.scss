@@ -1,59 +1,110 @@
-$lightblue : #00b4fe;
-$darkblue : #2d354c;
-$pink : rgba(236,58,53,.6);
-$darkgrey : rgba(45,53,76,.4);
-$lightgrey : #f8f8f8;
+$lightblue: #00b4fe;
+$darkblue: #2d354c;
+$pink: rgba(236, 58, 53, 0.6);
+$darkgrey: rgba(45, 53, 76, 0.4);
+$lightgrey: #f8f8f8;
 
-#HomeHeader{
-    text-align: center;
-    background-color: #222;
-    padding: 20px 20px 30px 20px;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    .logo{
-      height: 80px;
-      margin: 15px;
+.scrolled-nav {
+  height: 220px !important;
+  //line-height: 200px !important;
+}
+
+.scrolled-logo {
+  height: 50px !important;
+}
+
+#HomeHeader {
+  text-align: center;
+  background-color: #222;
+  padding: 20px 20px 30px 20px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-image: url(../../../images/bg.png);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  height: 400px;
+  webkit-transition: height 0.5s, line-height 0.5s; /* Safari */
+  transition: height 0.5s, line-height 0.5s;
+  @media (max-width: 767px) {
+    .big-title {
+      font-size: 2rem;
     }
-    .menu{
-      display: flex;
-      margin-top: 10px;
-      width: 100%;
-      justify-content: center;
-      .user{
-        display: flex;
-        flex-wrap: wrap;
-        width: 100%;
-        justify-content: center;
-          p{
-            padding: 0 10px;
-            letter-spacing: 7px;
-          text-transform: uppercase;
-          font-size: 12px;
-          font-family: 'Roboto-Light', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
-          }
-      }
+    .big-subtitle {
+      font-size: 0.8rem;
+    }
+    .user {
       a {
-        color: $lightgrey;
-        // margin-right: 20px;
-        text-decoration: none;
-        padding: 0 10px;
-        p{
-          letter-spacing: 7px;
-          text-transform: uppercase;
-          font-size: 12px;
-          font-family: 'Roboto-Light', -apple-system, BlinkMacSystemFont, Roboto, "Helvetica Neue", sans-serif;
+        padding: 0 5px !important;
+        p {
+          margin-bottom: 7px;
         }
       }
-      a
-      :active, :focus {
-        color: $lightblue;
-      }
-      @media (max-width: 767px){
-        flex-direction: column;
-        padding: 0;
+    }
+  }
+  @media (max-width: 715px) {
+    .big-title {
+      font-size: 1.5rem;
+    }
+    .big-subtitle {
+      font-size: 0.9rem;
+    }
+  }
+  @media (max-width: 450px) {
+    .big-title,
+    .big-subtitle {
+      display: none !important;
+    }
+  }
+  .logo {
+    height: 80px;
+    margin: 15px;
+  }
+  .menu {
+    display: flex;
+    margin-top: 10px;
+    width: 100%;
+    justify-content: center;
+    .user {
+      display: flex;
+      flex-wrap: wrap;
+      width: 100%;
+      justify-content: center;
+      p {
+        padding: 0 10px;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-family: "Roboto-Light", -apple-system, BlinkMacSystemFont, Roboto,
+          "Helvetica Neue", sans-serif;
       }
     }
+    a {
+      color: $lightgrey;
+      // margin-right: 20px;
+      text-decoration: none;
+      padding: 0 10px;
+      p {
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        font-size: 12px;
+        font-family: "Roboto-Light", -apple-system, BlinkMacSystemFont, Roboto,
+          "Helvetica Neue", sans-serif;
+      }
+    }
+    a :active,
+    :focus {
+      color: $lightblue;
+    }
+    @media (max-width: 767px) {
+      flex-direction: column;
+      padding: 0;
+    }
+  }
 }
