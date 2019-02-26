@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import Joi from "joi-browser";
 import api from "../../api.js";
-import Input from "../../utils/Input.js";
+import Input from "../../utils/Input";
 import Select from "../../utils/Select.js";
 import ArrayInput from "../../utils/ArrayInput.js";
-import TextAreaInput from "../../utils/TextAreaInput.js";
+import TextAreaInput from "../../utils/TextAreaInput";
+import { join } from "path";
 // import { join } from "path";
 
 import "./style/AddProject.scss";
