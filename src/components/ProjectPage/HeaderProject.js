@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
+import { Switch, Route } from "react-router-dom";
 
 import ProgressBar from "./ProgressBar";
 import ProjectSuggestion from "./ProjectSuggestion";
@@ -33,6 +34,7 @@ class ProjectHeader extends Component {
   }
 
   componentDidMount() {
+    console.log(this.props);
     window.scrollTo(0, 0);
     const { params } = this.props.match;
     axios
@@ -105,7 +107,7 @@ class ProjectHeader extends Component {
                 <p className="h6">
                   <b>LIKES :</b>
                 </p>
-                <p class="space">{likes}</p>
+                <p className="space">{likes}</p>
               </div>
             </div>
             <div className="bottom-details">
@@ -149,8 +151,9 @@ class ProjectHeader extends Component {
         </div>
 
         <hr />
-
-        <ProjectSuggestion ProjectSuggest={this.state.projectInfo} />
+        <Switch>
+          <Route path="/projects/:projectId" component={ProjectSuggestion} />
+        </Switch>
 
         <ProjectSuggestionThumbnail />
       </section>
