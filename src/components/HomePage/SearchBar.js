@@ -8,6 +8,7 @@ class SearchBar extends Component {
     return (
       <section id="SearchBox">
         <SearchBox />
+        <img className="algoliaLogo" src="../../../images/algolia-logo.svg" alt="algolia logo" />
       </section>
     );
   }

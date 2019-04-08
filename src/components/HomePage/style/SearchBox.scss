@@ -5,6 +5,7 @@ $darkgrey : rgba(45,53,76,.4);
 $lightgrey : #f8f8f8;
 
 #SearchBox{
+  display: inline;
   margin-top: 10px;
   .ais-SearchBox{
     border: 1px solid white;
@@ -27,4 +28,9 @@ $lightgrey : #f8f8f8;
   .ais-SearchBox-submitIcon{
     fill: white;
   }
+  .algoliaLogo {
+    height:50px;
+    width: auto
+  }
 }
+

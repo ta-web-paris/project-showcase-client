@@ -45,12 +45,13 @@ class HomeHeader extends Component {
               <p onClick={event => logUserOut(event)}>Log out</p>
             </div>
           ) : (
-            <NavLink to="/login">
-              <p>Log in</p>
-            </NavLink>
-          )}
+              <NavLink to="/login">
+                <p>Log in</p>
+              </NavLink>
+            )}
         </div>
         <SearchBar />
+
       </section>
     );
   }
