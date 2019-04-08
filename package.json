@@ -68,7 +68,7 @@
     "test": "node scripts/test.js --env=jsdom",
     "deploy": "npm run build && gh-pages --dist build"
   },
-  "homepage": "https://ironhack-paris-webdev-august-2018.github.io/project-showcase-frontend",
+  "homepage": "https://ironhack-project-showcase.herokuapp.com/",
   "jest": {
     "collectCoverageFrom": [
       "src/**/*.{js,jsx,mjs}"
