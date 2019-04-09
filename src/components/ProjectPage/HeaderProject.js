@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import axios from "axios";
+// import axios from "axios";
 import { Switch, Route } from "react-router-dom";
 import api from "../../api"
 import ProgressBar from "./ProgressBar";

@@ -30,29 +30,29 @@ class ProjectSuggestion extends Component {
     };
   }
 
-  componentDidMount() {
-    const { params } = this.props.match;
+  // componentDidMount() {
+  //   const { params } = this.props.match;
 
-    // console.log(this.props.match);
-    console.log(params);
+  //   // console.log(this.props.match);
+  //   console.log(params);
 
-    api
-      .get(`/creator-projects/${params.projectId}`, {
-        withCredentials: true
-      })
-      .then(response => {
-        this.setState({
-          projectInfo: response.data
-        });
-      })
-      .catch(err => {
-        console.log("Project Details ERROR", err);
-        alert("Sorry! Something went wrong.");
-      });
-  }
+  //   api
+  //     .get(`/creator-projects/${params.projectId}`, {
+  //       withCredentials: true
+  //     })
+  //     .then(response => {
+  //       this.setState({
+  //         projectInfo: response.data
+  //       });
+  //     })
+  //     .catch(err => {
+  //       console.log("Project Details ERROR", err);
+  //       alert("Sorry! Something went wrong.");
+  //     });
+  // }
 
   render() {
-    console.log(this.state.projectInfo, "project info");
+    // console.log(this.state.projectInfo, "project info");
 
     return (
       <section id="ProjectSuggestion">
@@ -67,7 +67,7 @@ class ProjectSuggestion extends Component {
                 data-ride="carousel"
               >
                 <div className="carousel-inner">
-                  <div className="carousel-item active">
+                  {/* <div className="carousel-item active">
                     <div className="row row3">
                       {this.state.projectInfo.map(el => (
                         <div key={el._id} className="col-lg-3 col-md-6">
@@ -77,7 +77,7 @@ class ProjectSuggestion extends Component {
                         </div>
                       ))}
                     </div>
-                  </div>
+                  </div> */}
 
                   {/* <div className="carousel-item">
                     <div className="row row3">
