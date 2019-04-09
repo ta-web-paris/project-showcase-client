@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
+import api from "../../api"
+
 
 import "./style/NotVerified.scss";
 
@@ -11,8 +13,8 @@ class NotVerifed extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    axios
-      .get("http://localhost:4000/api/notverified", { withCredentials: true })
+    api
+      .get("/notverified", { withCredentials: true })
       .then(response => {
         this.setState({ nonverifed: response.data });
       })
@@ -37,10 +39,10 @@ class NotVerifed extends Component {
                     {oneProject.creators.length > 1 ? (
                       <h6>Group project</h6>
                     ) : (
-                      oneProject.creators.map((oneCreator, index) => {
-                        return <h6 key={index}>{oneCreator.name}</h6>;
-                      })
-                    )}
+                        oneProject.creators.map((oneCreator, index) => {
+                          return <h6 key={index}>{oneCreator.name}</h6>;
+                        })
+                      )}
 
                     <p>{oneProject.name}</p>
                     <Link to={`/projects/edit/${oneProject._id}`}>

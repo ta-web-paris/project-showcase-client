@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 // import { Link } from "react-router-dom";
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-
+import api from "../../api"
 import "./style/ProjectSuggestion.scss";
 import { Link } from "@reach/router";
 
@@ -36,8 +36,8 @@ class ProjectSuggestion extends Component {
     // console.log(this.props.match);
     console.log(params);
 
-    axios
-      .get(`http://localhost:4000/api/creator-projects/${params.projectId}`, {
+    api
+      .get(`/creator-projects/${params.projectId}`, {
         withCredentials: true
       })
       .then(response => {

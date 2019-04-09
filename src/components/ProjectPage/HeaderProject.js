@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Switch, Route } from "react-router-dom";
-
+import api from "../../api"
 import ProgressBar from "./ProgressBar";
 import ProjectSuggestion from "./ProjectSuggestion";
 import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
@@ -37,8 +37,8 @@ class ProjectHeader extends Component {
     console.log(this.props);
     window.scrollTo(0, 0);
     const { params } = this.props.match;
-    axios
-      .get(`http://localhost:4000/api/projects/${params.projectId}`, {
+    api
+      .get(`/projects/${params.projectId}`, {
         withCredentials: true
       })
       .then(response => {

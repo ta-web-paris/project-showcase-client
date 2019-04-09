@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 // import axios from "axios";
 // import $ from "jquery";
-
+import api from "../../api"
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 import "./style/ProjectSuggestionThumbnail.scss";
@@ -20,8 +20,8 @@ class ProjectSuggestionThumbnail extends Component {
   //   });
 
   //   window.scrollTo(0, 0);
-  //   axios
-  //     .get("http://localhost:4000/api/", { withCredentials: true })
+  //   api
+  //     .get("/", { withCredentials: true })
   //     .then(response => {
   //       this.setState({ projects: response.data });
   //     })

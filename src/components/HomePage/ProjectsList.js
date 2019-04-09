@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import api from "../../api"
 import { Hits, connectStateResults } from "react-instantsearch-dom";
 
 import "./style/ProjectsList.scss";
@@ -51,14 +52,14 @@ const Result = ({ hit }) => (
           {hit.creators.length > 1 ? (
             <h6 className="name">Group project</h6>
           ) : (
-            hit.creators.map((oneCreator, index) => {
-              return (
-                <h6 key={index} className="name">
-                  {oneCreator.name}
-                </h6>
-              );
-            })
-          )}
+              hit.creators.map((oneCreator, index) => {
+                return (
+                  <h6 key={index} className="name">
+                    {oneCreator.name}
+                  </h6>
+                );
+              })
+            )}
         </div>
         <div className="hidden-content">
           <p>{hit.description}</p>
@@ -76,8 +77,8 @@ const ConditionalHits = connectStateResults(({ searchState }) =>
       {/* Result is the reference to the "Single Hit" component */}
     </div>
   ) : (
-    <Hits hitComponent={Result} />
-  )
+      <Hits hitComponent={Result} />
+    )
 );
 
 class ProjectsList extends Component {
@@ -101,8 +102,8 @@ class ProjectsList extends Component {
     console.log("list mounted");
 
     window.scrollTo(0, 0);
-    axios
-      .get("http://localhost:4000/api/", { withCredentials: true })
+    api
+      .get("/", { withCredentials: true })
       .then(response => {
         this.setState({ projects: response.data }, () => {
           parseProjects();

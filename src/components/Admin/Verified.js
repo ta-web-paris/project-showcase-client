@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-
+import api from "../../api"
 import "./style/Verified.scss";
 
 class Verified extends Component {
@@ -11,8 +11,8 @@ class Verified extends Component {
 
   componentDidMount() {
     window.scrollTo(0, 0);
-    axios
-      .get("http://localhost:4000/api/verified", { withCredentials: true })
+    api
+      .get("/verified", { withCredentials: true })
       .then(response => {
         this.setState({ verifed: response.data });
       })
@@ -36,10 +36,10 @@ class Verified extends Component {
                     {oneProject.creators.length > 1 ? (
                       <h6>Group project</h6>
                     ) : (
-                      oneProject.creators.map((oneCreator, index) => {
-                        return <h6 key={index}>{oneCreator.name}</h6>;
-                      })
-                    )}
+                        oneProject.creators.map((oneCreator, index) => {
+                          return <h6 key={index}>{oneCreator.name}</h6>;
+                        })
+                      )}
                     <p>{oneProject.name}</p>
                     <Link to={`/projects/edit/${oneProject._id}`}>
                       <button className="btn btn-primary">Edit</button>
