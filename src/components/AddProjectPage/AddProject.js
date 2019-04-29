@@ -43,6 +43,7 @@ class AddProject extends Component {
       squadNumber: 0,
       squadMonth: "January",
       squadYear: "2011",
+      searchId: 0,
       feedbackMessage: "",
       errors: {}
     };
@@ -123,6 +124,7 @@ class AddProject extends Component {
   };
 
   validateInput() {
+
     const {
       name,
       creators,
@@ -156,7 +158,7 @@ class AddProject extends Component {
         projectType,
         squadNumber,
         squadMonth,
-        squadYear
+        squadYear,
       },
       this.schema,
       { abortEarly: false }
@@ -199,13 +201,17 @@ class AddProject extends Component {
   submitProjectForm = event => {
     event.preventDefault();
 
+
+
+
     const errors = this.validateInput();
     this.setState({ errors });
     if (errors) {
       return;
     }
 
-    const newProject = { ...this.state };
+    const randomSearchId = Math.floor(Math.random() * 1000000)
+    const newProject = { ...this.state, searchId: randomSearchId };
     newProject.squad = this.formatSquadString(newProject);
 
     api
@@ -213,6 +219,7 @@ class AddProject extends Component {
       .then(() => {
         this.setState({
           ...this.getInitialState(),
+          searchId: randomSearchId,
           feedbackMessage: "Thank You! Your project was properly saved."
         });
       })
