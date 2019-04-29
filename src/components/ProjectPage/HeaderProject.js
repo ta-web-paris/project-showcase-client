@@ -2,7 +2,9 @@ import React, { Component } from "react";
 // import axios from "axios";
 import { Switch, Route } from "react-router-dom";
 import api from "../../api"
-import ProgressBar from "./ProgressBar";
+import ProgressBar1 from "./ProgressBar1";
+import ProgressBar2 from "./ProgressBar2";
+import ProgressBar3 from "./ProgressBar3";
 import ProjectSuggestion from "./ProjectSuggestion";
 import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
 
@@ -66,9 +68,26 @@ class ProjectHeader extends Component {
       creators
     } = this.state.projectInfo;
 
+    console.log(this.state.projectInfo);
+
+
+    function Progress() {
+      if (projectType === "front-end") {
+        return <ProgressBar1 />;
+      } else if (projectType === "fullstack") {
+
+        return <ProgressBar2 />;
+      } else {
+        return <ProgressBar3 />
+      }
+    }
+
+
     return (
       <section id="ProjectHeader">
-        <ProgressBar />
+
+
+        <Progress />
 
         <div className="row row1">
           <div className="project-details col-lg-5 col-md-12 col-sm-12">
