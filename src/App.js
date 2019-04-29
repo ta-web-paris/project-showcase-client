@@ -86,7 +86,7 @@ class App extends Component {
     return (
       <div id="App">
         {/* index name is what i called the data on algolia */}
-        <InstantSearch searchClient={searchClient} indexName="search_data">
+        <InstantSearch searchClient={searchClient} indexName="dev_data">
           <HeaderHome
             currentUser={currentUser}
             logUserOut={event => this.logUserOut(event)}
@@ -101,8 +101,8 @@ class App extends Component {
                 currentUser ? (
                   <Redirect to="/" />
                 ) : (
-                  <Login handleLogIn={this.userLoggedIn} />
-                )
+                    <Login handleLogIn={this.userLoggedIn} />
+                  )
               }
             />
             <Route
@@ -111,8 +111,8 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <SettingsPage currentUser={currentUser} />
-                )
+                    <SettingsPage currentUser={currentUser} />
+                  )
               }
             />
             <Route path="/add-project" component={AddProject} />
@@ -127,8 +127,8 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <NotVerified />
-                )
+                    <NotVerified />
+                  )
               }
             />
 
@@ -138,8 +138,8 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <Verified />
-                )
+                    <Verified />
+                  )
               }
             />
 
@@ -149,8 +149,8 @@ class App extends Component {
                 isLoginChecked && !currentUser ? (
                   <Redirect to="/login" />
                 ) : (
-                  <EditProject />
-                )
+                    <EditProject />
+                  )
               }
             />
 
