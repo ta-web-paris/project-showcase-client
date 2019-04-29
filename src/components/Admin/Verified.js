@@ -41,7 +41,7 @@ class Verified extends Component {
                         })
                       )}
                     <p>{oneProject.name}</p>
-                    <Link to={`/projects/edit/${oneProject._id}`}>
+                    <Link to={`/projects/edit/${oneProject.searchId}`}>
                       <button className="btn btn-primary">Edit</button>
                     </Link>
                   </div>
