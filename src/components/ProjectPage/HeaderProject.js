@@ -7,6 +7,7 @@ import ProgressBar2 from "./ProgressBar2";
 import ProgressBar3 from "./ProgressBar3";
 import ProjectSuggestion from "./ProjectSuggestion";
 import ProjectSuggestionThumbnail from "./ProjectSuggestionThumbnail";
+import EditNotVerified from "./EditNotVerified";
 
 import githubLogo from "../../images/icon-github.svg";
 import linkedinLogo from "../../images/icon-linkedin.svg";
@@ -35,8 +36,10 @@ class ProjectHeader extends Component {
     };
   }
 
+
+
   componentDidMount() {
-    console.log(this.props);
+    console.log(this.props, "props on load");
     window.scrollTo(0, 0);
     const { params } = this.props.match;
     api
@@ -65,10 +68,10 @@ class ProjectHeader extends Component {
       screenshotUrl,
       likes,
       tools,
-      creators
+      creators,
+      verified
     } = this.state.projectInfo;
 
-    console.log(this.state.projectInfo);
 
 
     function Progress() {
@@ -83,6 +86,8 @@ class ProjectHeader extends Component {
     }
 
 
+
+
     return (
       <section id="ProjectHeader">
 
@@ -93,6 +98,14 @@ class ProjectHeader extends Component {
           <div className="project-details col-lg-5 col-md-12 col-sm-12">
             <div className="top-details">
               <h1 className="h1">{name}</h1>
+
+
+              {/* Should check to see if there is a current user before displaying the button */}
+              {verified ? " " : <EditNotVerified />}
+              {/* {verified && currentUser ? " " : <EditNotVerified />} */}
+
+
+
               <div className="type">
                 <p className="mono-light">{projectType}</p>
                 <p className="mono-light">{squad}</p>
