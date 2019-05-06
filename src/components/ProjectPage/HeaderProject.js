@@ -13,6 +13,9 @@ import githubLogo from "../../images/icon-github.svg";
 import linkedinLogo from "../../images/icon-linkedin.svg";
 
 import "./style/HeaderProject.scss";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
 
 class ProjectHeader extends Component {
   constructor(props) {
@@ -140,6 +143,8 @@ class ProjectHeader extends Component {
                   <b>LIKES :</b>
                 </p>
                 <p className="space">{likes}</p>
+
+                <button> <FontAwesomeIcon icon={faHeart} /></button>
               </div>
             </div>
             <div className="bottom-details">
