@@ -4,7 +4,7 @@ import { Route, Switch, Redirect } from "react-router-dom";
 //------------- ALGOLIA --------------
 import algoliasearch from "algoliasearch/lite";
 //InstantSearch - data provider. It's like the BrowserRouter in react-router (index.js)
-import { InstantSearch } from "react-instantsearch-dom";
+import { InstantSearch, Configure } from "react-instantsearch-dom";
 
 import ErrorPage from "./components/ErrorPage";
 import "./script";
@@ -27,7 +27,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fab } from "@fortawesome/free-brands-svg-icons";
 import { faCheckSquare, faCoffee } from "@fortawesome/free-solid-svg-icons";
 import "../node_modules/instantsearch.css/themes/reset-min.css";
-import ProjectSuggestion from "./components/ProjectPage/ProjectSuggestion";
+// import ProjectSuggestion from "./components/ProjectPage/ProjectSuggestion";
 
 library.add(fab, faCheckSquare, faCoffee);
 
@@ -47,6 +47,7 @@ class App extends Component {
       currentUser: null
     };
   }
+
 
   componentDidMount() {
     api
@@ -83,14 +84,17 @@ class App extends Component {
 
   render() {
     const { isLoginChecked, currentUser } = this.state;
+
     return (
       <div id="App">
         {/* index name is what i called the data on algolia */}
         <InstantSearch searchClient={searchClient} indexName="dev_data">
+          <Configure filters="verified:true" />
           <HeaderHome
             currentUser={currentUser}
             logUserOut={event => this.logUserOut(event)}
           />
+
 
           <Switch>
             <Route exact path="/" component={ProjectsList} />
@@ -115,11 +119,28 @@ class App extends Component {
                   )
               }
             />
+
+
+
             <Route path="/add-project" component={AddProject} />
             <Route exact path="/projects/edit/:id" component={EditProject} />
             <Route exact path="/projects/delete/:id" component={EditProject} />
 
-            <Route path="/projects/:projectId" component={ProjectHeader} />
+            <Route path="/projects/:projectId"
+              render={(props) =>
+                <ProjectHeader {...props} currentUser={currentUser} />
+              }
+            />
+
+            {/* <Route path="/projects/:projectId" component={ProjectHeader} /> */}
+
+            {/* <Route path="/projects/:projectId">
+              <UserContext.Provider>
+                <ProjectHeader />
+              </UserContext.Provider>
+            </Route> */}
+
+
 
             <Route
               path="/notverified"
