@@ -4,9 +4,8 @@ import api from "../../api.js";
 import Input from "../../utils/Input";
 import Select from "../../utils/Select.js";
 import ArrayInput from "../../utils/ArrayInput.js";
+import ArrayInputCreators from "../../utils/ArrayInputCreators.js";
 import TextAreaInput from "../../utils/TextAreaInput";
-import { join } from "path";
-// import { join } from "path";
 
 import "./style/AddProject.scss";
 
@@ -29,13 +28,12 @@ class AddProject extends Component {
   getInitialState() {
     return {
       name: "",
-      creators: [""],
+      creators: [{ name: "", linkedInUrl: "" }],
       screenshotUrl: "",
       description: "",
       gitHubUrl: "",
       projectUrl: "",
       tools: [""],
-      // linkedInUrl: "",
       projectCredentials: ["", ""],
       display: "web",
       bootcamp: "Web Dev Full Time",
@@ -55,7 +53,12 @@ class AddProject extends Component {
       .required(),
     creators: Joi.array()
       .min(1)
-      .items(Joi.string()),
+      .items(
+        Joi.object().keys({
+          name: Joi.string(),
+          linkedInUrl: Joi.string().uri()
+        })
+      ),
     screenshotUrl: Joi.string()
       .trim()
       .required(),
@@ -64,7 +67,6 @@ class AddProject extends Component {
       .required()
       .max(150),
     gitHubUrl: Joi.string().uri(),
-    // linkedInUrl: Joi.string().uri(),
     projectUrl: Joi.string()
       .trim()
       .uri()
@@ -124,14 +126,12 @@ class AddProject extends Component {
   };
 
   validateInput() {
-
     const {
       name,
       creators,
       screenshotUrl,
       description,
       gitHubUrl,
-      // linkedInUrl,
       projectUrl,
       display,
       tools,
@@ -149,7 +149,6 @@ class AddProject extends Component {
         screenshotUrl,
         description,
         gitHubUrl,
-        // linkedInUrl,
         projectUrl,
         display,
         tools,
@@ -158,7 +157,7 @@ class AddProject extends Component {
         projectType,
         squadNumber,
         squadMonth,
-        squadYear,
+        squadYear
       },
       this.schema,
       { abortEarly: false }
@@ -182,9 +181,22 @@ class AddProject extends Component {
 
   handleArrayInput = idx => event => {
     const { value, name } = event.target;
-    const stateCopy = [...this.state[name]];
-    stateCopy[idx] = value;
-    this.setState({ [name]: stateCopy });
+    this.setState(state => {
+      const stateCopy = [...state[name]];
+      stateCopy[idx] = value;
+      return { [name]: stateCopy };
+    });
+  };
+
+  handleCreatorsInput = (idx, key) => event => {
+    const { value } = event.target;
+    this.setState(state => {
+      const creators = [...state.creators];
+      creators[idx] = creators[idx] || {};
+      creators[idx][key] = value;
+
+      return { creators };
+    });
   };
 
   addField = field => {
@@ -201,16 +213,13 @@ class AddProject extends Component {
   submitProjectForm = event => {
     event.preventDefault();
 
-
-
-
     const errors = this.validateInput();
     this.setState({ errors });
     if (errors) {
       return;
     }
 
-    const randomSearchId = Math.floor(Math.random() * 1000000)
+    const randomSearchId = Math.floor(Math.random() * 1000000);
     const newProject = { ...this.state, searchId: randomSearchId };
     newProject.squad = this.formatSquadString(newProject);
 
@@ -268,7 +277,6 @@ class AddProject extends Component {
       // screenshotUrl,
       description,
       gitHubUrl,
-      // linkedInUrl,
       projectUrl,
       display,
       tools,
@@ -345,11 +353,11 @@ class AddProject extends Component {
                 {errors && errors.name && <p>{errors.name}</p>}
               </div>
               <div className="form-group col-lg-4">
-                <ArrayInput
+                <ArrayInputCreators
                   label="Creators "
                   fieldArray={creators}
                   name="creators"
-                  onChange={idx => this.handleArrayInput(idx)}
+                  onChange={this.handleCreatorsInput}
                   onClick={() => this.addField("creators")}
                 />
                 {errors && errors.creators && <p>{errors.creators}</p>}
@@ -478,9 +486,8 @@ class AddProject extends Component {
                 </h4>
                 <div className="row">
                   {projectCredentials.map((oneCred, idx) => (
-                    <div className="form-group col-lg-6">
+                    <div className="form-group col-lg-6" key={idx}>
                       <Input
-                        key={idx}
                         name="projectCredentials"
                         onChange={this.handleArrayInput(idx)}
                         value={oneCred}
