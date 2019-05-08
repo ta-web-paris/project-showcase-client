@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-// import axios from "axios";
 import { Switch, Route } from "react-router-dom";
 import api from "../../api"
 import ProgressBar1 from "./ProgressBar1";
@@ -13,8 +12,8 @@ import githubLogo from "../../images/icon-github.svg";
 import linkedinLogo from "../../images/icon-linkedin.svg";
 
 import "./style/HeaderProject.scss";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
+
 
 
 class ProjectHeader extends Component {
@@ -45,6 +44,7 @@ class ProjectHeader extends Component {
 
     window.scrollTo(0, 0);
     const { params } = this.props.match;
+
     api
       .get(`/projects/${params.projectId}`, {
         withCredentials: true
@@ -60,7 +60,12 @@ class ProjectHeader extends Component {
       });
   }
 
+
+
+
+
   render() {
+    const { currentUser } = this.state
     const {
       name,
       projectType,
@@ -76,7 +81,6 @@ class ProjectHeader extends Component {
     } = this.state.projectInfo;
 
 
-
     function Progress() {
       if (projectType === "front-end") {
         return <ProgressBar1 />;
@@ -88,13 +92,9 @@ class ProjectHeader extends Component {
       }
     }
 
-
-
-
-
-
     return (
       <section id="ProjectHeader">
+
 
 
         <Progress />
@@ -104,12 +104,7 @@ class ProjectHeader extends Component {
             <div className="top-details">
               <h1 className="h1">{name}</h1>
 
-
-              {/* Should check to see if there is a current user before displaying the button */}
-              {verified ? " " : <EditNotVerified searchId={this.state.projectInfo.searchId} />}
-              {/* {verified && currentUser ? " " : <EditNotVerified />} */}
-
-
+              {this.props.currentUser ? <EditNotVerified searchId={this.state.projectInfo.searchId} /> : ""}
 
               <div className="type">
                 <p className="mono-light">{projectType}</p>
@@ -146,7 +141,7 @@ class ProjectHeader extends Component {
                 </p>
                 <p className="space">{likes}</p>
 
-                <button> <FontAwesomeIcon icon={faHeart} /></button>
+
               </div>
             </div>
             <div className="bottom-details">
