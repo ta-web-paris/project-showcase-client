@@ -42,7 +42,7 @@ class ProjectHeader extends Component {
 
 
   componentDidMount() {
-    console.log(this.props, "props on load");
+
     window.scrollTo(0, 0);
     const { params } = this.props.match;
     api
@@ -91,6 +91,8 @@ class ProjectHeader extends Component {
 
 
 
+
+
     return (
       <section id="ProjectHeader">
 
@@ -104,7 +106,7 @@ class ProjectHeader extends Component {
 
 
               {/* Should check to see if there is a current user before displaying the button */}
-              {verified ? " " : <EditNotVerified />}
+              {verified ? " " : <EditNotVerified searchId={this.state.projectInfo.searchId} />}
               {/* {verified && currentUser ? " " : <EditNotVerified />} */}
 
 

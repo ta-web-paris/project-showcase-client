@@ -45,10 +45,6 @@ class NotVerifed extends Component {
                       )}
 
                     <p>{oneProject.name}</p>
-                    <Link to={`/projects/edit/${oneProject.searchId}`}>
-                      <button className="btn btn-primary">Edit</button>
-                    </Link>
-
 
                     <Link to={`/projects/${oneProject.searchId}`}>
                       <button className="btn btn-primary">Details</button>
