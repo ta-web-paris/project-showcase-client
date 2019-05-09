@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
 import api from "../../api"
 import { Hits, connectStateResults } from "react-instantsearch-dom";
 
@@ -53,6 +52,7 @@ const Result = ({ hit }) => (
             <h6 className="name">Group project</h6>
           ) : (
               hit.creators.map((oneCreator, index) => {
+
                 return (
                   <h6 key={index} className="name">
                     {oneCreator.name}
@@ -71,14 +71,13 @@ const Result = ({ hit }) => (
 
 const ConditionalHits = connectStateResults(({ searchState }) =>
   searchState && searchState.query ? (
-    <div>
-      {/* Hits gets all of the results and maps over them and passes each individual result to the hitComponent. It will render multiple Result components each with their own hit as a prop */}
-      <Hits hitComponent={Result} />
-      {/* Result is the reference to the "Single Hit" component */}
-    </div>
+    /* Hits gets all of the results and maps over them and passes each individual result to the hitComponent. It will render multiple Result components each with their own hit as a prop */
+    <Hits hitComponent={Result} />
+    /* Result is the reference to the "Single Hit" component */
   ) : (
       <Hits hitComponent={Result} />
     )
+
 );
 
 class ProjectsList extends Component {
@@ -89,15 +88,6 @@ class ProjectsList extends Component {
     };
   }
 
-  componentDidUpdate() {
-    // if (this.state.projects.length) {
-    //   console.log("yahoo");
-    //   parseProjects(); // exec only once the data are fetched from db
-    // } else {
-    //   console.log("meeehhhh");
-    // }
-  }
-
   componentDidMount() {
     console.log("list mounted");
 
@@ -105,6 +95,7 @@ class ProjectsList extends Component {
     api
       .get("/", { withCredentials: true })
       .then(response => {
+
         this.setState({ projects: response.data }, () => {
           parseProjects();
         });
