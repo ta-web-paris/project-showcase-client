@@ -14,8 +14,6 @@ import linkedinLogo from "../../images/icon-linkedin.svg";
 import "./style/HeaderProject.scss";
 
 
-
-
 class ProjectHeader extends Component {
   constructor(props) {
     super(props);
@@ -33,15 +31,13 @@ class ProjectHeader extends Component {
         likes: "",
         tools: [],
         creators: [],
-        projectCredentials: []
+        projectCredentials: [],
+        verified: false
       }
     };
   }
 
-
-
   componentDidMount() {
-
     window.scrollTo(0, 0);
     const { params } = this.props.match;
 
@@ -60,12 +56,7 @@ class ProjectHeader extends Component {
       });
   }
 
-
-
-
-
   render() {
-    const { currentUser } = this.state
     const {
       name,
       projectType,
@@ -77,7 +68,6 @@ class ProjectHeader extends Component {
       likes,
       tools,
       creators,
-      verified
     } = this.state.projectInfo;
 
 
@@ -85,7 +75,6 @@ class ProjectHeader extends Component {
       if (projectType === "front-end") {
         return <ProgressBar1 />;
       } else if (projectType === "fullstack") {
-
         return <ProgressBar2 />;
       } else {
         return <ProgressBar3 />
@@ -95,8 +84,6 @@ class ProjectHeader extends Component {
     return (
       <section id="ProjectHeader">
 
-
-
         <Progress />
 
         <div className="row row1">
@@ -104,7 +91,7 @@ class ProjectHeader extends Component {
             <div className="top-details">
               <h1 className="h1">{name}</h1>
 
-              {this.props.currentUser ? <EditNotVerified searchId={this.state.projectInfo.searchId} /> : ""}
+              {this.props.currentUser ? <EditNotVerified projectInfo={this.state.projectInfo} /> : ""}
 
               <div className="type">
                 <p className="mono-light">{projectType}</p>
