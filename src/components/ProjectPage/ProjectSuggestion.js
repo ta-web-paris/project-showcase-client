@@ -33,9 +33,6 @@ class ProjectSuggestion extends Component {
   componentDidMount() {
     const { params } = this.props.match;
 
-    // console.log(this.props.match);
-    console.log(params);
-
     api
       .get(`/creator-projects/${params.projectId}`, {
         withCredentials: true
@@ -52,7 +49,6 @@ class ProjectSuggestion extends Component {
   }
 
   render() {
-    console.log(this.state.projectInfo, "project info");
 
     return (
       <section id="ProjectSuggestion">
@@ -70,7 +66,7 @@ class ProjectSuggestion extends Component {
                   <div className="carousel-item active">
                     <div className="row row3">
                       {this.state.projectInfo.map(el => (
-                        <div key={el._id} className="col-lg-3 col-md-6">
+                        <div key={el.name} className="col-lg-3 col-md-6">
                           <a href={el.searchId}>
                             <img src={el.screenshotUrl} alt="screenshot url" />
                           </a>
