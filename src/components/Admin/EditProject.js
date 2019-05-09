@@ -459,9 +459,9 @@ class EditProject extends Component {
               </h4>
               <div className="row">
                 {projectCredentials.map((oneCred, idx) => (
-                  <div className="form-group col-lg-6">
+                  <div key={idx} className="form-group col-lg-6">
                     <Input
-                      key={idx}
+
                       name="projectCredentials"
                       onChange={this.handleArrayInput(idx)}
                       value={oneCred}
