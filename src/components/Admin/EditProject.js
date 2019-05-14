@@ -4,6 +4,7 @@ import api from "../../api.js";
 import Input from "../../utils/Input.js";
 import Select from "../../utils/Select.js";
 import ArrayInput from "../../utils/ArrayInput.js";
+import ArrayInputCreators from "../../utils/ArrayInputCreators.js";
 import TextAreaInput from "../../utils/TextAreaInput.js";
 
 import "../AddProjectPage/style/AddProject.scss";
@@ -11,33 +12,35 @@ import "../AddProjectPage/style/AddProject.scss";
 class EditProject extends Component {
   constructor(props) {
     super(props);
-    this.state = this.getInitialState();
+    this.state = {
+      projectInfo: {
+        name: "",
+        creators: [""],
+        screenshotUrl: "",
+        description: "",
+        gitHubUrl: "",
+        projectUrl: "",
+        tools: [""],
+        projectCredentials: ["", ""],
+        display: "web",
+        bootcamp: "Web Dev Full Time",
+        projectType: "front-end",
+        squad: 0,
+        feedbackMessage: "",
+        errors: {}
+      }
+    }
   }
 
   componentDidMount() {
+    const { id } = this.props.match.params
     window.scrollTo(0, 0);
-  }
 
-  getInitialState() {
-    return {
-      name: "",
-      creators: [""],
-      screenshotUrl: "",
-      description: "",
-      gitHubUrl: "",
-      projectUrl: "",
-      tools: [""],
-      // linkedInUrl: "",
-      projectCredentials: ["", ""],
-      display: "web",
-      bootcamp: "Web Dev Full Time",
-      projectType: "front-end",
-      squadNumber: 0,
-      squadMonth: "January",
-      squadYear: "2011",
-      feedbackMessage: "",
-      errors: {}
-    };
+    api.get(`/projects/edit/${id}`)
+      .then(res => {
+        this.setState({ projectInfo: res.data });
+      })
+      .catch(err => console.log(err))
   }
 
   schema = {
@@ -55,7 +58,6 @@ class EditProject extends Component {
       .required()
       .max(150),
     gitHubUrl: Joi.string().uri(),
-    // linkedInUrl: Joi.string().uri(),
     projectUrl: Joi.string()
       .trim()
       .uri()
@@ -83,35 +85,9 @@ class EditProject extends Component {
       "data"
     ),
 
-    squadNumber: Joi.number()
+    squad: Joi.number()
       .integer()
       .positive(),
-    squadMonth: Joi.string().valid(
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ),
-    squadYear: Joi.string().valid(
-      "2011",
-      "2012",
-      "2013",
-      "2014",
-      "2015",
-      "2016",
-      "2017",
-      "2018",
-      "2019",
-      "2020"
-    )
   };
 
   validateInput() {
@@ -121,7 +97,6 @@ class EditProject extends Component {
       screenshotUrl,
       description,
       gitHubUrl,
-      // linkedInUrl,
       projectUrl,
       display,
       tools,
@@ -139,7 +114,6 @@ class EditProject extends Component {
         screenshotUrl,
         description,
         gitHubUrl,
-        // linkedInUrl,
         projectUrl,
         display,
         tools,
@@ -176,6 +150,17 @@ class EditProject extends Component {
     this.setState({ [name]: stateCopy });
   };
 
+  handleCreatorsInput = (idx, key) => event => {
+    const { value } = event.target;
+    this.setState(state => {
+      const creators = [...state.creators];
+      creators[idx] = creators[idx] || {};
+      creators[idx][key] = value;
+
+      return { creators };
+    });
+  };
+
   addField = field => {
     this.setState({
       [field]: this.state[field].concat([""])
@@ -199,8 +184,9 @@ class EditProject extends Component {
     const newProject = { ...this.state };
     newProject.squad = this.formatSquadString(newProject);
 
+    // /projects/edit/:id
     api
-      .post(`/projects`, newProject)
+      .put(`/projects/edit`, newProject)
       .then(() => {
         this.setState({
           ...this.getInitialState(),
@@ -246,55 +232,28 @@ class EditProject extends Component {
   };
 
   render() {
-    console.log(this.props);
+    console.log(this.state.projectInfo);
+
     const {
       name,
       creators,
-      // screenshotUrl,
       description,
       gitHubUrl,
-      // linkedInUrl,
       projectUrl,
       display,
       tools,
       projectCredentials,
+      screenshotUrl,
       bootcamp,
       projectType,
-      squadNumber,
-      squadMonth,
-      squadYear,
+      squad,
       feedbackMessage,
       errors
-    } = this.state;
+    } = this.state.projectInfo;
 
     const credPlaceholder = ["Username", "Password"];
     const displays = ["mobile", "web"];
-    const months = [
-      "January",
-      "February",
-      "March",
-      "April",
-      "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December"
-    ];
-    const years = [
-      "2011",
-      "2012",
-      "2013",
-      "2014",
-      "2015",
-      "2016",
-      "2017",
-      "2018",
-      "2019",
-      "2020"
-    ];
+
     const bootcamps = [
       "Web Dev Full Time",
       "Web Dev Part Time",
@@ -316,167 +275,160 @@ class EditProject extends Component {
       <section id="EditProject" className="ProjectForm">
         <h2>Edit a project</h2>
 
-        <form className="editProject" onSubmit={this.submitProjectForm}>
+
+        <form className="addProject" onSubmit={this.submitProjectForm}>
           {feedbackMessage && <p>{feedbackMessage}</p>}
-
-          <div className="row justify-content-center">
-            <div className="form-group col-lg-4">
-              <Input
-                name="name"
-                onChange={this.handleUserInput}
-                value={name}
-                label="Project name "
-              />
-              {errors && errors.name && <p>{errors.name}</p>}
-            </div>
-            <div className="form-group col-lg-4">
-              <ArrayInput
-                label="Creators "
-                fieldArray={creators}
-                name="creators"
-                onChange={idx => this.handleArrayInput(idx)}
-                onClick={() => this.addField("creators")}
-              />
-              {errors && errors.creators && <p>{errors.creators}</p>}
-            </div>
-            <div className="form-group col-lg-4">
-              <Input
-                type="file"
-                name="screenshotUrl"
-                onChange={this.updateFile}
-                label="Picture "
-              />
-              {errors && errors.screenshotUrl && <p>{errors.screenshotUrl}</p>}
-            </div>
-            {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
-            <div className="form-group col-lg-12">
-              <TextAreaInput
-                name="description"
-                onChange={this.handleUserInput}
-                value={description}
-                label="Description "
-              />
-              {errors && errors.description && <p>{errors.description}</p>}
-            </div>
-            <div className="form-group col-lg-4">
-              <Input
-                name="gitHubUrl"
-                onChange={this.handleUserInput}
-                value={gitHubUrl}
-                label="GitHub Repository URL "
-              />
-              {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
-            </div>
-            <div className="form-group col-lg-4">
-              <Input
-                name="projectUrl"
-                onChange={this.handleUserInput}
-                value={projectUrl}
-                label="Project URL "
-              />
-              {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
-            </div>
-            <div className="form-group col-lg-4">
-              <Select
-                label="Display "
-                name="display"
-                onChange={this.handleUserInput}
-                value={display}
-                optionsArray={displays}
-              />
-              {errors && errors.display && <p>{errors.display}</p>}
-            </div>
-            <div className="form-group col-lg-12">
-              <ArrayInput
-                label="Tools"
-                fieldArray={tools}
-                name="tools"
-                onChange={idx => this.handleArrayInput(idx)}
-                onClick={() => this.addField("tools")}
-              />
-              {errors && errors.tools && <p>{errors.tools}</p>}
-            </div>
-            <div className="form-group col-lg-6">
-              <Select
-                label="Bootcamp "
-                name="bootcamp"
-                onChange={this.handleUserInput}
-                value={bootcamp}
-                optionsArray={bootcamps}
-              />
-              {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
-            </div>
-            <div className="form-group col-lg-6">
-              <Select
-                label="Project type"
-                name="projectType"
-                onChange={this.handleUserInput}
-                value={projectType}
-                optionsArray={projectTypes}
-              />
-              {errors && errors.projectType && <p>{errors.projectType}</p>}
-            </div>
-            <fieldset className="form-group col-lg-12">
-              <h4>Squad :</h4>
-              <div className="row">
-                <div className="form-group col-lg-4">
-                  <Input
-                    type="number"
-                    placeholder="128"
-                    name="squadNumber"
-                    value={squadNumber}
-                    onChange={this.handleUserInput}
-                    label="Squad number "
-                  />
-                  {errors && errors.squadNumber && <p>{errors.squadNumber}</p>}
-                </div>
-                <div className="form-group col-lg-4">
-                  <Select
-                    label="Squad month "
-                    name="squadMonth"
-                    onChange={this.handleUserInput}
-                    value={squadMonth}
-                    optionsArray={months}
-                  />
-                  {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
-                </div>
-                <div className="form-group col-lg-4">
-                  <Select
-                    label="Squad year "
-                    name="squadYear"
-                    onChange={this.handleUserInput}
-                    value={squadYear}
-                    optionsArray={years}
-                  />
-                  {errors && errors.squadYear && <p>{errors.squadYear}</p>}
-                </div>
+          <div className="container">
+            <div className="row justify-content-center">
+              <div className="form-group col-lg-4">
+                <Input
+                  name="name"
+                  onChange={this.handleUserInput}
+                  value={name}
+                  label="Project name "
+                />
+                {errors && errors.name && <p>{errors.name}</p>}
               </div>
-            </fieldset>
-            <fieldset className="form-group col-lg-12">
-              <h4>
-                Optional: provide credentials in order for recruters to be able
-                to enter your website
-              </h4>
-              <div className="row">
-                {projectCredentials.map((oneCred, idx) => (
-                  <div key={idx} className="form-group col-lg-6">
+              <div className="form-group col-lg-4">
+                <ArrayInputCreators
+                  label="Creators "
+                  fieldArray={creators}
+                  name="creators"
+                  onChange={this.handleCreatorsInput}
+                  onClick={() => this.addField("creators")}
+                />
+                {errors && errors.creators && <p>{errors.creators}</p>}
+              </div>
+              <div className="form-group col-lg-4">
+                <Input
+                  type="file"
+                  name="screenshotUrl"
+                  onChange={this.updateFile}
+                  label="Picture "
+                />
+                {errors && errors.screenshotUrl && (
+                  <p>{errors.screenshotUrl}</p>
+                )}
+              </div>
+              {/* {screenshotUrl && <img src={screenshotUrl} alt={name} />} */}
+              <div className="form-group col-lg-12">
+                <TextAreaInput
+                  name="description"
+                  onChange={this.handleUserInput}
+                  value={description}
+                  label="Description "
+                />
+                {errors && errors.description && <p>{errors.description}</p>}
+              </div>
+              <div className="form-group col-lg-4">
+                <Input
+                  name="gitHubUrl"
+                  onChange={this.handleUserInput}
+                  value={gitHubUrl}
+                  label="GitHub Repository URL "
+                />
+                {errors && errors.gitHubUrl && <p>{errors.gitHubUrl}</p>}
+              </div>
+              <div className="form-group col-lg-4">
+                <Input
+                  name="projectUrl"
+                  onChange={this.handleUserInput}
+                  value={projectUrl}
+                  label="Project URL "
+                />
+                {errors && errors.projectUrl && <p>{errors.projectUrl}</p>}
+              </div>
+              <div className="form-group col-lg-4">
+                <Select
+                  label="Display "
+                  name="display"
+                  onChange={this.handleUserInput}
+                  value={display}
+                  optionsArray={displays}
+                />
+                {errors && errors.display && <p>{errors.display}</p>}
+              </div>
+              <div className="form-group col-lg-12">
+                <ArrayInput
+                  label="Tools "
+                  fieldArray={tools}
+                  name="tools"
+                  onChange={idx => this.handleArrayInput(idx)}
+                  onClick={() => this.addField("tools")}
+                />
+                {errors && errors.tools && <p>{errors.tools}</p>}
+              </div>
+              <div className="form-group col-lg-6">
+                <Select
+                  label="Bootcamp "
+                  name="bootcamp"
+                  onChange={this.handleUserInput}
+                  value={bootcamp}
+                  optionsArray={bootcamps}
+                />
+                {errors && errors.bootcamp && <p>{errors.bootcamp}</p>}
+              </div>
+              <div className="form-group col-lg-6">
+                <Select
+                  label="Project type "
+                  name="projectType"
+                  onChange={this.handleUserInput}
+                  value={projectType}
+                  optionsArray={projectTypes}
+                />
+                {errors && errors.projectType && <p>{errors.projectType}</p>}
+              </div>
+              <fieldset className="form-group col-lg-12">
+                <h4>Squad :</h4>
+                <div className="row">
+                  <div className="form-group col-lg-4">
                     <Input
-
-                      name="projectCredentials"
-                      onChange={this.handleArrayInput(idx)}
-                      value={oneCred}
-                      label={credPlaceholder[idx]}
+                      type="number"
+                      placeholder="128"
+                      name="squadNumber"
+                      value={squad}
+                      onChange={this.handleUserInput}
+                      label="Squad number "
                     />
+                    {errors && errors.squadNumber && (
+                      <p>{errors.squadNumber}</p>
+                    )}
                   </div>
-                ))}
-              </div>
-              {errors && errors.projectCredentials && (
-                <p>{errors.projectCredentials}</p>
-              )}
-            </fieldset>
-            <button className="btn btn-primary submit-btn">Submit</button>
+                  <div className="form-group col-lg-4">
+
+                    {errors && errors.squadMonth && <p>{errors.squadMonth}</p>}
+                  </div>
+                  <div className="form-group col-lg-4">
+
+                  </div>
+                </div>
+              </fieldset>
+              <fieldset className="form-group col-lg-12">
+                <h4>
+                  Optional: provide credentials in order for recruters to be
+                  able to enter your website
+                </h4>
+                <div className="row">
+                  {projectCredentials.map((oneCred, idx) => (
+                    <div className="form-group col-lg-6" key={idx}>
+                      <Input
+                        name="projectCredentials"
+                        onChange={this.handleArrayInput(idx)}
+                        value={oneCred}
+                        label={credPlaceholder[idx]}
+                      />
+                    </div>
+                  ))}
+                </div>
+                {errors && errors.projectCredentials && (
+                  <p>{errors.projectCredentials}</p>
+                )}
+              </fieldset>
+              <button className="btn btn-primary submit-btn">Submit</button>
+            </div>
           </div>
         </form>
+
       </section>
     );
   }
